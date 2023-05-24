@@ -5,7 +5,10 @@ import Image from "next/image";
 const Services = () => {
   return (
     <>
-      <section className="text-center max-w-[642px] mx-auto px-4 sm:px-6 ">
+      <section
+        className="text-center max-w-[642px] mx-auto px-4 sm:px-6 "
+        data-aos="fade-up"
+      >
         <div className="my-8">
           <Badge>Our services</Badge>
         </div>
@@ -28,7 +31,11 @@ const Services = () => {
           </p>
         </div>
       </section>
-      <section className="text-center max-w-[842px] mx-auto px-4 sm:px-6 relative">
+      <section
+        className="text-center max-w-[842px] mx-auto px-4 sm:px-6 relative"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
         {/* Words section */}
         <Image
           src="/images/light-blue.png"
