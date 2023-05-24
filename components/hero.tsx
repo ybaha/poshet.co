@@ -1,7 +1,4 @@
-import VideoThumb from "@/public/images/hero-image.png";
-import ModalVideo from "@/components/modal-video";
 import Badge from "./ui/badge";
-import Image from "next/image";
 
 export default function Hero() {
   return (
