@@ -1,6 +1,7 @@
 export const metadata = {
-  title: "Home - Simple",
-  description: "Page description",
+  title: "Poshet Digital",
+  description:
+    "Poshet: Empowering Digital Transformation Through Innovative Software Solutions",
 };
 
 import Hero from "@/components/hero";
