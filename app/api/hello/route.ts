@@ -152,8 +152,6 @@ const generateImage = async (title: string) => {
   // dowmload image from url and save it to the public folder using fs
   // return the path to the image
 
-  console.log(url);
-
   let imgbbRes;
 
   try {
