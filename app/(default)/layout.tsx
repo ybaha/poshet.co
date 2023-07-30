@@ -1,11 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-
 import AOS from "aos";
 import "aos/dist/aos.css";
-
-import Footer from "@/components/ui/footer";
 
 export default function DefaultLayout({
   children,
@@ -23,9 +20,10 @@ export default function DefaultLayout({
 
   return (
     <>
-      <main className="grow">{children}</main>
-
-      <Footer />
+      <div className="mt-16 sm:mt-24"></div>
+      <main className="grow min-h-[100vh] w-full max-w-6xl px-5 sm:px-6">
+        {children}
+      </main>
     </>
   );
 }

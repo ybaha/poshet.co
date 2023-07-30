@@ -1,3 +1,4 @@
+import { Icons } from "./icons";
 import Badge from "./ui/badge";
 
 export default function Hero() {
@@ -69,21 +70,15 @@ export default function Hero() {
               <div className="max-w-xs" data-aos="fade-up" data-aos-delay="300">
                 <div className="group">
                   <a
-                    className="btn font-semibold text-white bg-blue-800 hover:bg-blue-700 w-auto sm:w-auto"
+                    className="btn font-semibold text-white bg-blue-800 hover:bg-blue-700 w-auto sm:w-auto flex items-center gap-2"
                     href="https://cal.com/ercanmungan/30min?duration=30"
                     target="_blank"
                   >
                     Book a call
-                    <svg
-                      className="w-3 h-3 fill-current text-white shrink-0 ml-4 -mr-2 group-hover:translate-x-1 transition-all duration-150"
-                      viewBox="0 0 12 12"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z"
-                        fillRule="nonzero"
-                      />
-                    </svg>
+                    <Icons.MoveRight
+                      className="group-hover:translate-x-1 transition-all duration-200 ease-in-out"
+                      size={16}
+                    />
                   </a>
                 </div>
               </div>

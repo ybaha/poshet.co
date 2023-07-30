@@ -1,3 +1,5 @@
+import { Icons } from "./icons";
+
 export default function Newsletter() {
   return (
     <section>
@@ -106,20 +108,14 @@ export default function Newsletter() {
                 {/* CTA form */}
                 <form className="w-full lg:w-auto">
                   <a
-                    className="btn text-white bg-blue-600 hover:bg-blue-700 shadow group"
+                    className="btn text-white bg-blue-600 hover:bg-blue-700 shadow group flex items-center gap-2 w-2/3"
                     href="https://cal.com/ercanmungan/30min?duration=30"
                   >
                     Book a free consultation call
-                    <svg
-                      className="w-3 h-3 fill-current text-white shrink-0 ml-4 -mr-2 group-hover:translate-x-1 transition-all duration-150"
-                      viewBox="0 0 12 12"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z"
-                        fillRule="nonzero"
-                      />
-                    </svg>
+                    <Icons.MoveRight
+                      className="group-hover:translate-x-1 transition-all duration-200 ease-in-out"
+                      size={16}
+                    />
                   </a>
                 </form>
               </div>

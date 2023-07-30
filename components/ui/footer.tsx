@@ -1,11 +1,11 @@
 export default function Footer() {
   return (
-    <footer>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <footer className="w-full">
+      <div className="mx-auto w-full px-4 sm:px-6 border-t border-gray-200">
         {/* Top area: Blocks */}
 
         {/* Bottom area */}
-        <div className="md:flex md:items-center md:justify-between py-4 md:py-8 border-t border-gray-200">
+        <div className="md:flex mx-auto max-w-6xl md:items-center md:justify-between py-4 md:py-8">
           {/* Social as */}
           <ul className="flex mb-4 md:order-1 md:ml-4 md:mb-0">
             <li>
