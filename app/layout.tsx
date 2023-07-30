@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 
 import Header from "@/components/ui/header";
 import Footer from "@/components/ui/footer";
+import GoogleAnalytics from "./GoogleAnalytics";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,6 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <GoogleAnalytics GA_TRACKING_ID={process.env.GA_TRACKING_ID || ""} />
       <body className={`antialiased bg-white text-gray-900 tracking-tight`}>
         <div className="flex items-center flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip">
           <Header />
