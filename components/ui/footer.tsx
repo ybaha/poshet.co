@@ -23,12 +23,8 @@ export default function Footer() {
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 310 310"
                 >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g
-                    id="SVGRepo_tracerCarrier"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></g>
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                  <g id="SVGRepo_tracerCarrier"></g>
                   <g id="SVGRepo_iconCarrier">
                     <g id="XMLID_801_">
                       {" "}
@@ -62,12 +58,8 @@ export default function Footer() {
                   height="24px"
                   width="24px"
                 >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g
-                    id="SVGRepo_tracerCarrier"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></g>
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                  <g id="SVGRepo_tracerCarrier"></g>
                   <g id="SVGRepo_iconCarrier">
                     {" "}
                     <title></title>{" "}
@@ -81,9 +73,7 @@ export default function Footer() {
                             fill="none"
                             points="4 8.2 12 14.1 20 8.2"
                             stroke="#000000"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeWidth="2"
                           ></polyline>{" "}
                           <rect
                             fill="none"
@@ -91,9 +81,7 @@ export default function Footer() {
                             rx="2"
                             ry="2"
                             stroke="#000000"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeWidth="2"
                             width="18"
                             x="3"
                             y="6.5"

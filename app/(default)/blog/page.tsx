@@ -5,7 +5,7 @@ import path from "path";
 
 export default async function Page() {
   const posts = await getPosts();
-
+  console.log(posts[0].post.date);
   return (
     <div className="prose prose-sm md:prose-base lg:prose-lg prose-slate">
       <h1>Blog</h1>

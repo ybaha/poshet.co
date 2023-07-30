@@ -44,7 +44,11 @@ In a world of generic enterprise software, we use our proven process to uncover 
 
 Our team of expert designers, developers and copywriters will guide you through every step of the process to ensure that your website not only looks great, but delivers results.
 
-generate a blog post idea for the title ${title}. and write it following this mdx template.
+generate a blog post article for the title ${title}. and write it following this mdx template.
+Talk about very specific topics in the post that are useful for people to read.
+Sound not so professional but not too casual either. Use a friendly tone.
+Sound witty and funny but not too much. Dive deep into the topic and give useful information. 
+Make very little typo mistakes here and there.
 don't add any words or sentences to your response just return the mdx content.
 make use of the markdown properties (don't use the biggest heading #. instead use ## for each title)
 Only give the mdx content as a response! no other words or sentences!
@@ -81,22 +85,22 @@ async function parsePost(post: string) {
 async function generatePost() {
   const allposts = await fs.readdir(process.cwd() + "/_posts");
 
-  const res0 = await api.createChatCompletion({
+  const titleRes = await api.createChatCompletion({
     model: "gpt-3.5-turbo-16k",
     messages: [
       {
         role: "system",
         content: `poshet.co a software development agency, description from their website: In a world of generic enterprise software, we use our proven process to uncover your business needs, craft a tailored software solution, and transform your company into a digital leader. Our team of expert designers, developers and copywriters will guide you through every step of the process to ensure that your website not only looks great, but delivers results.
             Generate a blog post idea that is useful for people to read. Select a specific title on a very specific topic. Return only the title of the post as a response no other comments or words.
+            Make sure the title is not already in the list above and it is distinct from the other titles. Don't create a title that is too similar to the other titles both content wise and word wise.
             These are the posts that are already on the website:
-            ${allposts}
-            Make sure the title is not already in the list above and it is distinct from the other titles.
+            ${allposts.map((post) => post.replace(".mdx", "")).join(", ")}
           `,
       },
     ],
   });
 
-  const title = res0.data.choices[0].message?.content;
+  const title = titleRes.data.choices[0].message?.content;
 
   if (!title) return;
 
@@ -143,7 +147,10 @@ async function generatePost() {
 const generateImage = async (title: string) => {
   const response = await api.createImage({
     size: "512x512",
-    prompt: "Photo about: " + title + ". No text in the image.",
+    prompt:
+      "Photo about: " +
+      title +
+      ". No text in the image. Technology related image.",
     n: 1,
   });
 
