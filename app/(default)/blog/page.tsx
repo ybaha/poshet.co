@@ -3,6 +3,11 @@ import matter from "gray-matter";
 import Link from "next/link";
 import path from "path";
 
+export const metadata = {
+  title: "Blog",
+  description: "Poshet.co blog",
+};
+
 export default async function Page() {
   const posts = await getPosts();
   console.log(posts[0].post.date);

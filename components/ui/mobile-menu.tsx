@@ -79,7 +79,6 @@ export default function MobileMenu() {
                 href="/blog"
                 className="btn-sm text-gray-900 bg-gray-200 hover:bg-gray-100 w-full my-2 flex items-center gap-2"
                 onClick={() => setMobileNavOpen(false)}
-                target="_blank"
               >
                 <span>Blog</span>
                 <Icons.MoveRight
