@@ -10,6 +10,10 @@ const config = new Configuration({
 const api = new OpenAIApi(config);
 
 export async function GET(request: Request) {
+  // if building the site, return nothing
+  if (request.headers.get("x-nf-request-id"))
+    return new Response(null, { status: 200 });
+
   const postText = await generatePost();
   if (!postText) return new Response("Error generating post");
 
@@ -23,7 +27,10 @@ export async function GET(request: Request) {
   writePost(postText, post.frontMatter.slug);
 
   const res = {
-    ...post,
+    title: post.frontMatter.title,
+    slug: post.frontMatter.slug,
+    date: post.frontMatter.date,
+    description: post.frontMatter.description,
     postUrlDev: "http://localhost:3000/blog/" + post.frontMatter.slug,
     postUrlProd: "https://poshet.co/blog/" + post.frontMatter.slug,
   };
@@ -73,7 +80,6 @@ async function parsePost(post: string) {
 
 async function generatePost() {
   const allposts = await fs.readdir(process.cwd() + "/_posts");
-  console.log(allposts);
 
   const res0 = await api.createChatCompletion({
     model: "gpt-3.5-turbo-16k",
