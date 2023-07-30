@@ -76,6 +76,20 @@ export default function MobileMenu() {
           <ul className="px-5 py-2">
             <li className="group">
               <Link
+                href="/blog"
+                className="btn-sm text-gray-900 bg-gray-200 hover:bg-gray-100 w-full my-2 flex items-center gap-2"
+                onClick={() => setMobileNavOpen(false)}
+                target="_blank"
+              >
+                <span>Blog</span>
+                <Icons.MoveRight
+                  className="group-hover:translate-x-1 transition-all duration-200 ease-in-out"
+                  size={16}
+                />
+              </Link>
+            </li>
+            <li className="group">
+              <Link
                 href="https://cal.com/ercanmungan/30min?duration=30"
                 className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 w-full my-2 flex items-center gap-2"
                 onClick={() => setMobileNavOpen(false)}
