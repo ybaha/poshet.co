@@ -87,10 +87,10 @@ async function generatePost() {
       {
         role: "system",
         content: `poshet.co a software development agency, description from their website: In a world of generic enterprise software, we use our proven process to uncover your business needs, craft a tailored software solution, and transform your company into a digital leader. Our team of expert designers, developers and copywriters will guide you through every step of the process to ensure that your website not only looks great, but delivers results.
-            Generate a blog post idea that is useful for people to read. Return only the title of the post as a response no other comments or words.
+            Generate a blog post idea that is useful for people to read. Select a specific title on a very specific topic. Return only the title of the post as a response no other comments or words.
             These are the posts that are already on the website:
             ${allposts}
-            Make sure the title is not already in the list above.
+            Make sure the title is not already in the list above and it is distinct from the other titles.
           `,
       },
     ],
