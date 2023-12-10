@@ -5,7 +5,7 @@ module.exports = {
   exclude: ["/server-sitemap-index.xml"], // <= exclude here
   robotsTxtOptions: {
     additionalSitemaps: [
-      "https://example.com/server-sitemap-index.xml", // <==== Add here
+      "https://poshet.co/server-sitemap-index.xml", // <==== Add here
     ],
   },
 };
