@@ -2,17 +2,28 @@ import OpenAI from "openai";
 import axios from "axios";
 import fs from "fs/promises";
 import matter from "gray-matter";
+import { NextRequest } from "next/server";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || "",
 });
 
-export async function GET(request: Request) {
+const isProduction = process.env.NODE_ENV === "production";
+
+export async function GET(request: NextRequest) {
   // if building the site, return nothing
   if (request.headers.get("x-nf-request-id"))
     return new Response(null, { status: 200 });
 
-  const postText = await generatePost();
+  if (isProduction) return new Response("Not allowed in production");
+
+  const about = request.nextUrl.searchParams.get("about") as string | undefined;
+  console.log(about);
+
+  const title = await generateTitle(about);
+
+  const postText = await generatePost(title || "");
+
   if (!postText) return new Response("Error generating post");
 
   const post = await parsePost(postText!);
@@ -82,7 +93,7 @@ async function parsePost(post: string) {
   };
 }
 
-async function generatePost() {
+async function generateTitle(about?: string) {
   const allposts = await fs.readdir(process.cwd() + "/_posts");
 
   const titleRes = await openai.chat.completions.create({
@@ -91,9 +102,14 @@ async function generatePost() {
       {
         role: "system",
         content: `poshet.co a software development agency, description from their website: In a world of generic enterprise software, we use our proven process to uncover your business needs, craft a tailored software solution, and transform your company into a digital leader. Our team of expert designers, developers and copywriters will guide you through every step of the process to ensure that your website not only looks great, but delivers results.
-            Generate a blog post idea that is useful for people to read. Select a specific title on a very specific topic. Return only the title of the post as a response no other comments or words.
+            Generate a blog post idea that is useful for people to read ${
+              !!about
+                ? `that's about ${about}.`
+                : ". Select a specific title on a very specific topic"
+            }. Return only the title of the post as a response no other comments or words.
+            Try to keep the title between 6-12 words. If possible try to make it click-baity but not too much. Keeping the information and what post is about very clear.
             Make sure the title is not already in the list and it is distinct from the other titles. Don't create a title that is too similar to the other titles both content wise and word wise.
-            Don't use ":" in title.
+            Don't use ":" in title!
             This is the post list that contains posts that are already on the website:
             ${allposts.map((post) => post.replace(".mdx", "")).join(", ")}
           `,
@@ -104,8 +120,10 @@ async function generatePost() {
   const title = titleRes.choices[0].message.content;
   console.log("title: " + title);
 
-  if (!title) return;
+  return title;
+}
 
+async function generatePost(title: string) {
   const imageUrl = await generateImage(title);
   console.log("imageUrl: " + imageUrl);
 
@@ -125,26 +143,26 @@ async function generatePost() {
   let textMerged = text1 || "";
 
   console.log("text1: " + text1);
-  console.log("finish reason: ", response.choices[0].finish_reason !== "stop");
+  console.log("finish reason: ", response.choices[0].finish_reason);
   // if finish reason is not stop then call again
-  if (response.choices[0].finish_reason !== "stop") {
-    const response2 = await openai.chat.completions.create({
-      model: "gpt-4-1106-preview",
-      messages: [
-        {
-          role: "system",
-          content: prompt(imageUrl, title),
-        },
-        {
-          role: "assistant",
-          content: response.choices[0].message.content,
-        },
-      ],
-    });
+  // if (response.choices[0].finish_reason !== 'stop') {
+  //   const response2 = await openai.chat.completions.create({
+  //     model: "gpt-4-1106-preview",
+  //     messages: [
+  //       {
+  //         role: "system",
+  //         content: prompt(imageUrl, title),
+  //       },
+  //       {
+  //         role: "assistant",
+  //         content: response.choices[0].message.content,
+  //       },
+  //     ],
+  //   });
 
-    const text2 = response2.choices[0].message.content;
-    textMerged = text1! + text2!;
-  }
+  //   const text2 = response2.choices[0].message.content;
+  //   textMerged = text1! + text2!;
+  // }
 
   return textMerged;
 }
