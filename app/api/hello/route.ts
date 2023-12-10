@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
 
   const title = await generateTitle(about);
 
-  const postText = await generatePost(title || "");
+  const postText = await generatePost(title || "", about);
 
   if (!postText) return new Response("Error generating post");
 
@@ -48,17 +48,19 @@ export async function GET(request: NextRequest) {
   return new Response(JSON.stringify(res));
 }
 
-const prompt = (postImageUrl: string, title: string) => `
+const prompt = (postImageUrl: string, title: string, about?: string) => `
 poshet.co a software development agency, description from their website:
 In a world of generic enterprise software, we use our proven process to uncover your business needs, craft a tailored software solution, and transform your company into a digital leader.
 
 Our team of expert designers, developers and copywriters will guide you through every step of the process to ensure that your website not only looks great, but delivers results.
 
-generate a blog post article for the title ${title}. and write it following this mdx template.
+generate a blog post article for the title ${title} ${
+  about ? `which is about "${about}"` : ""
+}. and write it following this mdx template.
 Talk about very specific topics in the post that are useful for people to read.
 Sound semi-professional but not too casual either. Use a friendly tone. Be descriptive and clear.
 Longest paragraph should be around 8-12 sentences.Shortest paragraph should be around 5 sentences.
-Total word count should be around 2.5k-3.5k words.
+Total word count should be around 2.5k words.
 Sometimes sound witty and funny but not too much. Dive deep into the topic and give useful information.
 Make very little typo mistakes here and there.
 don't add any words or sentences to your response just return the mdx content.
@@ -107,12 +109,13 @@ async function generateTitle(about?: string) {
         content: `poshet.co a software development agency, description from their website: In a world of generic enterprise software, we use our proven process to uncover your business needs, craft a tailored software solution, and transform your company into a digital leader. Our team of expert designers, developers and copywriters will guide you through every step of the process to ensure that your website not only looks great, but delivers results.
             Generate a blog post idea that is useful for people to read ${
               !!about
-                ? `that's about ${about}.`
+                ? `that's about "${about}".`
                 : ". Select a specific title on a very specific topic"
-            }. Return only the title of the post as a response no other comments or words.
+            }. Return only the title of the post as a response no other comments or words. 
             Try to keep the title between 6-12 words. If possible try to make it click-baity but not too much. Keeping the information and what post is about very clear.
             Make sure the title is not already in the list and it is distinct from the other titles. Don't create a title that is too similar to the other titles both content wise and word wise.
-            Don't use semicolon (:) in title!
+            Don't use semicolon (:) in title! Keep the title SEO friendly!
+            Bad title: "Seizing Opportunity: 7 Untapped SaaS Niches for Solo Founders in 2024" Good title: "7 Untapped SaaS Niches for Solo Founders in 2024"
             This is the post list that contains posts that are already on the website:
             ${allposts.map((post) => post.replace(".mdx", "")).join(", ")}
           `,
@@ -126,7 +129,7 @@ async function generateTitle(about?: string) {
   return title;
 }
 
-async function generatePost(title: string) {
+async function generatePost(title: string, about?: string) {
   const imageUrl = await generateImage(title);
   console.log("imageUrl: " + imageUrl);
 
@@ -135,7 +138,7 @@ async function generatePost(title: string) {
     messages: [
       {
         role: "system",
-        content: prompt(imageUrl, title),
+        content: prompt(imageUrl, title, about),
       },
     ],
   });
@@ -152,7 +155,7 @@ async function generatePost(title: string) {
       messages: [
         {
           role: "system",
-          content: prompt(imageUrl, title),
+          content: prompt(imageUrl, title, about),
         },
         {
           role: "assistant",
