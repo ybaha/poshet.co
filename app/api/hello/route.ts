@@ -27,6 +27,7 @@ export async function GET(request: NextRequest) {
   if (!postText) return new Response("Error generating post");
 
   const post = await parsePost(postText!);
+  console.log(post);
 
   if (!post || !post.frontMatter.image)
     return new Response(
@@ -55,7 +56,9 @@ Our team of expert designers, developers and copywriters will guide you through 
 
 generate a blog post article for the title ${title}. and write it following this mdx template.
 Talk about very specific topics in the post that are useful for people to read.
-Sound semi-professional but not too casual either. Use a friendly tone.
+Sound semi-professional but not too casual either. Use a friendly tone. Be descriptive and clear.
+Longest paragraph should be around 8-12 sentences.Shortest paragraph should be around 5 sentences.
+Total word count should be around 2.5k-3.5k words.
 Sometimes sound witty and funny but not too much. Dive deep into the topic and give useful information.
 Make very little typo mistakes here and there.
 don't add any words or sentences to your response just return the mdx content.
@@ -64,7 +67,7 @@ make use of the markdown properties. (use lists quotes and other things if neede
 Only give the mdx content as a response! no other words or sentences!
 template:
 ---
-title: ...
+title: ...(escape quotes using \" also escape colons using \:)
 slug: ... (title.toLoweCase().replaceAll(' ','-'))
 date: "..." (ex: 2022-04-24. random date between 2023-01-01 and 2023-12-12 ${new Date()
   .toISOString()
@@ -109,7 +112,7 @@ async function generateTitle(about?: string) {
             }. Return only the title of the post as a response no other comments or words.
             Try to keep the title between 6-12 words. If possible try to make it click-baity but not too much. Keeping the information and what post is about very clear.
             Make sure the title is not already in the list and it is distinct from the other titles. Don't create a title that is too similar to the other titles both content wise and word wise.
-            Don't use ":" in title!
+            Don't use semicolon (:) in title!
             This is the post list that contains posts that are already on the website:
             ${allposts.map((post) => post.replace(".mdx", "")).join(", ")}
           `,
@@ -142,27 +145,25 @@ async function generatePost(title: string) {
   const text1 = response.choices[0].message.content;
   let textMerged = text1 || "";
 
-  console.log("text1: " + text1);
-  console.log("finish reason: ", response.choices[0].finish_reason);
   // if finish reason is not stop then call again
-  // if (response.choices[0].finish_reason !== 'stop') {
-  //   const response2 = await openai.chat.completions.create({
-  //     model: "gpt-4-1106-preview",
-  //     messages: [
-  //       {
-  //         role: "system",
-  //         content: prompt(imageUrl, title),
-  //       },
-  //       {
-  //         role: "assistant",
-  //         content: response.choices[0].message.content,
-  //       },
-  //     ],
-  //   });
+  if (response.choices[0].finish_reason !== "stop") {
+    const response2 = await openai.chat.completions.create({
+      model: "gpt-4-1106-preview",
+      messages: [
+        {
+          role: "system",
+          content: prompt(imageUrl, title),
+        },
+        {
+          role: "assistant",
+          content: response.choices[0].message.content,
+        },
+      ],
+    });
 
-  //   const text2 = response2.choices[0].message.content;
-  //   textMerged = text1! + text2!;
-  // }
+    const text2 = response2.choices[0].message.content;
+    textMerged = text1! + text2!;
+  }
 
   return textMerged;
 }
