@@ -4,6 +4,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Calendar,
+  UserCircleIcon,
 } from "lucide-react";
 
 export const Icons = {
@@ -12,4 +13,5 @@ export const Icons = {
   ChevronLeft,
   ChevronRight,
   Calendar,
+  UserCircleIcon,
 };

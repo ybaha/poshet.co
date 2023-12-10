@@ -42,6 +42,11 @@ export default async function Post({ params }: Props) {
           dateStyle: "long",
         })}
       </span>
+      {/* Author */}
+      <span id="author" className="flex items-center">
+        <Icons.UserCircleIcon size={16} />{" "}
+        <span className="ml-2">{`Written by: ${props.frontMatter.author}`}</span>
+      </span>
       {/* @ts-expect-error Server Component*/}
       <MDXRemote source={props.content} />
     </article>

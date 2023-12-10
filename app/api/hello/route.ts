@@ -1,13 +1,11 @@
-import { OpenAIApi, Configuration } from "openai";
+import OpenAI from "openai";
 import axios from "axios";
 import fs from "fs/promises";
 import matter from "gray-matter";
 
-const config = new Configuration({
+const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || "",
 });
-
-const api = new OpenAIApi(config);
 
 export async function GET(request: Request) {
   // if building the site, return nothing
@@ -24,7 +22,7 @@ export async function GET(request: Request) {
       "Error parsing post:\n " + post + "\n" + "posttext: " + "\n" + postText
     );
 
-  writePost(postText, post.frontMatter.slug);
+  await writePost(postText, post.frontMatter.slug);
 
   const res = {
     title: post.frontMatter.title,
@@ -46,21 +44,23 @@ Our team of expert designers, developers and copywriters will guide you through 
 
 generate a blog post article for the title ${title}. and write it following this mdx template.
 Talk about very specific topics in the post that are useful for people to read.
-Sound not so professional but not too casual either. Use a friendly tone.
-Sound witty and funny but not too much. Dive deep into the topic and give useful information. 
+Sound semi-professional but not too casual either. Use a friendly tone.
+Sometimes sound witty and funny but not too much. Dive deep into the topic and give useful information.
 Make very little typo mistakes here and there.
 don't add any words or sentences to your response just return the mdx content.
-make use of the markdown properties (don't use the biggest heading #. instead use ## for each title)
+Always start with an introductory heading (without including obvious introductory terms like "introduction to", just rephrase the title in a different way) and a brief introductory description of the topic.
+make use of the markdown properties. (use lists quotes and other things if needed) (don't use the biggest heading #. instead use ## for each title)
 Only give the mdx content as a response! no other words or sentences!
 template:
 ---
 title: ...
 slug: ... (title.toLoweCase().replaceAll(' ','-'))
-date: "..." (ex: 2022-04-24. random date between 2022-01-01 and 2022-04-24 ${new Date()
+date: "..." (ex: 2022-04-24. random date between 2023-01-01 and 2023-12-12 ${new Date()
   .toISOString()
   .slice(0, 10)}})
 description: "..."
 image: ${postImageUrl}
+author: ... (pick random name from this list: ['Yusuf Baha Erarslan', 'Yusha Talha Kuralay', 'Ercan Mungan', 'Ahmet Furkan Gunes'])
 ---
 (content here)        
 `;
@@ -85,29 +85,32 @@ async function parsePost(post: string) {
 async function generatePost() {
   const allposts = await fs.readdir(process.cwd() + "/_posts");
 
-  const titleRes = await api.createChatCompletion({
-    model: "gpt-3.5-turbo-16k",
+  const titleRes = await openai.chat.completions.create({
+    model: "gpt-4-1106-preview",
     messages: [
       {
         role: "system",
         content: `poshet.co a software development agency, description from their website: In a world of generic enterprise software, we use our proven process to uncover your business needs, craft a tailored software solution, and transform your company into a digital leader. Our team of expert designers, developers and copywriters will guide you through every step of the process to ensure that your website not only looks great, but delivers results.
             Generate a blog post idea that is useful for people to read. Select a specific title on a very specific topic. Return only the title of the post as a response no other comments or words.
-            Make sure the title is not already in the list above and it is distinct from the other titles. Don't create a title that is too similar to the other titles both content wise and word wise.
-            These are the posts that are already on the website:
+            Make sure the title is not already in the list and it is distinct from the other titles. Don't create a title that is too similar to the other titles both content wise and word wise.
+            Don't use ":" in title.
+            This is the post list that contains posts that are already on the website:
             ${allposts.map((post) => post.replace(".mdx", "")).join(", ")}
           `,
       },
     ],
   });
 
-  const title = titleRes.data.choices[0].message?.content;
+  const title = titleRes.choices[0].message.content;
+  console.log("title: " + title);
 
   if (!title) return;
 
   const imageUrl = await generateImage(title);
+  console.log("imageUrl: " + imageUrl);
 
-  const response = await api.createChatCompletion({
-    model: "gpt-3.5-turbo-16k",
+  const response = await openai.chat.completions.create({
+    model: "gpt-4-1106-preview",
     messages: [
       {
         role: "system",
@@ -118,13 +121,15 @@ async function generatePost() {
 
   if (!response) return;
 
-  const text1 = response.data.choices[0].message?.content;
+  const text1 = response.choices[0].message.content;
   let textMerged = text1 || "";
 
+  console.log("text1: " + text1);
+  console.log("finish reason: ", response.choices[0].finish_reason !== "stop");
   // if finish reason is not stop then call again
-  if (response.data.choices[0].finish_reason !== "stop") {
-    const response2 = await api.createChatCompletion({
-      model: "gpt-3.5-turbo",
+  if (response.choices[0].finish_reason !== "stop") {
+    const response2 = await openai.chat.completions.create({
+      model: "gpt-4-1106-preview",
       messages: [
         {
           role: "system",
@@ -132,12 +137,12 @@ async function generatePost() {
         },
         {
           role: "assistant",
-          content: response.data.choices[0].message?.content,
+          content: response.choices[0].message.content,
         },
       ],
     });
 
-    const text2 = response2.data.choices[0].message?.content;
+    const text2 = response2.choices[0].message.content;
     textMerged = text1! + text2!;
   }
 
@@ -145,16 +150,29 @@ async function generatePost() {
 }
 
 const generateImage = async (title: string) => {
-  const response = await api.createImage({
+  const imagePromptResponse = await openai.chat.completions.create({
+    model: "gpt-4-1106-preview",
+    messages: [
+      {
+        content: `Generate an AI image generation prompt for this title: ${title}.
+          Response should be simple and short. Don't add any words or sentences to your response just return the image prompt.
+          Response shouldn't include text related stuff. It should describe something visual.
+          Example: Title: "Can AI take over the world?" Response: "A robot and a human playing chess."
+          `,
+        role: "system",
+      },
+    ],
+  });
+  const imagePrompt = imagePromptResponse.choices[0].message.content;
+  console.log(imagePrompt);
+  const response = await openai.images.generate({
+    model: "dall-e-2",
     size: "512x512",
-    prompt:
-      "Photo about: " +
-      title +
-      ". No text in the image. Technology related image.",
+    prompt: imagePrompt || "Random tech related image",
     n: 1,
   });
 
-  const url = response.data.data[0].url!;
+  const url = response.data[0].url;
 
   // dowmload image from url and save it to the public folder using fs
   // return the path to the image
