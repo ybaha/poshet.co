@@ -1,4 +1,4 @@
-import { getServerSideSitemapIndex } from "next-sitemap";
+import { ISitemapField, getServerSideSitemap } from "next-sitemap";
 import fs from "fs/promises";
 
 export async function GET(request: Request) {
@@ -8,8 +8,11 @@ export async function GET(request: Request) {
   const allposts = await fs.readdir(process.cwd() + "/_posts");
 
   const urls = allposts.map((post) => {
-    return "https://example.com/blog/" + post.replace(".mdx", "");
+    return {
+      loc: `https://poshet.co/blog/${post.replace(".mdx", "")}`,
+      lastmod: new Date().toISOString(),
+    } as ISitemapField;
   });
 
-  return getServerSideSitemapIndex([...urls]);
+  return getServerSideSitemap([...urls]);
 }
