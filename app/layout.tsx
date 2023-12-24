@@ -6,6 +6,20 @@ import Script from "next/script";
 import Analytics from "./GoogleAnalytics";
 import { Suspense } from "react";
 
+export const metadata = {
+  metadataBase: new URL("https://poshet.co"),
+  alternates: {
+    canonical: "/",
+    // languages: {
+    //   'en-US': '/en-US',
+    //   'de-DE': '/de-DE',
+    // },
+  },
+  openGraph: {
+    images: "/images/poshet-black-transparent.png",
+  },
+};
+
 export default function RootLayout({
   children,
 }: {
