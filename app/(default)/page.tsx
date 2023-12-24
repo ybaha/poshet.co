@@ -1,7 +1,7 @@
 export const metadata = {
-  title: "Poshet Digital",
+  title: "Poshet Digital | Crafted Websites & Digital Solutions",
   description:
-    "Poshet: Empowering Digital Transformation Through Innovative Software Solutions",
+    "Transform your business with expertly designed websites and tailored software solutions. Book a consultation for SEO-focused services at Poshet.co.",
 };
 
 import Hero from "@/components/hero";

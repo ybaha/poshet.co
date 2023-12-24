@@ -4,8 +4,9 @@ import Link from "next/link";
 import path from "path";
 
 export const metadata = {
-  title: "Blog",
-  description: "Poshet.co blog",
+  title: "Tech Insights & Trends | Poshet Digital Blog",
+  description:
+    "Explore the latest in technology trends, insights, and innovations on Poshet Digital's blog. Stay updated with expert analysis and discussions.",
 };
 
 export default async function Page() {
