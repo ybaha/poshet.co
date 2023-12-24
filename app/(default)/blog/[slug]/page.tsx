@@ -63,6 +63,9 @@ export async function generateMetadata({ params }: any) {
     openGraph: {
       images: [blog.frontMatter.image],
     },
+    alternates: {
+      canonical: `https://www.poshet.co/blog/${params.slug}`,
+    },
   };
 }
 
