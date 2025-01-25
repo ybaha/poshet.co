@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Image from "next/image";
-import { authors } from "../../authors/page";
+import { authors } from "@/lib/constants";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 export async function generateStaticParams() {
