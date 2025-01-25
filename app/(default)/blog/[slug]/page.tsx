@@ -14,6 +14,12 @@ export default async function Post({ params }: Props) {
   const props = await getPost(params);
 
   if (!props.content) return <div>404</div>;
+
+  const author = props.frontMatter.author as string;
+  const authorLink = `/author/${author
+    .toLocaleLowerCase()
+    .replaceAll(" ", "-")}`;
+
   return (
     <article className="prose prose-sm md:prose-base lg:prose-lg prose-slate mx-auto pb-16">
       <Link
@@ -43,11 +49,10 @@ export default async function Post({ params }: Props) {
         })}
       </span>
       {/* Author */}
-      <span id="author" className="flex items-center">
+      <Link href={authorLink} id="author" className="flex items-center">
         <Icons.UserCircleIcon size={16} />{" "}
         <span className="ml-2">{`Written by: ${props.frontMatter.author}`}</span>
-      </span>
-      {/* @ts-expect-error Server Component*/}
+      </Link>
       <MDXRemote source={props.content} />
     </article>
   );
