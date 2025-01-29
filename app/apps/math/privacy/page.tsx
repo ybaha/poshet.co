@@ -1,15 +1,15 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy - Math Questions AI",
-  description: "Privacy policy for Math Questions AI iOS application",
+  title: "Privacy Policy - Math Answers AI",
+  description: "Privacy policy for Math Answers AI application",
 };
 
 export default function PrivacyPage() {
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
+    <div className="max-w-3xl mx-auto px-4 py-8 mt-10">
       <h1 className="text-3xl font-bold mb-6">
-        Privacy Policy for Math Questions AI
+        Privacy Policy for Math Answers AI
       </h1>
 
       <div className="space-y-6">
