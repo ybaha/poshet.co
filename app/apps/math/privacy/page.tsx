@@ -16,26 +16,53 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-xl font-semibold mb-2">1. Data Collection</h2>
           <p className="text-gray-600">
-            We collect minimal data necessary for app functionality:
-            <ul className="list-disc pl-6 mt-2 space-y-2">
-              <li>
-                Math problem images processed temporarily (deleted after 24
-                hours)
-              </li>
-              <li>Anonymous usage statistics for app improvements</li>
-              <li>Account email for progress tracking (stored securely)</li>
-            </ul>
+            We collect and process the following types of data:
           </p>
+
+          <h3 className="text-lg font-semibold mt-4 mb-2">
+            Data Linked to You:
+          </h3>
+          <div className="pl-6">
+            <h4 className="font-medium mb-2">Contact Information:</h4>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>
+                Name - Used for product personalization and app functionality
+              </li>
+              <li>Email address - Used for app functionality</li>
+            </ul>
+
+            <h4 className="font-medium mt-4 mb-2">Purchase Information:</h4>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>
+                Purchase history - Used for analytics and app functionality
+              </li>
+            </ul>
+          </div>
+
+          <h3 className="text-lg font-semibold mt-4 mb-2">
+            Data Not Linked to You:
+          </h3>
+          <div className="pl-6">
+            <h4 className="font-medium mb-2">Diagnostic Data:</h4>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>Crash data - Used for analytics</li>
+              <li>Performance data - Used for analytics</li>
+              <li>Other diagnostic data - Used for analytics</li>
+            </ul>
+          </div>
         </section>
 
         <section>
           <h2 className="text-xl font-semibold mb-2">2. Data Usage</h2>
           <p className="text-gray-600">
-            Your data is used exclusively to:
+            Your data is used for the following purposes:
             <ul className="list-disc pl-6 mt-2 space-y-2">
-              <li>Provide math problem solutions via OpenAI API</li>
-              <li>Maintain your learning progress history</li>
-              <li>Improve app performance and accuracy</li>
+              <li>
+                Product Personalization - To provide a customized experience
+              </li>
+              <li>App Functionality - To ensure core features work properly</li>
+              <li>Analytics - To improve our services and performance</li>
+              <li>Progress Tracking - To maintain your learning history</li>
             </ul>
           </p>
         </section>
