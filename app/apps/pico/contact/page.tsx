@@ -60,13 +60,6 @@ const ContactPage = () => {
 
           <div className="space-y-4">
             <div>
-              <h3 className="font-bold">Email</h3>
-              <a href="mailto:ybahaerarslan@gmail.com" className="text-blue-600 hover:underline">
-                ybahaerarslan@gmail.com
-              </a>
-            </div>
-
-            <div>
               <h3 className="font-bold">Response Time</h3>
               <p className="text-gray-700">We typically respond within 24-48 hours</p>
             </div>
@@ -168,22 +161,35 @@ const ContactPage = () => {
       <section className="mt-12 p-6 bg-gray-50 rounded-lg">
         <h2 className="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
         <div className="space-y-4">
-          <div>
-            <h3 className="font-bold">How do I reset my password?</h3>
-            <p className="text-gray-700">
-              You can reset your password by clicking on the &quot;Forgot Password&quot; link on the login page.
-            </p>
-          </div>
+
           <div>
             <h3 className="font-bold">Is my data secure?</h3>
             <p className="text-gray-700">
-              Yes, we take data security seriously. All your data is encrypted and stored securely.
+              Yes, we don’t collect, store, or share any personal data (not even your name or email). The only information processed is payment data for subscriptions, which is handled securely by Apple/Google and our payment provider.
             </p>
           </div>
           <div>
             <h3 className="font-bold">Can I use Pico Cards offline?</h3>
             <p className="text-gray-700">
-              Yes, you can use most features of Pico Cards offline. Your data will sync when you&apos;re back online.
+              Yes, you can use all of the features of Pico Cards offline. You can restore your purchases on any device on Manage Subscription page.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-bold">Do I need an account to use the app?</h3>
+            <p className="text-gray-700">
+              Nope! Just download the app and start using it. The only time you’ll need to sign in is if you purchase a premium subscription (via Apple/Google accounts).
+            </p>
+          </div>
+          <div>
+            <h3 className="font-bold">How do I cancel my subscription?</h3>
+            <p className="text-gray-700">
+              Subscriptions are managed through your Apple or Google account settings, not the app. You can cancel anytime by following their standard process.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-bold">CanI delete my data?</h3>
+            <p className="text-gray-700">
+              Since we don’t store personal data, there’s nothing to delete! For payment history, contact Apple/Google support. To remove the app, just uninstall it from your device.
             </p>
           </div>
         </div>
