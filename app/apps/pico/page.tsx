@@ -67,12 +67,12 @@ const PicoPage = () => {
             className={buttonVariants({ variant: 'outline' })}
           >
               <Play />
-              <span>Get it on Google Play</span>
+              <span>Coming Soon</span>
           </Link>
           <Link 
-            href="https://apps.apple.com/app/pico-cards/id123456789" 
+            href="https://apps.apple.com/us/app/pico-cards-deep-questions/id6741867029" 
             target="_blank"
-            className={buttonVariants({ variant: 'outline' })}
+            className={buttonVariants({ variant: 'default' })}
           >
            <Apple />
            <span>Download on the App Store</span>
