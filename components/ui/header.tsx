@@ -37,7 +37,8 @@ export default function Header() {
 
           <div className="hidden md:flex gap-8">
             <Link href="/blog">Blog</Link>
-            <Link href="/blog">Contact</Link>
+            <Link href="/contact">Contact</Link>
+            <Link href="/apps">Apps</Link>
           </div>
 
           {/* Desktop navigation */}
