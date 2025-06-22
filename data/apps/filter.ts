@@ -111,12 +111,8 @@ export const filterAppData: AppData = {
           "The Application collects information when you download and use it. This information may include information such as:",
         type: "list",
         items: [
-          "Your device's Internet Protocol address (e.g. IP address)",
-          "The pages of the Application that you visit, the time and date of your visit, the time spent on those pages",
-          "The time spent on the Application",
           "The operating system you use on your mobile device",
           "Photos you upload for transformation (processed and immediately deleted)",
-          "Purchase and credit transaction data",
         ],
       },
       {
