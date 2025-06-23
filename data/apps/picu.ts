@@ -1,6 +1,6 @@
 import { AppData } from "@/lib/types/app";
 
-export const filterAppData: AppData = {
+export const picuAppData: AppData = {
   metadata: {
     name: "PicU: Transform Your Photos AI",
     slug: "picu",
@@ -221,6 +221,65 @@ export const filterAppData: AppData = {
         title: "Governing Law",
         content:
           "These Terms shall be governed and construed in accordance with the laws of Turkey, without regard to its conflict of law provisions.",
+        type: "paragraph",
+      },
+      {
+        title: "Face Data and Biometric Information",
+        content:
+          "PicU does not collect, extract, store, or process biometric face data or facial recognition information. While users may upload images that contain faces, our app treats all uploaded content as visual imagery for artistic transformation purposes only.",
+        type: "paragraph",
+      },
+      {
+        title: "Image Processing and Storage",
+        content:
+          "When you upload an image (whether it contains faces, objects, landscapes, or any other content), the image is:",
+        type: "list",
+        items: [
+          "Sent to OpenAI's secure API for artistic transformation",
+          "Processed to apply the selected artistic filter or style",
+          "Both the original and transformed images are stored in your personal gallery for your access",
+          "Images remain accessible to you until you choose to delete them from your gallery",
+        ],
+      },
+      {
+        title: "No Facial Analysis",
+        content: "Our app does not perform:",
+        type: "list",
+        items: [
+          "Face recognition or identification",
+          "Facial feature extraction or mapping",
+          "Creation of facial templates or biometric signatures",
+          "Storage of facial geometry or measurements",
+          "Analysis of facial characteristics for identification purposes",
+        ],
+      },
+      {
+        title: "Third-Party Processing",
+        content:
+          "Images are processed by OpenAI's image editing API solely for artistic transformation. OpenAI processes images according to their privacy policy and does not use them to create biometric face data or for facial recognition purposes.",
+        type: "paragraph",
+      },
+      {
+        title: "Data Retention",
+        content:
+          "No biometric face data is retained because none is collected. Uploaded images are stored in your personal gallery for your convenience and remain there until you delete them. While images may incidentally contain faces, they are stored purely as visual content for your creative portfolio, not as biometric data.",
+        type: "paragraph",
+      },
+      {
+        title: "Your Control",
+        content: "You maintain full control over:",
+        type: "list",
+        items: [
+          "What images you choose to upload",
+          "Which images remain in your gallery",
+          "When to delete images from your account",
+          "Whether to upload images containing faces (this is entirely optional)",
+        ],
+      },
+      {
+        title: "Image Deletion",
+        content:
+          "You can delete any image from your gallery at any time through the app interface. When deleted, images are permanently removed from our servers.",
         type: "paragraph",
       },
       {

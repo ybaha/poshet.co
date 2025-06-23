@@ -3,13 +3,13 @@ import { AppData, AppSlug } from "@/lib/types/app";
 // Import all app data files
 import { picoAppData } from "@/data/apps/pico";
 import { mathAppData } from "@/data/apps/math";
-import { filterAppData } from "@/data/apps/filter";
+import { picuAppData } from "@/data/apps/picu";
 
 // Registry of all available apps
 const APP_REGISTRY: Record<string, AppData> = {
   pico: picoAppData,
   math: mathAppData,
-  filter: filterAppData,
+  picu: picuAppData,
 };
 
 /**

@@ -45,7 +45,7 @@ export const mathAppData: AppData = {
       platform: "android",
       url: "https://play.google.com/store/apps/details?id=co.poshet.math",
       label: "Get it on Google Play",
-      available: true,
+      available: false,
     },
   ],
   faq: [
