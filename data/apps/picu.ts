@@ -190,7 +190,7 @@ export const picuAppData: AppData = {
       {
         title: "Credit System and Purchases",
         content:
-          "Credits are required to transform photos. All purchases are final and non-refundable except as required by law. Credits do not expire but may be lost if the app is discontinued.",
+          "Credits are required to transform photos. All purchases are final and non-refundable except as required by law. Credits do not expire but may be lost if the app is discontinued. Note: Purchase restoration is not currently supported.",
         type: "paragraph",
       },
       {
