@@ -4,12 +4,14 @@ import { AppData, AppSlug } from "@/lib/types/app";
 import { picoAppData } from "@/data/apps/pico";
 import { mathAppData } from "@/data/apps/math";
 import { picuAppData } from "@/data/apps/picu";
+import { vidgenAppData } from "@/data/apps/vidgen";
 
 // Registry of all available apps
 const APP_REGISTRY: Record<string, AppData> = {
   pico: picoAppData,
   math: mathAppData,
   picu: picuAppData,
+  vidgen: vidgenAppData,
 };
 
 /**
