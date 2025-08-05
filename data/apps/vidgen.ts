@@ -114,34 +114,44 @@ export const vidgenAppData: AppData = {
       {
         title: "Information Collection and Use",
         content:
-          "The Application collects information when you download and use it. This information may include:",
+          "VidGen3 has a minimal data collection approach. We only store:",
         type: "list",
         items: [
-          "Your device's Internet Protocol address (e.g. IP address)",
-          "The pages of the Application that you visit, the time and date of your visit, the time spent on those pages",
-          "The time spent on the Application",
-          "The operating system you use on your mobile device",
-          "Images you upload for video generation (processed and stored in your gallery)",
+          "Images you upload for video generation",
           "Text prompts you provide for video generation",
+          "Generated videos in your personal gallery",
           "Video generation history and preferences",
+          "Your Apple account identifier (for linking your content and purchases)",
+        ],
+      },
+      {
+        title: "What We Don't Collect",
+        content: "Unlike many apps, VidGen3 does not collect or store:",
+        type: "list",
+        items: [
+          "IP addresses or device identifiers",
+          "Location data or tracking information",
+          "Personal information like name, email, or contact details",
+          "Device usage analytics or app navigation data",
+          "Any data unrelated to video generation functionality",
         ],
       },
       {
         title: "Video and Image Processing",
         content:
-          "Content uploaded to the Application (images and text prompts) is processed using AI technology through third-party services including Replicate API. Your generated videos are stored in your personal gallery and remain accessible until you choose to delete them. Original images are processed for video generation and stored securely.",
+          "Content uploaded to the Application (images and text prompts) is processed using secure AI technology services. Your generated videos are stored in your personal gallery and remain accessible until you choose to delete them. Original images are processed for video generation and stored securely.",
         type: "paragraph",
       },
       {
-        title: "Subscription and Payment Data",
+        title: "Account Linking and Purchases",
         content:
-          "Subscription and purchase information is processed through RevenueCat and your device's app store (Apple App Store or Google Play Store). We do not directly handle payment card information - all transactions are processed securely by these trusted payment providers.",
+          "Your generated content and purchase history are linked to your Apple account identifier. This allows you to access your content and purchases across devices. We do not store payment card information - all transactions are processed securely by Apple App Store.",
         type: "paragraph",
       },
       {
         title: "Third Party Access",
         content:
-          "We use third-party services for AI video generation (Replicate), payment processing (RevenueCat, Apple, Google), and cloud storage (Cloudflare R2). Only aggregated, anonymized usage data is shared to improve our service. Your personal content is never shared for marketing or training purposes.",
+          "We use secure third-party services for AI video generation, payment processing (Apple App Store), and cloud storage. Your generated content and prompts are only shared with these services to provide the video generation functionality. Your personal content is never shared for marketing or training purposes.",
         type: "paragraph",
       },
       {
@@ -215,13 +225,13 @@ export const vidgenAppData: AppData = {
       {
         title: "Credit System and Subscriptions",
         content:
-          "VidGen3 uses a credit-based system where credits are consumed for video generation based on duration, resolution, and AI model complexity. We offer both one-time credit purchases and subscription plans with monthly credit allowances.",
+          "VidGen3 uses a credit-based system where credits are consumed for video generation based on duration, resolution, and AI model complexity. We offer consumable IAP credits for one-time purchases, as well as weekly and monthly subscription plans with credit allowances.",
         type: "paragraph",
       },
       {
         title: "Payment Terms",
         content:
-          "All purchases are processed through your device's app store and are subject to their refund policies. Credits purchased individually never expire. Subscription credits may have expiration dates as specified in your plan. Subscriptions automatically renew unless cancelled.",
+          "All purchases are processed through Apple App Store. Consumable IAP credits are immediately consumed upon use and never expire. Weekly and monthly subscriptions automatically renew unless cancelled and provide credit allowances during the active subscription period.",
         type: "paragraph",
       },
       {
@@ -233,13 +243,13 @@ export const vidgenAppData: AppData = {
       {
         title: "AI Content Generation Disclaimer",
         content:
-          "AI-generated videos may not always meet your expectations or produce desired results. Video generation quality depends on various factors including prompt clarity, source image quality, and AI model capabilities. No guarantee is made regarding specific outcomes or quality of generated content.",
+          "AI-generated videos may not always meet your expectations or produce desired results. Video generation quality depends on various factors including prompt clarity, source image quality, and the selected generation settings. No guarantee is made regarding specific outcomes or quality of generated content.",
         type: "paragraph",
       },
       {
         title: "Service Availability",
         content:
-          "Video generation requires an internet connection and depends on third-party AI services. While we strive for high availability, we cannot guarantee uninterrupted service. Generation times may vary based on server load and model complexity.",
+          "Video generation requires an internet connection and depends on our AI processing services. While we strive for high availability, we cannot guarantee uninterrupted service. Generation times may vary based on video settings and system load.",
         type: "paragraph",
       },
       {
@@ -251,7 +261,7 @@ export const vidgenAppData: AppData = {
       {
         title: "Intellectual Property",
         content:
-          "The app, its AI technology, user interface, and all related intellectual property remain the exclusive property of Poshet. The AI models are provided by third-party services and are subject to their respective terms.",
+          "The app, its AI technology, user interface, and all related intellectual property remain the exclusive property of Poshet. The AI video generation technology is licensed for use within the app and subject to these terms.",
         type: "paragraph",
       },
       {
@@ -269,13 +279,13 @@ export const vidgenAppData: AppData = {
       {
         title: "Subscription Cancellation",
         content:
-          "Subscriptions can be cancelled through your app store account settings. Cancellation takes effect at the end of the current billing period. You retain access to subscription benefits until the end of the paid period.",
+          "Weekly and monthly subscriptions can be cancelled through your Apple App Store account settings. Cancellation takes effect at the end of the current billing period. You retain access to subscription benefits until the end of the paid period.",
         type: "paragraph",
       },
       {
         title: "Refund Policy",
         content:
-          "Refunds are handled according to your app store's policy (Apple App Store or Google Play Store). Generally, credits and subscriptions are non-refundable except as required by law or in cases of technical issues preventing service use.",
+          "Refunds are handled according to Apple App Store's policy. Refund eligibility may depend on usage, time since purchase, and other factors. Consumable credits that have been used for video generation are generally non-refundable. Unused subscription periods may be eligible for refund according to Apple's terms.",
         type: "paragraph",
       },
       {
@@ -293,7 +303,7 @@ export const vidgenAppData: AppData = {
       {
         title: "Privacy and Data Processing",
         content:
-          "By using VidGen3, you acknowledge that your images, prompts, and generated videos will be processed by third-party AI services (including Replicate) to provide video generation functionality. These services have their own privacy policies and data handling practices.",
+          "By using VidGen3, you acknowledge that your images, prompts, and generated videos will be processed by secure third-party AI services to provide video generation functionality. These services follow strict data privacy and security practices.",
         type: "paragraph",
       },
       {
