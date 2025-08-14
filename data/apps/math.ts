@@ -2,20 +2,20 @@ import { AppData } from "@/lib/types/app";
 
 export const mathAppData: AppData = {
   metadata: {
-    name: "Math Master",
+    name: "Math Help AI - Solve Questions",
     slug: "math",
-    tagline: "Master Math Concepts Effortlessly",
+    tagline: "Solve Math Questions with AI",
     description:
-      "Math Master is an interactive learning app designed to help students excel in mathematics.",
+      "Math Help AI is an interactive learning app designed to help students excel in mathematics.",
     version: "2.1.0",
     developer: "Poshet",
     supportEmail: "ybahaerarslan@gmail.com",
   },
   hero: {
-    title: "Math Master",
-    subtitle: "Master Math Concepts Effortlessly",
+    title: "Math Help AI",
+    subtitle: "Solve Math Questions with AI",
     description:
-      "Math Master is an interactive learning app designed to help students excel in mathematics through engaging exercises, step-by-step solutions, and personalized learning paths. From basic arithmetic to advanced calculus, we make math accessible and enjoyable for learners of all levels.",
+      "Math Help AI is an interactive learning app designed to help students excel in mathematics through engaging exercises, step-by-step solutions, and personalized learning paths. From basic arithmetic to advanced calculus, we make math accessible and enjoyable for learners of all levels.",
     imagePath: "/apps/math/Screenshot 01.png",
   },
   features: [
@@ -37,7 +37,7 @@ export const mathAppData: AppData = {
   downloads: [
     {
       platform: "ios",
-      url: "https://apps.apple.com/app/math-master",
+      url: "https://apps.apple.com/nl/app/math-help-ai-solve-questions/id6740034105?l=en-GB",
       label: "Download on the App Store",
       available: true,
     },

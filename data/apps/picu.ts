@@ -53,7 +53,7 @@ export const picuAppData: AppData = {
   downloads: [
     {
       platform: "ios",
-      url: "https://apps.apple.com/app/picu-transform-photos-ai/id123456789",
+      url: "https://apps.apple.com/nl/app/picu-transform-your-photos-ai/id6745964976?l=en-GB",
       label: "Download on the App Store",
       available: true,
     },
