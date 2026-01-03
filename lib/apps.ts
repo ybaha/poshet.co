@@ -6,6 +6,7 @@ import { mathAppData } from "@/data/apps/math";
 import { picuAppData } from "@/data/apps/picu";
 import { vidgenAppData } from "@/data/apps/vidgen";
 import { gripAppData } from "@/data/apps/grip";
+import { glbAppData } from "@/data/apps/glb";
 
 // Registry of all available apps
 const APP_REGISTRY: Record<string, AppData> = {
@@ -14,6 +15,7 @@ const APP_REGISTRY: Record<string, AppData> = {
   picu: picuAppData,
   vidgen: vidgenAppData,
   grip: gripAppData,
+  glb: glbAppData,
 };
 
 /**
