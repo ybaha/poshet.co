@@ -89,7 +89,7 @@ export const vidgenAppData: AppData = {
     {
       question: "What happens to my videos and images?",
       answer:
-        "Your generated videos are stored securely in your personal gallery. Original images uploaded for image-to-video are processed and can be deleted by you anytime. We don't share your content with third parties.",
+        "Your generated videos are stored securely in your personal gallery. Original images uploaded for image-to-video are processed and can be deleted by you anytime. When you delete your data, it is removed from our servers within 24 hours. To provide video generation, your text prompts and images are sent to third-party AI providers (such as OpenAI, Google, ByteDance, Stability AI, and Luma via Replicate) — but your content is never used for marketing or AI model training.",
     },
     {
       question: "Do credits expire?",
@@ -125,6 +125,20 @@ export const vidgenAppData: AppData = {
         ],
       },
       {
+        title: "Third-Party AI Data Sharing",
+        content:
+          "To provide video generation and prompt enhancement features, VidGen3 shares certain data with third-party AI service providers. By using these features, you acknowledge and consent to the following:",
+        type: "list",
+        items: [
+          "Data shared: text prompts you enter and images you upload for video generation",
+          "Third-party providers that may receive your data: OpenAI, Google, ByteDance, Stability AI, and Luma (via Replicate)",
+          "Purpose: your data is transmitted solely for AI-powered video generation and prompt enhancement",
+          "Consent: you are required to explicitly review and accept a consent screen before any data is transmitted to third-party providers",
+          "Existing users are prompted to review and accept consent before their first AI-powered action",
+          "You can review or revoke your consent at any time in the app Settings",
+        ],
+      },
+      {
         title: "What We Don't Collect",
         content: "Unlike many apps, VidGen3 does not collect or store:",
         type: "list",
@@ -139,7 +153,7 @@ export const vidgenAppData: AppData = {
       {
         title: "Video and Image Processing",
         content:
-          "Content uploaded to the Application (images and text prompts) is processed using secure AI technology services. Your generated videos are stored in your personal gallery and remain accessible until you choose to delete them. Original images are processed for video generation and stored securely.",
+          "Content you upload to the Application (images and text prompts) is transmitted to third-party AI providers — including OpenAI, Google, ByteDance, Stability AI, and Luma (via Replicate) — for the purpose of video generation and prompt enhancement. Your generated videos are stored in your personal gallery and remain accessible until you choose to delete them. Original images are processed for video generation and stored securely on our servers. Your content is not used by these providers for model training or marketing purposes.",
         type: "paragraph",
       },
       {
@@ -151,13 +165,23 @@ export const vidgenAppData: AppData = {
       {
         title: "Third Party Access",
         content:
-          "We use secure third-party services for AI video generation, payment processing (Apple App Store), and cloud storage. Your generated content and prompts are only shared with these services to provide the video generation functionality. Your personal content is never shared for marketing or training purposes.",
+          "We share your data with the following categories of third-party service providers:",
+        type: "list",
+        items: [
+          "AI Video Generation and Prompt Enhancement: OpenAI, Google, ByteDance, Stability AI, and Luma (via Replicate) — these providers receive your text prompts and uploaded images solely for the purpose of generating videos and enhancing prompts",
+          "Payment Processing: Apple App Store — handles all in-app purchases and subscriptions securely",
+          "Cloud Storage: secure cloud infrastructure providers — store your generated videos, uploaded images, and generation history",
+        ],
+      },
+      {
+        content:
+          "Your content is shared with these providers only to deliver the video generation functionality. Your personal content is never shared for marketing or AI model training purposes.",
         type: "paragraph",
       },
       {
         title: "Data Retention Policy",
         content:
-          "Generated videos and uploaded images are stored in your personal gallery until you delete them. Account data and generation history are retained while you use the Application and for a reasonable time after account termination for support and legal purposes.",
+          "Generated videos and uploaded images are stored in your personal gallery until you choose to delete them. When you delete your data, it is removed from our servers within 24 hours. Account data and generation history are retained while you actively use the Application. Upon account termination or deletion request, all associated data is purged from our servers within 24 hours.",
         type: "paragraph",
       },
       {
@@ -191,7 +215,7 @@ export const vidgenAppData: AppData = {
         type: "paragraph",
       },
     ],
-    lastUpdated: "2025-02-04",
+    lastUpdated: "2026-02-12",
     contactEmail: "ybahaerarslan@gmail.com",
   },
   terms: {
