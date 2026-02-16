@@ -103,6 +103,11 @@ export const roomaAppData: AppData = {
         "Absolutely! You can easily share your before-and-after transformations with friends, family, or your interior designer to communicate your vision.",
     },
     {
+      question: "What happens to my photos and designs?",
+      answer:
+        "Your uploaded room photos and generated designs are stored securely in your personal collection. When you delete your data, it is removed from our servers within 24 hours. To provide the AI redesign feature, your room photos are sent to Google's AI models for image generation — but your content is never used for marketing or AI model training.",
+    },
+    {
       question: "Can I cancel my subscription anytime?",
       answer:
         "Yes, you can cancel your subscription at any time through the App Store or Google Play. You'll continue to have access until the end of your current billing period.",
@@ -135,21 +140,45 @@ export const roomaAppData: AppData = {
         ],
       },
       {
+        title: "Third-Party AI Data Sharing",
+        content:
+          "To provide AI-powered interior design features, Rooma shares certain data with third-party AI service providers. By using these features, you acknowledge and consent to the following:",
+        type: "list",
+        items: [
+          "Data shared: photos of rooms you upload for redesign and any style or design preferences you select",
+          "Third-party provider that receives your data: Google (AI image generation models)",
+          "Purpose: your data is transmitted solely for AI-powered interior design image generation",
+          "Consent: you are required to explicitly review and accept a consent screen before any data is transmitted to third-party providers",
+          "Existing users are prompted to review and accept consent before their first AI-powered action",
+          "You can review or revoke your consent at any time in the app Settings",
+        ],
+      },
+      {
         title: "Photo Processing",
         content:
-          "Photos you upload are sent to our AI servers for processing to generate interior design suggestions. Original photos and generated designs are stored in your personal collection until you choose to delete them.",
+          "Photos you upload are transmitted to Google's AI models for processing to generate interior design suggestions. Your photos and generated designs are stored in your personal collection until you choose to delete them. Your content is not used by Google for model training or marketing purposes.",
         type: "paragraph",
       },
       {
         title: "Third Party Services",
         content:
-          "The Application uses third-party services for AI processing, cloud storage, and payment processing (App Store, Google Play). These services operate under their own privacy policies.",
+          "We share your data with the following categories of third-party service providers:",
+        type: "list",
+        items: [
+          "AI Image Generation: Google — receives your room photos and design preferences solely for the purpose of generating redesigned interior images",
+          "Payment Processing: Apple App Store and Google Play — handle all in-app purchases and subscriptions securely",
+          "Cloud Storage: secure cloud infrastructure providers — store your uploaded photos, generated designs, and collection data",
+        ],
+      },
+      {
+        content:
+          "Your content is shared with these providers only to deliver the interior design functionality. Your personal content is never shared for marketing or AI model training purposes.",
         type: "paragraph",
       },
       {
         title: "Data Retention Policy",
         content:
-          "Your saved designs and photos are retained in your personal collection until you delete them or close your account. Subscription data is retained for the duration of your subscription and as required for accounting purposes.",
+          "Your saved designs and photos are retained in your personal collection until you choose to delete them. When you delete your data, it is removed from our servers within 24 hours. Upon account termination or deletion request, all associated data is purged from our servers within 24 hours. Subscription data is retained for the duration of your subscription and as required for accounting purposes.",
         type: "paragraph",
       },
       {
@@ -183,7 +212,7 @@ export const roomaAppData: AppData = {
         type: "paragraph",
       },
     ],
-    lastUpdated: "2025-01-15",
+    lastUpdated: "2026-02-12",
     contactEmail: "ybahaerarslan@gmail.com",
   },
   terms: {
