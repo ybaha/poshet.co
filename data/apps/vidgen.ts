@@ -346,4 +346,77 @@ export const vidgenAppData: AppData = {
     lastUpdated: "2025-02-04",
     contactEmail: "ybahaerarslan@gmail.com",
   },
+  deleteAccount: {
+    title: "Delete Account & Data",
+    sections: [
+      {
+        content:
+          "This page explains how you can request deletion of your account and any data associated with VidGen3. We are committed to giving you full control over your information.",
+        type: "paragraph",
+      },
+      {
+        title: "What Data We Store",
+        content:
+          "VidGen3 may collect and store the following data associated with your use of the app:",
+        type: "list",
+        items: [
+          "Images you upload for video generation",
+          "Text prompts you provide for video generation",
+          "Generated videos stored in your personal gallery",
+          "Video generation history and preferences",
+          "Your Apple account identifier (used for linking content and purchases)",
+          "Purchase, credit balance, and subscription data",
+        ],
+      },
+      {
+        title: "How to Request Data Deletion",
+        content:
+          "To request deletion of your data, please follow these steps:",
+        type: "list",
+        items: [
+          'Send an email to ybahaerarslan@gmail.com with the subject line "VidGen3 - Data Deletion Request"',
+          "Include any account identifier (e.g. the email associated with your Apple ID or Google account) so we can locate your data",
+          "We will acknowledge your request within 48 hours and process it within 30 days",
+        ],
+      },
+      {
+        title: "In-App Deletion",
+        content:
+          "You can delete individual videos and images from your gallery within the app at any time. When deleted, content is removed from our servers within 24 hours.",
+        type: "paragraph",
+      },
+      {
+        title: "Deletion Timeline",
+        content:
+          "Once we receive your deletion request, we will acknowledge it within 48 hours. Your data will be permanently deleted within 30 days. You will receive a confirmation email once the deletion is complete.",
+        type: "paragraph",
+      },
+      {
+        title: "What Happens After Deletion",
+        content:
+          "Please be aware of the following consequences of data deletion:",
+        type: "list",
+        items: [
+          "All videos, uploaded images, text prompts, generation history, and account data will be permanently removed and cannot be recovered",
+          "Any remaining credits will be forfeited",
+          "If you have an active subscription, please cancel it separately through the App Store or Google Play before requesting deletion",
+          "You may reinstall the app and start fresh at any time after deletion",
+        ],
+      },
+      {
+        title: "Third-Party Data",
+        content:
+          "Your text prompts and images are sent to third-party AI providers (OpenAI, Google, ByteDance, Stability AI, and Luma via Replicate) for video generation. These providers process your data according to their respective privacy policies. Payment data is managed by Apple (App Store). To delete payment history held by Apple, please contact Apple support directly.",
+        type: "paragraph",
+      },
+      {
+        title: "Contact Us",
+        content:
+          "If you have any questions about data deletion or need assistance, please contact us at ybahaerarslan@gmail.com.",
+        type: "paragraph",
+      },
+    ],
+    lastUpdated: "2026-02-24",
+    contactEmail: "ybahaerarslan@gmail.com",
+  },
 };

@@ -220,7 +220,19 @@ const DynamicAppPage = ({ params }: PageProps) => {
                 className="text-blue-600 hover:underline"
               >
                 Terms of Service
-              </Link>{" "}
+              </Link>
+              {appData.deleteAccount && (
+                <>
+                  {" "}
+                  or{" "}
+                  <Link
+                    href={`/apps/${params.slug}/delete-account`}
+                    className="text-blue-600 hover:underline"
+                  >
+                    Delete Account
+                  </Link>
+                </>
+              )}{" "}
               for more information.
             </p>
           </div>

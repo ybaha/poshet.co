@@ -63,6 +63,7 @@ export interface AppData {
   contact: AppContactInfo;
   privacy: AppLegalPage;
   terms: AppLegalPage;
+  deleteAccount?: AppLegalPage;
 }
 
 export type AppSlug = string;

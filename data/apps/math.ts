@@ -177,4 +177,69 @@ export const mathAppData: AppData = {
     lastUpdated: "2025-01-15",
     contactEmail: "ybahaerarslan@gmail.com",
   },
+  deleteAccount: {
+    title: "Delete Account & Data",
+    sections: [
+      {
+        content:
+          "This page explains how you can request deletion of your account and any data associated with Math Help AI. We are committed to giving you full control over your information.",
+        type: "paragraph",
+      },
+      {
+        title: "What Data We Store",
+        content:
+          "Math Help AI may collect and store the following data associated with your use of the app:",
+        type: "list",
+        items: [
+          "Learning progress and performance data",
+          "App usage statistics and analytics",
+          "Device information and technical data",
+          "Account information (if you created an account)",
+          "Subscription and purchase data",
+        ],
+      },
+      {
+        title: "How to Request Data Deletion",
+        content:
+          "To request deletion of your data, please follow these steps:",
+        type: "list",
+        items: [
+          'Send an email to ybahaerarslan@gmail.com with the subject line "Math Help AI - Data Deletion Request"',
+          "Include any account identifier (e.g. the email associated with your Apple ID or Google account) so we can locate your data",
+          "We will acknowledge your request within 48 hours and process it within 30 days",
+        ],
+      },
+      {
+        title: "Deletion Timeline",
+        content:
+          "Once we receive your deletion request, we will acknowledge it within 48 hours. Your data will be permanently deleted within 30 days. You will receive a confirmation email once the deletion is complete.",
+        type: "paragraph",
+      },
+      {
+        title: "What Happens After Deletion",
+        content:
+          "Please be aware of the following consequences of data deletion:",
+        type: "list",
+        items: [
+          "All learning progress, performance data, and account information will be permanently removed and cannot be recovered",
+          "If you have an active subscription, please cancel it separately through the App Store or Google Play before requesting deletion",
+          "You may reinstall the app and start fresh at any time after deletion",
+        ],
+      },
+      {
+        title: "Third-Party Data",
+        content:
+          "Subscription and payment data is managed by Apple (App Store) or Google (Google Play). To delete payment history or subscription records held by these platforms, please contact Apple or Google support directly, as we do not have access to this information.",
+        type: "paragraph",
+      },
+      {
+        title: "Contact Us",
+        content:
+          "If you have any questions about data deletion or need assistance, please contact us at ybahaerarslan@gmail.com.",
+        type: "paragraph",
+      },
+    ],
+    lastUpdated: "2026-02-24",
+    contactEmail: "ybahaerarslan@gmail.com",
+  },
 };

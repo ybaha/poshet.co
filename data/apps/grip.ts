@@ -271,5 +271,75 @@ export const gripAppData: AppData = {
     lastUpdated: "2025-01-15",
     contactEmail: "ybahaerarslan@gmail.com",
   },
+  deleteAccount: {
+    title: "Delete Account & Data",
+    sections: [
+      {
+        content:
+          "This page explains how you can request deletion of your account and any data associated with Grip. We are committed to giving you full control over your information and handle all inquiries with complete discretion.",
+        type: "paragraph",
+      },
+      {
+        title: "What Data We Store",
+        content:
+          "Grip is designed with privacy as a core principle. Most data is stored locally on your device. The following information may be associated with your use of the app:",
+        type: "list",
+        items: [
+          "Training preferences and goals (stored locally on your device)",
+          "Progress data (stored locally on your device)",
+          "Subscription status for accessing premium features",
+          "Device information for app functionality and crash reporting",
+        ],
+      },
+      {
+        title: "How to Request Data Deletion",
+        content:
+          "To request deletion of your data, please follow these steps:",
+        type: "list",
+        items: [
+          'Send an email to ybahaerarslan@gmail.com with the subject line "Grip - Data Deletion Request"',
+          "Include any account identifier (e.g. the email associated with your Apple ID or Google account) so we can locate your data",
+          "We will acknowledge your request within 48 hours and process it within 30 days",
+        ],
+      },
+      {
+        title: "In-App Deletion",
+        content:
+          "Since most of your training data is stored locally on your device, you can delete it at any time by clearing the app data or uninstalling the app from your device.",
+        type: "paragraph",
+      },
+      {
+        title: "Deletion Timeline",
+        content:
+          "Once we receive your deletion request, we will acknowledge it within 48 hours. Any server-side data will be permanently deleted within 30 days. You will receive a confirmation email once the deletion is complete.",
+        type: "paragraph",
+      },
+      {
+        title: "What Happens After Deletion",
+        content:
+          "Please be aware of the following consequences of data deletion:",
+        type: "list",
+        items: [
+          "All data associated with your account will be permanently removed and cannot be recovered",
+          "Local data on your device can be removed by uninstalling the app",
+          "If you have an active subscription, please cancel it separately through the App Store or Google Play before requesting deletion",
+          "You may reinstall the app and start fresh at any time after deletion",
+        ],
+      },
+      {
+        title: "Third-Party Data",
+        content:
+          "Subscription and payment data is managed by Apple (App Store) or Google (Google Play). To delete payment history or subscription records held by these platforms, please contact Apple or Google support directly, as we do not have access to this information.",
+        type: "paragraph",
+      },
+      {
+        title: "Contact Us",
+        content:
+          "If you have any questions about data deletion or need assistance, please contact us at ybahaerarslan@gmail.com. All inquiries are handled with complete discretion.",
+        type: "paragraph",
+      },
+    ],
+    lastUpdated: "2026-02-24",
+    contactEmail: "ybahaerarslan@gmail.com",
+  },
 };
-
