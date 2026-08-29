@@ -9,6 +9,7 @@ import { gripAppData } from "@/data/apps/grip";
 import { glbAppData } from "@/data/apps/glb";
 import { roomaAppData } from "@/data/apps/rooma";
 import { cleanAppData } from "@/data/apps/clean";
+import { viraltyAppData } from "@/data/apps/viralty";
 
 // Registry of all available apps
 const APP_REGISTRY: Record<string, AppData> = {
@@ -20,6 +21,7 @@ const APP_REGISTRY: Record<string, AppData> = {
   glb: glbAppData,
   rooma: roomaAppData,
   clean: cleanAppData,
+  viralty: viraltyAppData,
 };
 
 /**
