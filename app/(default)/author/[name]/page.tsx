@@ -9,6 +9,9 @@ import { PageHeader } from "@/components/studio/page-header";
 import { SectionHeading } from "@/components/studio/section-heading";
 import { getAllPosts } from "@/lib/blog";
 import { authors } from "@/lib/constants";
+import { StructuredData } from "@/components/structured-data";
+import { buildBreadcrumbList } from "@/lib/structured-data/breadcrumbs";
+import { buildProfilePage } from "@/lib/structured-data/profile-page";
 import { pageMetadata } from "@/lib/seo";
 
 type PageProps = { params: { name: string } };
@@ -38,6 +41,16 @@ export default async function AuthorPage({ params }: PageProps) {
 
   return (
     <>
+      <StructuredData
+        data={[
+          buildProfilePage(author),
+          buildBreadcrumbList([
+            { name: "Home", path: "/" },
+            { name: "Authors", path: "/authors" },
+            { name: author.name, path: `/author/${author.slug}` },
+          ]),
+        ]}
+      />
       <Section className="pb-12 pt-10 md:pb-12 md:pt-16 lg:pb-16 lg:pt-16">
         <Container>
           <BackLink href="/authors">All authors</BackLink>

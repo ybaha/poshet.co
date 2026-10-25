@@ -10,6 +10,9 @@ import { Container, Eyebrow, Section } from "@/components/studio/container";
 import { ContactCta } from "@/components/studio/contact-cta";
 import { FaqSection } from "@/components/studio/faq";
 import { PageHero } from "@/components/studio/page-hero";
+import { StructuredData } from "@/components/structured-data";
+import { buildBreadcrumbList } from "@/lib/structured-data/breadcrumbs";
+import { buildMobileApplication } from "@/lib/structured-data/mobile-application";
 import { pageMetadata } from "@/lib/seo";
 import { getAppData, generateStaticParams } from "@/lib/apps";
 import { getAppDisplayName, getAppSeed } from "@/lib/app-presentation";
@@ -58,6 +61,16 @@ export default function AppDetailPage({ params }: PageProps) {
 
   return (
     <>
+      <StructuredData
+        data={[
+          buildMobileApplication(appData, params.slug),
+          buildBreadcrumbList([
+            { name: "Home", path: "/" },
+            { name: "Projects", path: "/projects" },
+            { name, path: `/projects/${params.slug}` },
+          ]),
+        ]}
+      />
       <PageHero
         colors={hero.tint ? paletteFromTint(hero.tint) : undefined}
         seed={getAppSeed(params.slug)}

@@ -8,6 +8,9 @@ import { Container, Section } from "@/components/studio/container";
 import { ContactCta } from "@/components/studio/contact-cta";
 import { PageHeader } from "@/components/studio/page-header";
 import { getPost, getPostSlugs } from "@/lib/blog";
+import { StructuredData } from "@/components/structured-data";
+import { buildBlogPosting } from "@/lib/structured-data/article";
+import { buildBreadcrumbList } from "@/lib/structured-data/breadcrumbs";
 import { pageMetadata } from "@/lib/seo";
 
 type PageProps = { params: { slug: string } };
@@ -42,6 +45,16 @@ export default async function PostPage({ params }: PageProps) {
 
   return (
     <>
+      <StructuredData
+        data={[
+          buildBlogPosting(post),
+          buildBreadcrumbList([
+            { name: "Home", path: "/" },
+            { name: "Blog", path: "/blog" },
+            { name: post.title, path: `/blog/${params.slug}` },
+          ]),
+        ]}
+      />
       <Section className="pb-10 pt-10 md:pb-12 md:pt-16 lg:pb-12 lg:pt-16">
         <Container className="max-w-[880px]">
           <BackLink href="/blog">All articles</BackLink>

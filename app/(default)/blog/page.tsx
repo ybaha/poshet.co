@@ -6,6 +6,8 @@ import { GlassPill } from "@/components/studio/glass-pill";
 import { PageHero } from "@/components/studio/page-hero";
 import { SectionHeading } from "@/components/studio/section-heading";
 import { getAllPosts } from "@/lib/blog";
+import { StructuredData } from "@/components/structured-data";
+import { buildBreadcrumbList } from "@/lib/structured-data/breadcrumbs";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -20,6 +22,12 @@ export default async function BlogPage() {
 
   return (
     <>
+      <StructuredData
+        data={buildBreadcrumbList([
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/blog" },
+        ])}
+      />
       <PageHero
         seed={587}
         startTime={90}

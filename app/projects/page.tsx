@@ -8,6 +8,8 @@ import { PageHero } from "@/components/studio/page-hero";
 import { SectionHeading } from "@/components/studio/section-heading";
 import { products } from "@/data/products";
 import { getAllApps } from "@/lib/apps";
+import { StructuredData } from "@/components/structured-data";
+import { buildBreadcrumbList } from "@/lib/structured-data/breadcrumbs";
 import { pageMetadata } from "@/lib/seo";
 import { isLive } from "@/lib/app-presentation";
 
@@ -25,6 +27,12 @@ export default function ProjectsPage() {
 
   return (
     <>
+      <StructuredData
+        data={buildBreadcrumbList([
+          { name: "Home", path: "/" },
+          { name: "Projects", path: "/projects" },
+        ])}
+      />
       <PageHero
         seed={433}
         startTime={140}
