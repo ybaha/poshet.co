@@ -20,6 +20,8 @@ export type BlogPost = {
   image?: string;
   /** Override for hero `alt`; defaults via {@link postHeroImageAlt}. */
   imageAlt?: string;
+  /** Keeps off-topic legacy posts reachable but out of search results. */
+  noindex?: boolean;
   author: PostAuthor;
   readingMinutes: number;
 };
@@ -58,6 +60,7 @@ async function readPost(slug: string): Promise<BlogPostWithContent | null> {
     date: Number.isNaN(date.getTime()) ? "" : date.toISOString().slice(0, 10),
     image: data.image || undefined,
     imageAlt: data.imageAlt ? String(data.imageAlt) : undefined,
+    noindex: data.noindex === true || undefined,
     author: resolveAuthor(String(data.author ?? "Poshet")),
     readingMinutes: readingMinutes(content),
     content,

@@ -34,6 +34,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: post.description,
       path: `/blog/${params.slug}`,
       type: "article",
+      noindex: post.noindex,
     }),
     authors: [{ name: post.author.name }],
   };
