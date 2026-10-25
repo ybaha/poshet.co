@@ -39,6 +39,7 @@ export function PostCard({ post, featured = false }: PostCardProps) {
         {post.image && (
           <Image
             src={post.image}
+            // Decorative: title is in the same link; non-empty alt would duplicate it for screen readers.
             alt=""
             fill
             sizes={sizes}

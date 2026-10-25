@@ -7,9 +7,6 @@ const LEGACY_APP_PAGES = ["privacy", "terms", "contact", "support", "delete-acco
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    domains: ["i.ibb.co"],
-  },
   experimental: {
     appDir: true,
   },

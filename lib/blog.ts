@@ -16,6 +16,8 @@ export type BlogPost = {
   /** ISO date, `YYYY-MM-DD`. */
   date: string;
   image?: string;
+  /** Override for hero `alt`; defaults via {@link postHeroImageAlt}. */
+  imageAlt?: string;
   author: PostAuthor;
   readingMinutes: number;
 };
@@ -52,6 +54,7 @@ async function readPost(slug: string): Promise<BlogPostWithContent | null> {
     description: String(data.description ?? ""),
     date: Number.isNaN(date.getTime()) ? "" : date.toISOString().slice(0, 10),
     image: data.image || undefined,
+    imageAlt: data.imageAlt ? String(data.imageAlt) : undefined,
     author: resolveAuthor(String(data.author ?? "Poshet")),
     readingMinutes: readingMinutes(content),
     content,
@@ -76,6 +79,10 @@ export async function getAllPosts(): Promise<BlogPost[]> {
     .filter((post): post is BlogPostWithContent => post !== null)
     .map(({ content: _content, ...post }) => post)
     .sort((a, b) => b.date.localeCompare(a.date));
+}
+
+export function postHeroImageAlt(post: BlogPost): string {
+  return post.imageAlt ?? post.title;
 }
 
 export function formatPostDate(date: string, style: "long" | "medium" = "long") {

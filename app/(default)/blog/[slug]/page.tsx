@@ -7,7 +7,7 @@ import { PostMeta } from "@/components/studio/blog/post-meta";
 import { Container, Section } from "@/components/studio/container";
 import { ContactCta } from "@/components/studio/contact-cta";
 import { PageHeader } from "@/components/studio/page-header";
-import { getPost, getPostSlugs } from "@/lib/blog";
+import { getPost, getPostSlugs, postHeroImageAlt } from "@/lib/blog";
 import { StructuredData } from "@/components/structured-data";
 import { buildBlogPosting } from "@/lib/structured-data/article";
 import { buildBreadcrumbList } from "@/lib/structured-data/breadcrumbs";
@@ -74,7 +74,7 @@ export default async function PostPage({ params }: PageProps) {
           <div className="relative aspect-[16/9] overflow-hidden rounded-[28px] bg-gradient-to-br from-studio-ice to-studio-sky/40 lg:rounded-card">
             <Image
               src={post.image}
-              alt=""
+              alt={postHeroImageAlt(post)}
               fill
               priority
               sizes="(min-width: 1080px) 1000px, 92vw"
