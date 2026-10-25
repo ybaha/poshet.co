@@ -49,12 +49,12 @@ export async function generateMetadata({
     authors: [{ name: metadata.developer }],
     creator: metadata.developer,
     publisher: metadata.developer,
-    alternates: { canonical: `/apps/${params.slug}` },
+    alternates: { canonical: `/projects/${params.slug}` },
     openGraph: {
       title: `${metadata.name} - ${metadata.tagline}`,
       description: hero.description,
       type: "website",
-      url: `https://poshet.co/apps/${params.slug}`,
+      url: `https://poshet.co/projects/${params.slug}`,
       siteName: "Poshet",
       images: hero.imagePath
         ? [
@@ -109,7 +109,7 @@ export default function AppDetailPage({ params }: PageProps) {
         colors={hero.tint ? paletteFromTint(hero.tint) : undefined}
         seed={getAppSeed(params.slug)}
         startTime={140}
-        badge={<BackLink href="/apps" tone="glass">All apps</BackLink>}
+        badge={<BackLink href="/projects" tone="glass">All projects</BackLink>}
         leading={
           icon && (
             <Image

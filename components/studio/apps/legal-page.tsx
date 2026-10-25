@@ -24,7 +24,7 @@ export function LegalPage({ legalData, appSlug, appName, developer = "Poshet" }:
     <Section className="pb-24 pt-10 md:pb-28 md:pt-16 lg:pb-32 lg:pt-16">
       <Container>
         <article className="mx-auto max-w-3xl">
-          <BackLink href={`/apps/${appSlug}`}>{appName}</BackLink>
+          <BackLink href={`/projects/${appSlug}`}>{appName}</BackLink>
 
           <PageHeader className="mt-8" eyebrow="Legal" title={title} description={`Effective ${lastUpdated}`} />
 

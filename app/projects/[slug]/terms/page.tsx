@@ -43,7 +43,7 @@ export async function generateMetadata({
       title: `${metadata.name} Terms of Service`,
       description: `Terms of service for ${metadata.name}. Learn about usage rights and responsibilities.`,
       type: "website",
-      url: `https://poshet.co/apps/${params.slug}/terms`,
+      url: `https://poshet.co/projects/${params.slug}/terms`,
       siteName: "Poshet",
     },
     twitter: {

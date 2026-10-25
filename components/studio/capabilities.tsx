@@ -3,6 +3,7 @@ import { capabilities } from "@/data/studio";
 import { Card } from "./card";
 import { Container, Section } from "./container";
 import { SectionHeading } from "./section-heading";
+import { TagList } from "./tag-list";
 
 const ICONS: Record<(typeof capabilities)[number]["icon"], LucideIcon> = {
   design: PenTool,
@@ -36,16 +37,7 @@ export function Capabilities() {
                 <p className="mt-3 text-[16px] leading-relaxed text-studio-muted">
                   {description}
                 </p>
-                <ul className="mt-6 flex flex-wrap gap-2">
-                  {tags.map((tag) => (
-                    <li
-                      key={tag}
-                      className="rounded-full border border-studio-line bg-white px-3 py-1.5 text-sm text-studio-navy"
-                    >
-                      {tag}
-                    </li>
-                  ))}
-                </ul>
+                <TagList tags={tags} className="mt-6" />
               </Card>
             );
           })}

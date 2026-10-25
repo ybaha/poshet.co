@@ -54,10 +54,9 @@ export const roomaAppData: AppData = {
   downloads: [
     {
       platform: "ios",
-      url: "https://apps.apple.com/app/rooma-ai-interior-design",
+      url: "https://apps.apple.com/nl/app/rooma-ai-interior-design/id6758413701?l=en-GB",
       label: "Download on the App Store",
-      available: false,
-      comingSoon: true,
+      available: true,
     },
     {
       platform: "android",

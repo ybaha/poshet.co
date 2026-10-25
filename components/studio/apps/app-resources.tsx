@@ -11,11 +11,11 @@ type AppResourcesProps = {
 /** Support and legal links every published app is expected to expose. */
 export function AppResources({ slug, name, hasDeleteAccount }: AppResourcesProps) {
   const links = [
-    { label: "Contact support", href: `/apps/${slug}/contact` },
-    { label: "Privacy policy", href: `/apps/${slug}/privacy` },
-    { label: "Terms of service", href: `/apps/${slug}/terms` },
+    { label: "Contact support", href: `/projects/${slug}/contact` },
+    { label: "Privacy policy", href: `/projects/${slug}/privacy` },
+    { label: "Terms of service", href: `/projects/${slug}/terms` },
     ...(hasDeleteAccount
-      ? [{ label: "Delete account", href: `/apps/${slug}/delete-account` }]
+      ? [{ label: "Delete account", href: `/projects/${slug}/delete-account` }]
       : []),
   ];
 

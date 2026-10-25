@@ -9,7 +9,7 @@ export const cleanAppData: AppData = {
       "Clean is a gentle daily-habit app for women. It turns a handful of tiny skincare, movement, and self-care promises into a streak you actually keep — with a circle of sisters who notice when you close your day.",
     version: "1.0.0",
     developer: "Poshet",
-    websiteUrl: "https://poshet.co/apps/clean",
+    websiteUrl: "https://poshet.co/projects/clean",
     supportEmail: "ybahaerarslan@gmail.com",
   },
   hero: {
@@ -54,10 +54,9 @@ export const cleanAppData: AppData = {
   downloads: [
     {
       platform: "ios",
-      url: "https://apps.apple.com/app/clean",
+      url: "https://apps.apple.com/app/id6802110217",
       label: "Download on the App Store",
-      available: false,
-      comingSoon: true,
+      available: true,
     },
     {
       platform: "android",

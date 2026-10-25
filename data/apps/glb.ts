@@ -54,10 +54,9 @@ export const glbAppData: AppData = {
   downloads: [
     {
       platform: "ios",
-      url: "https://apps.apple.com/app/glb-3d-model-generator",
+      url: "https://apps.apple.com/nl/app/glb-3d-model-generator/id6749620007?l=en-GB",
       label: "Download on the App Store",
-      available: false,
-      comingSoon: true,
+      available: true,
     },
     {
       platform: "android",

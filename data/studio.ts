@@ -1,10 +1,12 @@
+import { getTintBackground } from "@/lib/app-presentation";
+import { products } from "./products";
+
 export const BOOKING_URL = "https://cal.com/ercanmungan/30min?duration=30";
 export const CONTACT_EMAIL = "info@poshet.co";
 
 export const navLinks = [
-  { label: "Work", href: "/#work" },
   { label: "Services", href: "/#services" },
-  { label: "Apps", href: "/apps" },
+  { label: "Projects", href: "/projects" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
@@ -22,7 +24,7 @@ export const footerGroups = [
   {
     title: "Explore",
     links: [
-      { label: "Apps", href: "/apps" },
+      { label: "Projects", href: "/projects" },
       { label: "Blog", href: "/blog" },
       { label: "Contact", href: "/contact" },
     ],
@@ -31,7 +33,9 @@ export const footerGroups = [
 
 export type WorkPreview =
   | { kind: "screens"; images: { src: string; alt: string }[]; background: string }
-  | { kind: "icon"; icon: string; alt: string; background: string };
+  | { kind: "icon"; icon: string; alt: string; background: string }
+  /** A wide product screenshot floated inside the card. */
+  | { kind: "cover"; src: string; alt: string; background: string };
 
 export type FeaturedWork = {
   slug: string;
@@ -41,12 +45,27 @@ export type FeaturedWork = {
   preview: WorkPreview;
 };
 
+const productWork: FeaturedWork[] = products.map((product) => ({
+  slug: product.slug,
+  title: product.name,
+  category: product.category,
+  href: product.href,
+  preview: {
+    kind: "cover",
+    src: product.image.src,
+    alt: product.image.alt,
+    background: getTintBackground(product.tint),
+  },
+}));
+
+/** Products first, then the mobile apps. */
 export const featuredWork: FeaturedWork[] = [
+  ...productWork,
   {
     slug: "math",
     title: "Math Help AI",
     category: "iOS app · AI & education",
-    href: "/apps/math",
+    href: "/projects/math",
     preview: {
       kind: "screens",
       background: "linear-gradient(160deg, #DCE9FF 0%, #F0F8FF 70%)",
@@ -60,7 +79,7 @@ export const featuredWork: FeaturedWork[] = [
     slug: "pico",
     title: "Pico Cards",
     category: "iOS app · Conversation starters",
-    href: "/apps/pico",
+    href: "/projects/pico",
     preview: {
       kind: "icon",
       icon: "/apps/pico/icon.png",
@@ -72,7 +91,7 @@ export const featuredWork: FeaturedWork[] = [
     slug: "picu",
     title: "PicU",
     category: "iOS app · AI photo editing",
-    href: "/apps/picu",
+    href: "/projects/picu",
     preview: {
       kind: "icon",
       icon: "/apps/filter/icon.png",
@@ -84,7 +103,7 @@ export const featuredWork: FeaturedWork[] = [
     slug: "viralty",
     title: "Viralty",
     category: "iOS app · Video analysis",
-    href: "/apps/viralty",
+    href: "/projects/viralty",
     preview: {
       kind: "icon",
       icon: "/apps/viralty/icon.png",

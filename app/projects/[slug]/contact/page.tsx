@@ -33,7 +33,7 @@ export async function generateMetadata({
   const { metadata, contact } = appData;
 
   return {
-    alternates: { canonical: `/apps/${params.slug}/contact` },
+    alternates: { canonical: `/projects/${params.slug}/contact` },
     title: `Contact ${metadata.name} Support`,
     description: `${contact.supportDescription} Get help with ${metadata.name}.`,
     keywords: [metadata.name, "contact", "support", "help", metadata.developer],
@@ -44,7 +44,7 @@ export async function generateMetadata({
       title: `Contact ${metadata.name} Support`,
       description: `${contact.supportDescription} Get help with ${metadata.name}.`,
       type: "website",
-      url: `https://poshet.co/apps/${params.slug}/contact`,
+      url: `https://poshet.co/projects/${params.slug}/contact`,
       siteName: "Poshet",
     },
     twitter: {
@@ -96,7 +96,7 @@ export default function AppSupportPage({ params }: PageProps) {
               </ul>
 
               <div className="mt-8">
-                <BackLink href={`/apps/${params.slug}`}>Back to {name}</BackLink>
+                <BackLink href={`/projects/${params.slug}`}>Back to {name}</BackLink>
               </div>
             </div>
 

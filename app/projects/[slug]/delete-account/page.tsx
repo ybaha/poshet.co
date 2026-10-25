@@ -19,37 +19,37 @@ export async function generateMetadata({
 
   if (!appData) {
     return {
-      title: "Privacy Policy - App Not Found",
+      title: "Delete Account - App Not Found",
       description: "The requested app could not be found.",
     };
   }
 
-  const { metadata, privacy } = appData;
+  const { metadata } = appData;
 
   return {
-    title: `${metadata.name} Privacy Policy`,
-    description: `Read the privacy policy for ${metadata.name}. Learn how we protect your data and what information we collect.`,
+    title: `${metadata.name} - Delete Account & Data`,
+    description: `Request deletion of your account and data for ${metadata.name}. Learn how to delete your data and what happens after deletion.`,
     keywords: [
       metadata.name,
-      "privacy policy",
-      "data protection",
-      "privacy",
+      "delete account",
+      "data deletion",
+      "remove data",
       metadata.developer,
     ],
     authors: [{ name: metadata.developer }],
     creator: metadata.developer,
     publisher: metadata.developer,
     openGraph: {
-      title: `${metadata.name} Privacy Policy`,
-      description: `Privacy policy for ${metadata.name}. Learn how we protect your data.`,
+      title: `${metadata.name} - Delete Account & Data`,
+      description: `Request deletion of your account and data for ${metadata.name}.`,
       type: "website",
-      url: `https://poshet.co/apps/${params.slug}/privacy`,
+      url: `https://poshet.co/projects/${params.slug}/delete-account`,
       siteName: "Poshet",
     },
     twitter: {
       card: "summary",
-      title: `${metadata.name} Privacy Policy`,
-      description: `Privacy policy for ${metadata.name}`,
+      title: `${metadata.name} - Delete Account & Data`,
+      description: `Delete your account and data for ${metadata.name}`,
       creator: "@poshet",
     },
     robots: {
@@ -59,23 +59,23 @@ export async function generateMetadata({
   };
 }
 
-const DynamicPrivacyPage = ({ params }: PageProps) => {
+const DeleteAccountPage = ({ params }: PageProps) => {
   const appData = getAppData(params.slug);
 
-  if (!appData) {
+  if (!appData || !appData.deleteAccount) {
     notFound();
   }
 
-  const { metadata, privacy } = appData;
+  const { metadata, deleteAccount } = appData;
 
   return (
     <LegalPage
       appSlug={params.slug}
-      legalData={privacy}
+      legalData={deleteAccount}
       appName={metadata.name}
       developer={metadata.developer}
     />
   );
 };
 
-export default DynamicPrivacyPage;
+export default DeleteAccountPage;

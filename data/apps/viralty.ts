@@ -9,7 +9,7 @@ export const viraltyAppData: AppData = {
       "Viralty analyzes your short-form video before you publish. Upload a TikTok, Reel, or Short and get an estimated virality score, predicted retention curve, reach range, and specific fixes — tailored to your platform, follower count, and niche.",
     version: "1.0.0",
     developer: "Poshet",
-    websiteUrl: "https://poshet.co/apps/viralty",
+    websiteUrl: "https://poshet.co/projects/viralty",
     supportEmail: "ybahaerarslan@gmail.com",
   },
   hero: {

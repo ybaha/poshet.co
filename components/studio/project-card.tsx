@@ -13,9 +13,12 @@ type ProjectCardProps = {
 };
 
 export function ProjectCard({ work, badge }: ProjectCardProps) {
+  const external = /^https?:\/\//.test(work.href);
+
   return (
     <Link
       href={work.href}
+      {...(external && { target: "_blank", rel: "noopener noreferrer" })}
       className={cn(
         "group block p-2",
         CARD_HOVER_CLASSES,

@@ -59,7 +59,7 @@ export function toFeaturedWork(slug: string, app: AppData): FeaturedWork {
     slug,
     title: getAppDisplayName(app),
     category: app.hero.subtitle,
-    href: `/apps/${slug}`,
+    href: `/projects/${slug}`,
     preview: getAppPreview(app),
   };
 }

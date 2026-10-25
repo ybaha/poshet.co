@@ -7,7 +7,7 @@ interface PageProps {
 }
 
 const SupportPage = ({ params }: PageProps) => {
-  redirect(`/apps/${params.slug}/contact`);
+  redirect(`/projects/${params.slug}/contact`);
 };
 
 export default SupportPage;

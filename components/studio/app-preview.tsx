@@ -26,6 +26,14 @@ export function AppPreview({ preview }: { preview: WorkPreview }) {
     );
   }
 
+  if (preview.kind === "cover") {
+    return (
+      <div className="absolute inset-x-[5%] bottom-0 aspect-video overflow-hidden rounded-t-xl shadow-[0_24px_48px_-16px_rgb(14_40_93/0.45)] ring-1 ring-studio-navy/10 transition-transform duration-500 group-hover:-translate-y-2 motion-reduce:transform-none">
+        <Image src={preview.src} alt={preview.alt} fill sizes="(min-width: 1024px) 480px, 80vw" />
+      </div>
+    );
+  }
+
   const [primary, secondary] = preview.images;
   return (
     <>

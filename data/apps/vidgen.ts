@@ -54,7 +54,7 @@ export const vidgenAppData: AppData = {
   downloads: [
     {
       platform: "ios",
-      url: "https://apps.apple.com/app/vidgen3-ai-video-generation/id123456789",
+      url: "https://apps.apple.com/nl/app/vidgen3/id6749280633?l=en-GB",
       label: "Download on the App Store",
       available: true,
     },

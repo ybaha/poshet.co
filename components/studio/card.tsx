@@ -64,7 +64,11 @@ export function Card<T extends ElementType = "div">({
 export const CARD_HOVER_CLASSES =
   "transition duration-300 hover:-translate-y-1 hover:shadow-card-hover motion-reduce:transform-none";
 
-const MEDIA_ASPECTS = { "4/3": "aspect-[4/3]", "16/10": "aspect-[16/10]" } as const;
+const MEDIA_ASPECTS = {
+  "4/3": "aspect-[4/3]",
+  "16/10": "aspect-[16/10]",
+  "16/9": "aspect-video",
+} as const;
 
 type CardMediaProps = {
   aspect?: keyof typeof MEDIA_ASPECTS;

@@ -54,10 +54,9 @@ export const gripAppData: AppData = {
   downloads: [
     {
       platform: "ios",
-      url: "https://apps.apple.com/app/grip",
+      url: "https://apps.apple.com/nl/app/grip-mens-health-welness/id6755091590?l=en-GB",
       label: "Download on the App Store",
-      available: false,
-      comingSoon: true,
+      available: true,
     },
     {
       platform: "android",

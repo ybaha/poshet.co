@@ -11,10 +11,10 @@ export function SelectedWork() {
         <SectionHeading
           eyebrow="Selected work"
           title="Products we have designed, built and shipped."
-          description="A look at apps from our own portfolio, live on the App Store."
+          description="Products and apps from our own portfolio, live today."
           action={
-            <ButtonLink href="/apps" variant="outline">
-              Explore our apps
+            <ButtonLink href="/projects" variant="outline">
+              Explore our projects
             </ButtonLink>
           }
         />
