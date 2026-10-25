@@ -194,7 +194,8 @@ const generateImage = async (title: string) => {
     n: 1,
   });
 
-  const url = response.data[0].url;
+  const url = response.data?.[0]?.url;
+  if (!url) return;
 
   // dowmload image from url and save it to the public folder using fs
   // return the path to the image
