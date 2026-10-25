@@ -20,9 +20,9 @@ import { getAppDisplayName, getAppSeed } from "@/lib/app-presentation";
 import { paletteFromTint } from "@/lib/shader-gradient/palette";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export { generateStaticParams };
@@ -30,7 +30,8 @@ export { generateStaticParams };
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const appData = getAppData(params.slug);
+  const { slug } = await params;
+  const appData = getAppData(slug);
 
   if (!appData) {
     return { title: "App not found", robots: NOINDEX_ROBOTS };
@@ -41,14 +42,15 @@ export async function generateMetadata({
   return pageMetadata({
     title: appSeoTitle(appData),
     description: metadata.description,
-    path: `/projects/${params.slug}`,
+    path: `/projects/${slug}`,
   });
 }
 
 const APP_ICON_SIZE = 96;
 
-export default function AppDetailPage({ params }: PageProps) {
-  const appData = getAppData(params.slug);
+export default async function AppDetailPage({ params }: PageProps) {
+  const { slug } = await params;
+  const appData = getAppData(slug);
 
   if (!appData) {
     notFound();
@@ -64,17 +66,17 @@ export default function AppDetailPage({ params }: PageProps) {
     <>
       <StructuredData
         data={[
-          buildMobileApplication(appData, params.slug),
+          buildMobileApplication(appData, slug),
           buildBreadcrumbList([
             { name: "Home", path: "/" },
             { name: "Projects", path: "/projects" },
-            { name, path: `/projects/${params.slug}` },
+            { name, path: `/projects/${slug}` },
           ]),
         ]}
       />
       <PageHero
         colors={hero.tint ? paletteFromTint(hero.tint) : undefined}
-        seed={getAppSeed(params.slug)}
+        seed={getAppSeed(slug)}
         startTime={140}
         badge={<BackLink href="/projects" tone="glass">All projects</BackLink>}
         leading={
@@ -119,7 +121,7 @@ export default function AppDetailPage({ params }: PageProps) {
         />
       )}
 
-      <AppResources slug={params.slug} name={name} hasDeleteAccount={Boolean(deleteAccount)} />
+      <AppResources slug={slug} name={name} hasDeleteAccount={Boolean(deleteAccount)} />
 
       <ContactCta />
     </>

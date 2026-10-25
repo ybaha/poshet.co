@@ -14,7 +14,7 @@ import { buildBreadcrumbList } from "@/lib/structured-data/breadcrumbs";
 import { absoluteUrl, toIsoDateTime } from "@/lib/structured-data/utils";
 import { NOINDEX_ROBOTS, pageMetadata } from "@/lib/seo";
 
-type PageProps = { params: { slug: string } };
+type PageProps = { params: Promise<{ slug: string }> };
 
 /** Typography plugin tuned to the studio palette and display font. */
 const ARTICLE_PROSE =
@@ -26,7 +26,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const post = await getPost(params.slug);
+  const { slug } = await params;
+  const post = await getPost(slug);
   if (!post) return { title: "Article not found", robots: NOINDEX_ROBOTS };
 
   const publishedTime = toIsoDateTime(post.date);
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     ...pageMetadata({
       title: postDocumentTitle(post),
       description: post.description,
-      path: `/blog/${params.slug}`,
+      path: `/blog/${slug}`,
       type: "article",
       noindex: post.noindex,
       article: publishedTime
@@ -52,7 +53,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function PostPage({ params }: PageProps) {
-  const post = await getPost(params.slug);
+  const { slug } = await params;
+  const post = await getPost(slug);
   if (!post) notFound();
 
   return (
@@ -63,7 +65,7 @@ export default async function PostPage({ params }: PageProps) {
           buildBreadcrumbList([
             { name: "Home", path: "/" },
             { name: "Blog", path: "/blog" },
-            { name: post.title, path: `/blog/${params.slug}` },
+            { name: post.title, path: `/blog/${slug}` },
           ]),
         ]}
       />

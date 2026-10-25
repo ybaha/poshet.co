@@ -6,14 +6,16 @@ export async function generateStaticParams() {
   return (await getPostSlugs()).map((slug) => ({ slug }));
 }
 
-export async function generateImageMetadata({ params }: { params: { slug: string } }) {
-  const post = await getPost(params.slug);
+export async function generateImageMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await getPost(slug);
   const alt = post ? blogPostOgAlt(post.title) : "Poshet blog article";
   return ogImageMetadata(alt);
 }
 
-export default async function Image({ params }: { params: { slug: string } }) {
-  const post = await getPost(params.slug);
+export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await getPost(slug);
   if (!post) return renderOgImage({ eyebrow: "Blog", title: "Notes on building for the web." });
 
   return renderOgImage({

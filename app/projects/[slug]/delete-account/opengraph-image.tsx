@@ -5,12 +5,14 @@ import { appDeleteAccountOgAlt, ogImageMetadata } from "@/lib/og/image-metadata"
 
 export { generateStaticParams };
 
-export function generateImageMetadata({ params }: { params: { slug: string } }) {
-  const app = getAppData(params.slug);
+export async function generateImageMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const app = getAppData(slug);
   const alt = app ? appDeleteAccountOgAlt(getAppDisplayName(app)) : "App account deletion";
   return ogImageMetadata(alt);
 }
 
-export default function Image({ params }: { params: { slug: string } }) {
-  return renderAppOgImage(params.slug, { eyebrow: "Support", title: "Delete your account" });
+export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  return renderAppOgImage(slug, { eyebrow: "Support", title: "Delete your account" });
 }

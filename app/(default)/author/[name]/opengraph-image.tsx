@@ -6,14 +6,16 @@ export function generateStaticParams() {
   return authors.map((author) => ({ name: author.slug }));
 }
 
-export function generateImageMetadata({ params }: { params: { name: string } }) {
-  const author = authors.find((candidate) => candidate.slug === params.name);
+export async function generateImageMetadata({ params }: { params: Promise<{ name: string }> }) {
+  const { name } = await params;
+  const author = authors.find((candidate) => candidate.slug === name);
   const alt = author ? authorOgAlt(author.name, author.role) : "Poshet blog author";
   return ogImageMetadata(alt);
 }
 
-export default function Image({ params }: { params: { name: string } }) {
-  const author = authors.find((candidate) => candidate.slug === params.name);
+export default async function Image({ params }: { params: Promise<{ name: string }> }) {
+  const { name } = await params;
+  const author = authors.find((candidate) => candidate.slug === name);
   return renderOgImage({
     eyebrow: author?.role ?? "Authors",
     title: author?.name ?? "The people behind the writing.",

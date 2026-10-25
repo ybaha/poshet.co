@@ -9,9 +9,9 @@ import { buildAppLegalStructuredData } from "@/lib/structured-data/app-legal-pag
 import { Metadata } from "next";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export { generateStaticParams };
@@ -19,7 +19,8 @@ export { generateStaticParams };
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const appData = getAppData(params.slug);
+  const { slug } = await params;
+  const appData = getAppData(slug);
 
   if (!appData) {
     return { title: "Terms of service not found", robots: NOINDEX_ROBOTS };
@@ -30,12 +31,13 @@ export async function generateMetadata({
   return pageMetadata({
     title: `${appName} terms of service`,
     description: termsDescription(appName),
-    path: `/projects/${params.slug}/terms`,
+    path: `/projects/${slug}/terms`,
   });
 }
 
-const DynamicTermsPage = ({ params }: PageProps) => {
-  const appData = getAppData(params.slug);
+const DynamicTermsPage = async ({ params }: PageProps) => {
+  const { slug } = await params;
+  const appData = getAppData(slug);
 
   if (!appData) {
     notFound();
@@ -45,9 +47,9 @@ const DynamicTermsPage = ({ params }: PageProps) => {
 
   return (
     <>
-      <StructuredData data={buildAppLegalStructuredData(appData, params.slug, "terms")} />
+      <StructuredData data={buildAppLegalStructuredData(appData, slug, "terms")} />
       <LegalPage
-        appSlug={params.slug}
+        appSlug={slug}
         legalData={terms}
         appName={metadata.name}
         developer={metadata.developer}

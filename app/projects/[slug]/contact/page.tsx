@@ -12,9 +12,9 @@ import { getAppData, generateStaticParams } from "@/lib/apps";
 import { getAppDisplayName } from "@/lib/app-presentation";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export { generateStaticParams };
@@ -22,7 +22,8 @@ export { generateStaticParams };
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const appData = getAppData(params.slug);
+  const { slug } = await params;
+  const appData = getAppData(slug);
 
   if (!appData) {
     return { title: "Support not found", robots: NOINDEX_ROBOTS };
@@ -36,13 +37,14 @@ export async function generateMetadata({
   return pageMetadata({
     title: `${appName} support`,
     description: appSupportDescription(appName, contact.supportDescription),
-    path: `/projects/${params.slug}/contact`,
+    path: `/projects/${slug}/contact`,
     noindex: true,
   });
 }
 
-export default function AppSupportPage({ params }: PageProps) {
-  const appData = getAppData(params.slug);
+export default async function AppSupportPage({ params }: PageProps) {
+  const { slug } = await params;
+  const appData = getAppData(slug);
 
   if (!appData) {
     notFound();
@@ -77,12 +79,12 @@ export default function AppSupportPage({ params }: PageProps) {
               </ul>
 
               <div className="mt-8">
-                <BackLink href={`/projects/${params.slug}`}>Back to {name}</BackLink>
+                <BackLink href={`/projects/${slug}`}>Back to {name}</BackLink>
               </div>
             </div>
 
             <Card radius="panel" padding="lg" elevated>
-              <SupportForm slug={params.slug} />
+              <SupportForm slug={slug} />
             </Card>
           </div>
         </Container>

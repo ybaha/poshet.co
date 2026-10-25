@@ -7,9 +7,9 @@ import { LegalPage } from "@/components/studio/apps/legal-page";
 import { Metadata } from "next";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export { generateStaticParams };
@@ -17,7 +17,8 @@ export { generateStaticParams };
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const appData = getAppData(params.slug);
+  const { slug } = await params;
+  const appData = getAppData(slug);
 
   if (!appData) {
     return { title: "Delete account not found", robots: NOINDEX_ROBOTS };
@@ -28,13 +29,14 @@ export async function generateMetadata({
   return pageMetadata({
     title: `${appName} delete account`,
     description: deleteAccountDescription(appName),
-    path: `/projects/${params.slug}/delete-account`,
+    path: `/projects/${slug}/delete-account`,
     noindex: true,
   });
 }
 
-const DeleteAccountPage = ({ params }: PageProps) => {
-  const appData = getAppData(params.slug);
+const DeleteAccountPage = async ({ params }: PageProps) => {
+  const { slug } = await params;
+  const appData = getAppData(slug);
 
   if (!appData || !appData.deleteAccount) {
     notFound();
@@ -44,7 +46,7 @@ const DeleteAccountPage = ({ params }: PageProps) => {
 
   return (
     <LegalPage
-      appSlug={params.slug}
+      appSlug={slug}
       legalData={deleteAccount}
       appName={metadata.name}
       developer={metadata.developer}

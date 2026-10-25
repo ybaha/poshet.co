@@ -14,7 +14,7 @@ import { buildBreadcrumbList } from "@/lib/structured-data/breadcrumbs";
 import { buildProfilePage } from "@/lib/structured-data/profile-page";
 import { NOINDEX_ROBOTS, pageMetadata } from "@/lib/seo";
 
-type PageProps = { params: { name: string } };
+type PageProps = { params: Promise<{ name: string }> };
 
 const findAuthor = (slug: string) => authors.find((author) => author.slug === slug);
 
@@ -22,8 +22,9 @@ export function generateStaticParams() {
   return authors.map((author) => ({ name: author.slug }));
 }
 
-export function generateMetadata({ params }: PageProps): Metadata {
-  const author = findAuthor(params.name);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { name } = await params;
+  const author = findAuthor(name);
   if (!author) return { title: "Author not found", robots: NOINDEX_ROBOTS };
 
   return pageMetadata({
@@ -34,7 +35,8 @@ export function generateMetadata({ params }: PageProps): Metadata {
 }
 
 export default async function AuthorPage({ params }: PageProps) {
-  const author = findAuthor(params.name);
+  const { name } = await params;
+  const author = findAuthor(name);
   if (!author) notFound();
 
   const posts = (await getAllPosts()).filter((post) => post.author.slug === author.slug);

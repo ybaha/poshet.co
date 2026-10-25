@@ -7,9 +7,6 @@ const LEGACY_APP_PAGES = ["privacy", "terms", "contact", "support", "delete-acco
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
   async redirects() {
     return [
       { source: "/apps", destination: "/projects", permanent: true },

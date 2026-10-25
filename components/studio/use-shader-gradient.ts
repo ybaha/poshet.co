@@ -30,7 +30,7 @@ const MAX_FRAME_DELTA_SECONDS = 0.1;
  * (off-screen, hidden tab, reduced motion, lost context).
  */
 export function useShaderGradient(
-  canvasRef: RefObject<HTMLCanvasElement>,
+  canvasRef: RefObject<HTMLCanvasElement | null>,
   { colors, seed, speed, startTime, interactive }: ShaderGradientConfig
 ) {
   const paletteKey = colors.join("|");

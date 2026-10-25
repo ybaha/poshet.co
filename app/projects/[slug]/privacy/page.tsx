@@ -9,9 +9,9 @@ import { buildAppLegalStructuredData } from "@/lib/structured-data/app-legal-pag
 import { Metadata } from "next";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export { generateStaticParams };
@@ -19,7 +19,8 @@ export { generateStaticParams };
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const appData = getAppData(params.slug);
+  const { slug } = await params;
+  const appData = getAppData(slug);
 
   if (!appData) {
     return { title: "Privacy policy not found", robots: NOINDEX_ROBOTS };
@@ -30,12 +31,13 @@ export async function generateMetadata({
   return pageMetadata({
     title: `${appName} privacy policy`,
     description: privacyPolicyDescription(appName),
-    path: `/projects/${params.slug}/privacy`,
+    path: `/projects/${slug}/privacy`,
   });
 }
 
-const DynamicPrivacyPage = ({ params }: PageProps) => {
-  const appData = getAppData(params.slug);
+const DynamicPrivacyPage = async ({ params }: PageProps) => {
+  const { slug } = await params;
+  const appData = getAppData(slug);
 
   if (!appData) {
     notFound();
@@ -45,9 +47,9 @@ const DynamicPrivacyPage = ({ params }: PageProps) => {
 
   return (
     <>
-      <StructuredData data={buildAppLegalStructuredData(appData, params.slug, "privacy")} />
+      <StructuredData data={buildAppLegalStructuredData(appData, slug, "privacy")} />
       <LegalPage
-        appSlug={params.slug}
+        appSlug={slug}
         legalData={privacy}
         appName={metadata.name}
         developer={metadata.developer}
