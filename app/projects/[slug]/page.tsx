@@ -13,7 +13,7 @@ import { PageHero } from "@/components/studio/page-hero";
 import { StructuredData } from "@/components/structured-data";
 import { buildBreadcrumbList } from "@/lib/structured-data/breadcrumbs";
 import { buildMobileApplication } from "@/lib/structured-data/mobile-application";
-import { pageMetadata } from "@/lib/seo";
+import { NOINDEX_ROBOTS, pageMetadata } from "@/lib/seo";
 import { getAppData, generateStaticParams } from "@/lib/apps";
 import { getAppDisplayName, getAppSeed } from "@/lib/app-presentation";
 import { paletteFromTint } from "@/lib/shader-gradient/palette";
@@ -32,7 +32,7 @@ export async function generateMetadata({
   const appData = getAppData(params.slug);
 
   if (!appData) {
-    return { title: "App not found", robots: { index: false } };
+    return { title: "App not found", robots: NOINDEX_ROBOTS };
   }
 
   const { metadata } = appData;

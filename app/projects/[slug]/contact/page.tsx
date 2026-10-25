@@ -7,7 +7,7 @@ import { Card } from "@/components/studio/card";
 import { Container, Section } from "@/components/studio/container";
 import { PageHeader } from "@/components/studio/page-header";
 import { FaqSection } from "@/components/studio/faq";
-import { pageMetadata } from "@/lib/seo";
+import { NOINDEX_ROBOTS, pageMetadata } from "@/lib/seo";
 import { getAppData, generateStaticParams } from "@/lib/apps";
 import { getAppDisplayName } from "@/lib/app-presentation";
 
@@ -25,7 +25,7 @@ export async function generateMetadata({
   const appData = getAppData(params.slug);
 
   if (!appData) {
-    return { title: "Support not found", robots: { index: false } };
+    return { title: "Support not found", robots: NOINDEX_ROBOTS };
   }
 
   const { metadata } = appData;
@@ -35,6 +35,7 @@ export async function generateMetadata({
     title: `Contact ${metadata.name} Support`,
     description: `${contact.supportDescription} Get help with ${metadata.name}.`,
     path: `/projects/${params.slug}/contact`,
+    noindex: true,
   });
 }
 

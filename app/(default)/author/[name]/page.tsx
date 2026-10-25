@@ -12,7 +12,7 @@ import { authors } from "@/lib/constants";
 import { StructuredData } from "@/components/structured-data";
 import { buildBreadcrumbList } from "@/lib/structured-data/breadcrumbs";
 import { buildProfilePage } from "@/lib/structured-data/profile-page";
-import { pageMetadata } from "@/lib/seo";
+import { NOINDEX_ROBOTS, pageMetadata } from "@/lib/seo";
 
 type PageProps = { params: { name: string } };
 
@@ -24,7 +24,7 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: PageProps): Metadata {
   const author = findAuthor(params.name);
-  if (!author) return { title: "Author not found", robots: { index: false } };
+  if (!author) return { title: "Author not found", robots: NOINDEX_ROBOTS };
 
   return pageMetadata({
     title: `${author.name} - Poshet.co Author`,

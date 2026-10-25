@@ -11,7 +11,7 @@ import { getPost, getPostSlugs } from "@/lib/blog";
 import { StructuredData } from "@/components/structured-data";
 import { buildBlogPosting } from "@/lib/structured-data/article";
 import { buildBreadcrumbList } from "@/lib/structured-data/breadcrumbs";
-import { pageMetadata } from "@/lib/seo";
+import { NOINDEX_ROBOTS, pageMetadata } from "@/lib/seo";
 
 type PageProps = { params: { slug: string } };
 
@@ -26,7 +26,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const post = await getPost(params.slug);
-  if (!post) return { title: "Article not found", robots: { index: false } };
+  if (!post) return { title: "Article not found", robots: NOINDEX_ROBOTS };
 
   return {
     ...pageMetadata({

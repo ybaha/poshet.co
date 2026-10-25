@@ -1,5 +1,5 @@
 import React from "react";
-import { pageMetadata } from "@/lib/seo";
+import { NOINDEX_ROBOTS, pageMetadata } from "@/lib/seo";
 import { getAppData, generateStaticParams } from "@/lib/apps";
 import { notFound } from "next/navigation";
 import { LegalPage } from "@/components/studio/apps/legal-page";
@@ -19,7 +19,7 @@ export async function generateMetadata({
   const appData = getAppData(params.slug);
 
   if (!appData) {
-    return { title: "Privacy policy not found", robots: { index: false } };
+    return { title: "Privacy policy not found", robots: NOINDEX_ROBOTS };
   }
 
   const { metadata } = appData;
