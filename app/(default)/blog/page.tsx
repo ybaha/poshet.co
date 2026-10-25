@@ -1,62 +1,56 @@
-import fs from "fs/promises";
-import matter from "gray-matter";
-import Link from "next/link";
-import path from "path";
+import { PostCard } from "@/components/studio/blog/post-card";
+import { PostGrid } from "@/components/studio/blog/post-grid";
+import { Container, Section } from "@/components/studio/container";
+import { ContactCta } from "@/components/studio/contact-cta";
+import { GlassPill } from "@/components/studio/glass-pill";
+import { PageHero } from "@/components/studio/page-hero";
+import { SectionHeading } from "@/components/studio/section-heading";
+import { getAllPosts } from "@/lib/blog";
 
 export const metadata = {
   title: "Tech Insights & Trends | Poshet Digital Blog",
   description:
     "Explore the latest in technology trends, insights, and innovations on Poshet Digital's blog. Stay updated with expert analysis and discussions.",
+  alternates: { canonical: "/blog" },
 };
 
-export default async function Page() {
-  const posts = await getPosts();
-  console.log(posts[0].post.date);
+export default async function BlogPage() {
+  const [featured, ...rest] = await getAllPosts();
+
   return (
-    <div className="prose prose-sm md:prose-base lg:prose-lg prose-slate">
-      <h1>Blog</h1>
-      <ul className="list-disc">
-        {posts.map(({ post, params }) => (
-          <li key={params.slug}>
-            <Link
-              href={`/blog/${params.slug}`}
-              className="decoration-transparent"
-            >
-              {post.title}
-            </Link>
-            <br />
-            <small>{post.date}</small>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <PageHero
+        seed={587}
+        startTime={90}
+        badge={
+          <GlassPill>
+            <span aria-hidden="true" className="h-2 w-2 rounded-full bg-studio-cyan" />
+            {rest.length + (featured ? 1 : 0)} articles
+          </GlassPill>
+        }
+        title="Notes on building for the web."
+        description="Practical writing on design, development and shipping products, from the people who build them."
+      />
+
+      {featured && (
+        <Section className="pt-12 md:pt-16 lg:pt-20">
+          <Container>
+            <SectionHeading eyebrow="Latest" title="Fresh from the studio." className="mb-12 lg:mb-16" />
+            <PostCard post={featured} featured />
+          </Container>
+        </Section>
+      )}
+
+      {rest.length > 0 && (
+        <Section className="pt-0 md:pt-0 lg:pt-0">
+          <Container>
+            <SectionHeading eyebrow="More to read" title="Earlier articles." className="mb-12 lg:mb-16" />
+            <PostGrid posts={rest} />
+          </Container>
+        </Section>
+      )}
+
+      <ContactCta />
+    </>
   );
 }
-
-const getPosts = async () => {
-  const files = await fs.readdir(path.join(process.cwd(), "_posts"));
-
-  const slugs = files.map((file) => file.replace(/\.mdx?$/, ""));
-
-  let posts = [];
-
-  for (const slug of slugs) {
-    const file = await fs.readFile(
-      path.join(process.cwd(), "_posts", `${slug}.mdx`),
-      "utf8"
-    );
-
-    const { data } = matter(file);
-
-    posts.push({
-      params: {
-        slug,
-      },
-      post: data,
-    });
-  }
-
-  return posts.sort((a, b) => {
-    return new Date(b.post.date).getTime() - new Date(a.post.date).getTime();
-  });
-};

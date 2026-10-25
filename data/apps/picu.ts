@@ -17,6 +17,7 @@ export const picuAppData: AppData = {
     description:
       "Turn your ordinary photos into extraordinary masterpieces with PicU's AI-powered filters and effects. From vintage vibes to futuristic cyberpunk, artistic oil paintings to dreamy watercolors - unleash your creativity with cutting-edge AI technology. Upload your photo, choose your style, and watch the magic happen!",
     imagePath: "/apps/filter/icon.png",
+    tint: "#E58F23",
   },
   features: [
     {

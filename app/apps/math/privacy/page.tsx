@@ -55,8 +55,8 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-xl font-semibold mb-2">2. Data Usage</h2>
           <p className="text-gray-600">
-            Your data is used for the following purposes:
-            <ul className="list-disc pl-6 mt-2 space-y-2">
+            Your data is used for the following purposes:</p>
+            <ul className="list-disc pl-6 mt-2 space-y-2 text-gray-600">
               <li>
                 Product Personalization - To provide a customized experience
               </li>
@@ -64,7 +64,6 @@ export default function PrivacyPage() {
               <li>Analytics - To improve our services and performance</li>
               <li>Progress Tracking - To maintain your learning history</li>
             </ul>
-          </p>
         </section>
 
         <section>
@@ -81,13 +80,12 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-xl font-semibold mb-2">4. Data Security</h2>
           <p className="text-gray-600">
-            We implement industry-standard security measures including:
-            <ul className="list-disc pl-6 mt-2 space-y-2">
+            We implement industry-standard security measures including:</p>
+            <ul className="list-disc pl-6 mt-2 space-y-2 text-gray-600">
               <li>SSL encryption for all data transfers</li>
               <li>Secure server infrastructure</li>
               <li>Regular security audits</li>
             </ul>
-          </p>
         </section>
 
         <section>

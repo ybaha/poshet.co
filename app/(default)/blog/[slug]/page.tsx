@@ -1,106 +1,86 @@
-import React from "react";
-import fs from "fs/promises";
-import path from "path";
-import matter from "gray-matter";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import { Icons } from "@/components/icons";
-
-import Link from "next/link";
 import Image from "next/image";
+import { notFound } from "next/navigation";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { BackLink } from "@/components/studio/back-link";
+import { PostMeta } from "@/components/studio/blog/post-meta";
+import { Container, Section } from "@/components/studio/container";
+import { ContactCta } from "@/components/studio/contact-cta";
+import { PageHeader } from "@/components/studio/page-header";
+import { getPost, getPostSlugs } from "@/lib/blog";
 
-type Props = { params: { slug: string } };
+type PageProps = { params: { slug: string } };
 
-export default async function Post({ params }: Props) {
-  const props = await getPost(params);
-
-  if (!props.content) return <div>404</div>;
-
-  const author = props.frontMatter.author as string;
-  const authorLink = `/author/${author
-    .toLocaleLowerCase()
-    .replaceAll(" ", "-")}`;
-
-  return (
-    <article className="prose prose-sm md:prose-base lg:prose-lg prose-slate mx-auto pb-16">
-      <Link
-        className="flex items-center gap-2 mb-2 decoration-transparent"
-        href="/blog"
-      >
-        <Icons.ChevronLeft size={16} /> Posts
-      </Link>
-
-      {/* image */}
-      {props.frontMatter.image && (
-        <div className="relative w-full h-48 sm:h-72 mb-16">
-          <Image
-            src={props.frontMatter.image}
-            className="object-cover object-center rounded-lg"
-            fill
-            alt={"image for " + props.frontMatter.title}
-          />
-        </div>
-      )}
-
-      <h1>{props.frontMatter.title}</h1>
-      <span className="my-0 py-0 flex items-center gap-2">
-        <Icons.Calendar size={16} />{" "}
-        {new Date(props.frontMatter.date).toLocaleString("en-US", {
-          dateStyle: "long",
-        })}
-      </span>
-      {/* Author */}
-      <Link href={authorLink} id="author" className="flex items-center">
-        <Icons.UserCircleIcon size={16} />{" "}
-        <span className="ml-2">{`Written by: ${props.frontMatter.author}`}</span>
-      </Link>
-      <MDXRemote source={props.content} />
-    </article>
-  );
-}
-
-export async function generateMetadata({ params }: any) {
-  const blog = await getPost(params);
-
-  if (!blog.frontMatter) return {};
-  return {
-    title: blog.frontMatter.title,
-    description: blog.frontMatter.description,
-    openGraph: {
-      images: [blog.frontMatter.image],
-      title: blog.frontMatter.title,
-      description: blog.frontMatter.description,
-      url: `https://www.poshet.co/blog/${params.slug}`,
-    },
-    alternates: {
-      canonical: `https://www.poshet.co/blog/${params.slug}`,
-    },
-  };
-}
+/** Typography plugin tuned to the studio palette and display font. */
+const ARTICLE_PROSE =
+  "prose prose-lg max-w-none prose-headings:font-display prose-headings:font-medium prose-headings:tracking-tight prose-headings:text-studio-navy prose-p:text-studio-ink/80 prose-li:text-studio-ink/80 prose-li:marker:text-studio-blue prose-strong:text-studio-navy prose-a:text-studio-blue prose-a:underline-offset-4 prose-img:rounded-[20px] prose-blockquote:border-studio-blue prose-blockquote:text-studio-navy";
 
 export async function generateStaticParams() {
-  const files = await fs.readdir(path.join(process.cwd(), "_posts"));
-  const slugs = files.map((file) => file.replace(/\.mdx?$/, ""));
-
-  return slugs.map((slug) => ({ params: { slug } }));
+  const slugs = await getPostSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
-async function getPost({ slug }: { slug: string }) {
-  let markdownFile;
+export async function generateMetadata({ params }: PageProps) {
+  const post = await getPost(params.slug);
+  if (!post) return {};
 
-  try {
-    markdownFile = await fs.readFile(
-      path.join("_posts", slug + ".mdx"),
-      "utf-8"
-    );
-  } catch (e) {
-    return {};
-  }
-
-  const { data: frontMatter, content } = matter(markdownFile);
-
+  const url = `https://www.poshet.co/blog/${params.slug}`;
   return {
-    frontMatter,
-    slug,
-    content,
+    title: post.title,
+    description: post.description,
+    openGraph: {
+      images: post.image ? [post.image] : [],
+      title: post.title,
+      description: post.description,
+      url,
+    },
+    alternates: { canonical: url },
   };
+}
+
+export default async function PostPage({ params }: PageProps) {
+  const post = await getPost(params.slug);
+  if (!post) notFound();
+
+  return (
+    <>
+      <Section className="pb-10 pt-10 md:pb-12 md:pt-16 lg:pb-12 lg:pt-16">
+        <Container className="max-w-[880px]">
+          <BackLink href="/blog">All articles</BackLink>
+          <PageHeader
+            className="mt-8"
+            eyebrow="Article"
+            size="section"
+            title={post.title}
+            description={post.description}
+          />
+          <PostMeta post={post} className="mt-8" />
+        </Container>
+      </Section>
+
+      {post.image && (
+        <Container className="max-w-[1080px]">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-[28px] bg-gradient-to-br from-studio-ice to-studio-sky/40 lg:rounded-card">
+            <Image
+              src={post.image}
+              alt=""
+              fill
+              priority
+              sizes="(min-width: 1080px) 1000px, 92vw"
+              className="object-cover"
+            />
+          </div>
+        </Container>
+      )}
+
+      <Section className="pb-24 pt-12 md:pb-28 md:pt-16 lg:pb-28 lg:pt-16">
+        <Container className="max-w-[760px]">
+          <article className={ARTICLE_PROSE}>
+            <MDXRemote source={post.content} />
+          </article>
+        </Container>
+      </Section>
+
+      <ContactCta />
+    </>
+  );
 }

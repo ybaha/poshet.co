@@ -17,6 +17,7 @@ export const vidgenAppData: AppData = {
     description:
       "Transform your creativity into motion with VidGen3. Generate stunning AI videos from text descriptions or animate your images with cutting-edge AI technology. From concept to creation in seconds - unleash the power of AI video generation with multiple models, customizable settings, and professional-quality results.",
     imagePath: "/apps/vidgen/icon.png",
+    tint: "#AE9763",
   },
   features: [
     {

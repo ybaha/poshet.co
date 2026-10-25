@@ -17,6 +17,7 @@ export const glbAppData: AppData = {
     description:
       "Transform your ideas into stunning 3D models with GLB. Upload any image or describe what you want, and our AI generates high-quality GLB files ready for games, AR/VR experiences, 3D printing, and design projects. No 3D modeling skills required — just your creativity.",
     imagePath: "/apps/glb/icon.png",
+    tint: "#62DD51",
   },
   features: [
     {

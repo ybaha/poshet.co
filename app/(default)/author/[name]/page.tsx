@@ -1,54 +1,60 @@
 import { Metadata } from "next";
-import Image from "next/image";
+import { notFound } from "next/navigation";
+import { AuthorAvatar } from "@/components/studio/blog/author-avatar";
+import { PostGrid } from "@/components/studio/blog/post-grid";
+import { BackLink } from "@/components/studio/back-link";
+import { Container, Section } from "@/components/studio/container";
+import { ContactCta } from "@/components/studio/contact-cta";
+import { PageHeader } from "@/components/studio/page-header";
+import { SectionHeading } from "@/components/studio/section-heading";
+import { getAllPosts } from "@/lib/blog";
 import { authors } from "@/lib/constants";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
-export async function generateStaticParams() {
-  return authors.map((author) => ({
-    name: author.slug,
-  }));
+type PageProps = { params: { name: string } };
+
+const findAuthor = (slug: string) => authors.find((author) => author.slug === slug);
+
+export function generateStaticParams() {
+  return authors.map((author) => ({ name: author.slug }));
 }
 
-export const generateMetadata = ({
-  params,
-}: {
-  params: { name: string };
-}): Metadata => {
-  const author = authors.find((a) => a.slug === params.name);
+export function generateMetadata({ params }: PageProps): Metadata {
+  const author = findAuthor(params.name);
   return {
     title: `${author?.name} - Poshet.co Author`,
     description: author?.bio,
-    openGraph: {
-      images: author?.image ? [author.image] : [],
-    },
+    openGraph: { images: author?.image ? [author.image] : [] },
   };
-};
+}
 
-export default function AuthorPage({ params }: { params: { name: string } }) {
-  const author = authors.find((a) => a.slug === params.name);
+export default async function AuthorPage({ params }: PageProps) {
+  const author = findAuthor(params.name);
+  if (!author) notFound();
 
-  if (!author) {
-    return (
-      <div className="max-w-3xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold">Author not found</h1>
-      </div>
-    );
-  }
+  const posts = (await getAllPosts()).filter((post) => post.author.slug === author.slug);
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
-      <div className="flex flex-col items-center mb-8">
-        <Avatar className="w-16 h-16 mb-4">
-          <AvatarImage src={author.image} alt={author.name} />
-          <AvatarFallback>{author.name.charAt(0)}</AvatarFallback>
-        </Avatar>
-        <h1 className="text-3xl font-bold">{author.name}</h1>
-        <p className="text-xl text-gray-600 mt-2">{author.role}</p>
-      </div>
+    <>
+      <Section className="pb-12 pt-10 md:pb-12 md:pt-16 lg:pb-16 lg:pt-16">
+        <Container>
+          <BackLink href="/authors">All authors</BackLink>
+          <div className="mt-8 flex flex-col gap-6 md:flex-row md:items-center md:gap-10">
+            <AuthorAvatar name={author.name} image={author.image} className="h-24 w-24 text-2xl md:h-32 md:w-32 md:text-3xl" />
+            <PageHeader eyebrow={author.role} title={author.name} description={author.bio} />
+          </div>
+        </Container>
+      </Section>
 
-      <div className="prose max-w-none">
-        <p className="text-lg text-gray-600">{author.bio}</p>
-      </div>
-    </div>
+      {posts.length > 0 && (
+        <Section className="pt-0 md:pt-0 lg:pt-0">
+          <Container>
+            <SectionHeading eyebrow="Articles" title={`Written by ${author.name.split(" ")[0]}.`} className="mb-12 lg:mb-16" />
+            <PostGrid posts={posts} />
+          </Container>
+        </Section>
+      )}
+
+      <ContactCta />
+    </>
   );
 }

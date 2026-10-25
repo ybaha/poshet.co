@@ -1,19 +1,29 @@
 import "./css/style.css";
 
-import Header from "@/components/ui/header";
-import Footer from "@/components/ui/footer";
-import Script from "next/script";
-import Analytics from "./GoogleAnalytics";
+import { Golos_Text } from "next/font/google";
+import localFont from "next/font/local";
 import { Suspense } from "react";
+import { Footer } from "@/components/studio/footer";
+import { Header } from "@/components/studio/header";
+import Analytics from "./GoogleAnalytics";
+
+const body = Golos_Text({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-studio-body",
+  display: "swap",
+});
+
+const display = localFont({
+  src: "./fonts/MonaSans-latin.woff2",
+  variable: "--font-studio-display",
+  weight: "200 900",
+  display: "swap",
+});
 
 export const metadata = {
   metadataBase: new URL("https://poshet.co"),
   alternates: {
     canonical: "/",
-    // languages: {
-    //   'en-US': '/en-US',
-    //   'de-DE': '/de-DE',
-    // },
   },
   openGraph: {
     images: "/images/poshet-black-transparent.png",
@@ -26,14 +36,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <Suspense>
-        <Analytics />
-      </Suspense>
-      <body className={`antialiased bg-white text-gray-900 tracking-tight`}>
-        <div className="flex items-center flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip">
+    <html lang="en" className={`${body.variable} ${display.variable}`}>
+      <body className="bg-studio-canvas font-sans tracking-tight text-gray-900 antialiased">
+        <Suspense>
+          <Analytics />
+        </Suspense>
+        <a
+          href="#main"
+          className="sr-only z-[60] rounded-full bg-studio-blue px-5 py-3 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        >
+          Skip to content
+        </a>
+        <div className="flex min-h-screen flex-col items-center overflow-hidden supports-[overflow:clip]:overflow-clip">
           <Header />
-          {children}
+          <main id="main" className="w-full grow tracking-[-0.01em]">
+            {children}
+          </main>
           <Footer />
         </div>
       </body>

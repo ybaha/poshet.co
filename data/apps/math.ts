@@ -15,24 +15,40 @@ export const mathAppData: AppData = {
     title: "Math Help AI",
     subtitle: "Solve Math Questions with AI",
     description:
-      "Math Help AI is an interactive learning app designed to help students excel in mathematics through engaging exercises, step-by-step solutions, and personalized learning paths. From basic arithmetic to advanced calculus, we make math accessible and enjoyable for learners of all levels.",
+      "Struggling with math homework? Math Help AI is an AI-powered tutor that makes solving problems effortless. Snap a photo, get step-by-step solutions, and ask follow-up questions until it clicks.",
     imagePath: "/apps/math/Screenshot 01.png",
+    screenshots: [
+      "/apps/math/Screenshot 01.png",
+      "/apps/math/Screenshot 02.png",
+      "/apps/math/Screenshot 03.png",
+    ],
   },
   features: [
     {
-      title: "Interactive Exercises",
+      title: "AI-powered math solver",
       description:
-        "Solve problems with instant feedback and detailed explanations",
+        "Take a photo of any math problem or upload an image from your gallery. The AI analyzes the question and delivers an accurate solution.",
     },
     {
-      title: "Step-by-Step Solutions",
+      title: "Interactive chat",
       description:
-        "Learn the methodology behind every solution with clear explanations",
+        "Ask follow-up questions, get deeper insight into formulas, and build problem-solving skills through AI-guided tutoring.",
     },
     {
-      title: "Progress Tracking",
-      description: "Monitor your improvement and identify areas for growth",
+      title: "Math history",
+      description:
+        "Review previous solutions any time, sorted and filtered by date, with expandable answer breakdowns.",
     },
+    {
+      title: "Clean, seamless experience",
+      description:
+        "A simple interface with light and dark mode, for every level from arithmetic to calculus.",
+    },
+  ],
+  premiumFeatures: [
+    { title: "Unlimited questions", description: "No limits on AI solutions." },
+    { title: "Full chat history", description: "Access past solutions any time." },
+    { title: "Follow-up questions", description: "Go deeper with extra explanations." },
   ],
   downloads: [
     {
@@ -48,33 +64,12 @@ export const mathAppData: AppData = {
       available: false,
     },
   ],
-  faq: [
-    {
-      question: "What grade levels does Math Master support?",
-      answer:
-        "Math Master covers topics from elementary arithmetic through college-level calculus, making it suitable for students from grade 3 through university level.",
-    },
-    {
-      question: "Can I track my child's progress?",
-      answer:
-        "Yes! Math Master includes comprehensive progress tracking and parent dashboards to monitor learning achievements and identify areas that need attention.",
-    },
-    {
-      question: "Does the app work offline?",
-      answer:
-        "Many core features work offline, including practice problems and previously downloaded content. Some advanced features like progress syncing require an internet connection.",
-    },
-    {
-      question: "Is there a free trial?",
-      answer:
-        "Yes, Math Master offers a 7-day free trial with access to all premium features. After the trial, you can continue with our free tier or upgrade to premium.",
-    },
-  ],
+  faq: [],
   contact: {
     responseTime: "We typically respond within 12-24 hours",
     officeHours: "Monday - Friday: 8:00 AM - 7:00 PM (GMT+3)",
     supportDescription:
-      "Need help with Math Master? Have questions about specific math topics? Our team of educators and developers is here to assist you.",
+      "Have a question about Math Help AI or need help with the app? Send us a message and we will get back to you.",
   },
   privacy: {
     title: "Privacy Policy",

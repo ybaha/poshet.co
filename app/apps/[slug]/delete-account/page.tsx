@@ -1,7 +1,7 @@
 import React from "react";
 import { getAppData, generateStaticParams } from "@/lib/apps";
 import { notFound } from "next/navigation";
-import LegalPageTemplate from "@/components/apps/LegalPageTemplate";
+import { LegalPage } from "@/components/studio/apps/legal-page";
 import { Metadata } from "next";
 
 interface PageProps {
@@ -69,7 +69,8 @@ const DeleteAccountPage = ({ params }: PageProps) => {
   const { metadata, deleteAccount } = appData;
 
   return (
-    <LegalPageTemplate
+    <LegalPage
+      appSlug={params.slug}
       legalData={deleteAccount}
       appName={metadata.name}
       developer={metadata.developer}

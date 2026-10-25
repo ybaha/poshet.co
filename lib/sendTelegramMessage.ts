@@ -2,17 +2,18 @@
 
 const TELEGRAM_API_URL = `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`;
 
-export const sendTelegramMessage = async (message: string) => {
+/** Sends a message to the studio's Telegram chat. Resolves to whether it was delivered. */
+export const sendTelegramMessage = async (message: string): Promise<boolean> => {
   const timestamp = new Date().toLocaleTimeString("tr-TR");
 
   if (process.env.NODE_ENV === "development") {
     console.log("Telegram message:", message, timestamp);
 
-    return;
+    return true;
   }
 
   try {
-    await fetch(TELEGRAM_API_URL, {
+    const response = await fetch(TELEGRAM_API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -20,7 +21,11 @@ export const sendTelegramMessage = async (message: string) => {
         text: `${message}\n${timestamp}`,
       }),
     });
+
+    return response.ok;
   } catch (error) {
     console.error("Error sending message to Telegram:", error);
+
+    return false;
   }
 };

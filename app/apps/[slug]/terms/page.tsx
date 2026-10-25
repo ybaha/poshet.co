@@ -1,7 +1,7 @@
 import React from "react";
 import { getAppData, generateStaticParams } from "@/lib/apps";
 import { notFound } from "next/navigation";
-import LegalPageTemplate from "@/components/apps/LegalPageTemplate";
+import { LegalPage } from "@/components/studio/apps/legal-page";
 import { Metadata } from "next";
 
 interface PageProps {
@@ -69,7 +69,8 @@ const DynamicTermsPage = ({ params }: PageProps) => {
   const { metadata, terms } = appData;
 
   return (
-    <LegalPageTemplate
+    <LegalPage
+      appSlug={params.slug}
       legalData={terms}
       appName={metadata.name}
       developer={metadata.developer}

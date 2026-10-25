@@ -22,7 +22,12 @@ export interface AppHero {
   subtitle: string;
   description: string;
   imageUrl?: string;
+  /** App icon (or a single key visual when there are no screenshots). */
   imagePath?: string;
+  /** Store screenshots, in display order. Portrait phone captures. */
+  screenshots?: string[];
+  /** Brand color used to tint this app's preview tiles. */
+  tint?: string;
 }
 
 export interface AppLegalPage {
@@ -58,6 +63,8 @@ export interface AppData {
   metadata: AppMetadata;
   hero: AppHero;
   features: AppFeature[];
+  /** Extra capabilities that sit behind a subscription. */
+  premiumFeatures?: AppFeature[];
   downloads: AppDownloadLink[];
   faq: AppFAQ[];
   contact: AppContactInfo;

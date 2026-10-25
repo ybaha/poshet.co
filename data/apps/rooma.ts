@@ -17,6 +17,7 @@ export const roomaAppData: AppData = {
     description:
       "Transform any space with the power of AI. Simply snap a photo of your room and watch Rooma redesign it in stunning styles — from modern minimalist to cozy bohemian, sleek industrial to warm Scandinavian. Get unlimited design inspiration and see your dream home come to life before making any changes.",
     imagePath: "/apps/rooma/icon.png",
+    tint: "#8E7B64",
   },
   features: [
     {

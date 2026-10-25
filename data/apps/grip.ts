@@ -17,6 +17,7 @@ export const gripAppData: AppData = {
     description:
       "Grip is a private, guided app that helps men last longer, feel more in control, and enjoy sex with confidence. Instead of quick fixes or awkward conversations, Grip teaches you how to train your body and mind step by step. Learn to control arousal, relax the right muscles, breathe correctly, and break the habits that make you finish too fast.",
     imagePath: "/apps/grip/icon.png",
+    tint: "#F7C70D",
   },
   features: [
     {
