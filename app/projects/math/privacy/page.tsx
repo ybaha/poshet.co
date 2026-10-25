@@ -1,4 +1,7 @@
 import { Metadata } from "next";
+import { StructuredData } from "@/components/structured-data";
+import { getAppData } from "@/lib/apps";
+import { buildAppLegalStructuredData } from "@/lib/structured-data/app-legal-page";
 import { pageMetadata, privacyPolicyDescription } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -8,7 +11,11 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function PrivacyPage() {
+  const app = getAppData("math");
+
   return (
+    <>
+      {app ? <StructuredData data={buildAppLegalStructuredData(app, "math", "privacy")} /> : null}
     <div className="max-w-3xl mx-auto px-4 py-8 mt-10">
       <h1 className="text-3xl font-bold mb-6">
         Privacy Policy for Math Answers AI
@@ -113,5 +120,6 @@ export default function PrivacyPage() {
         </section>
       </div>
     </div>
+    </>
   );
 }

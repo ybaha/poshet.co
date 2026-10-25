@@ -17,6 +17,8 @@ export type BlogPost = {
   description: string;
   /** ISO date, `YYYY-MM-DD`. */
   date: string;
+  /** Optional last-updated date when the post was revised after publication. */
+  modified?: string;
   image?: string;
   /** Override for hero `alt`; defaults via {@link postHeroImageAlt}. */
   imageAlt?: string;
@@ -58,6 +60,12 @@ async function readPost(slug: string): Promise<BlogPostWithContent | null> {
     seoTitle: data.seoTitle ? String(data.seoTitle) : undefined,
     description: String(data.description ?? ""),
     date: Number.isNaN(date.getTime()) ? "" : date.toISOString().slice(0, 10),
+    modified: data.modified
+      ? (() => {
+          const modified = new Date(data.modified);
+          return Number.isNaN(modified.getTime()) ? undefined : modified.toISOString().slice(0, 10);
+        })()
+      : undefined,
     image: data.image || undefined,
     imageAlt: data.imageAlt ? String(data.imageAlt) : undefined,
     noindex: data.noindex === true || undefined,

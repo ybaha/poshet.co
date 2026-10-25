@@ -10,6 +10,17 @@ const TITLE_MAX = 60;
 const DESC_MIN = 120;
 const DESC_MAX = 160;
 const MIN_SITEMAP_URLS = 10;
+const MIN_ALT_LENGTH = 12;
+
+const GENERIC_IMAGE_ALTS = new Set([
+  "Mobile app by Poshet",
+  "Privacy policy for a Poshet app",
+  "Terms of service for a Poshet app",
+  "Support for a Poshet app",
+  "Account deletion for a Poshet app",
+  "Article on the Poshet blog",
+  "Author on the Poshet blog",
+]);
 
 const decode = (s) =>
   s
@@ -40,10 +51,23 @@ function linkRel(html, rel) {
   return decode(pick(html, re) || pick(html, re2));
 }
 
+function themeColor(html) {
+  return meta(html, "theme-color");
+}
+
+function appDisplayNameFromOgTitle(ogTitle) {
+  const withoutBrand = ogTitle.split(" | Poshet")[0].trim();
+  const segment = withoutBrand.split(":")[0].split(" · ")[0].trim();
+  return segment;
+}
+
 function requiredSchemaTypes(path) {
   if (path === "/") return ["Organization", "WebSite"];
   if (path === "/projects" || path === "/blog") return ["BreadcrumbList"];
+  if (path === "/authors") return ["CollectionPage", "BreadcrumbList"];
+  if (path === "/contact") return ["ContactPage", "BreadcrumbList"];
   if (/^\/projects\/[^/]+$/.test(path)) return ["MobileApplication", "BreadcrumbList"];
+  if (/^\/projects\/[^/]+\/(privacy|terms)$/.test(path)) return ["WebPage", "BreadcrumbList"];
   if (/^\/blog\/[^/]+$/.test(path)) return ["BlogPosting", "BreadcrumbList"];
   if (/^\/author\/[^/]+$/.test(path)) return ["ProfilePage", "BreadcrumbList"];
   return [];
@@ -73,6 +97,20 @@ function collectJsonLdTypes(html) {
   return { types, invalid: false };
 }
 
+function validateImageAlt(alt, path, ogTitle) {
+  const issues = [];
+  if (!alt) issues.push("missing og:image:alt");
+  else {
+    if (alt.length < MIN_ALT_LENGTH) issues.push(`og:image:alt short (${alt.length})`);
+    if (GENERIC_IMAGE_ALTS.has(alt)) issues.push("generic og:image:alt");
+    if (/^\/projects\/[^/]+$/.test(path)) {
+      const expected = appDisplayNameFromOgTitle(ogTitle);
+      if (expected && !alt.includes(expected)) issues.push("og:image:alt missing app name");
+    }
+  }
+  return issues;
+}
+
 function analyze(html, expectedCanonical, path, { requireNoindex = false, checkSchema = true } = {}) {
   const issues = [];
   const titles = [...html.matchAll(/<title[^>]*>([^<]*)<\/title>/gi)].map((m) => decode(m[1]));
@@ -98,6 +136,12 @@ function analyze(html, expectedCanonical, path, { requireNoindex = false, checkS
   const ogImg = meta(html, "og:image");
   if (!ogImg?.startsWith("http")) issues.push("og:image");
 
+  const ogImgAlt = meta(html, "og:image:alt");
+  const twImgAlt = meta(html, "twitter:image:alt");
+  issues.push(...validateImageAlt(ogImgAlt, path, ogTitle));
+  if (!twImgAlt) issues.push("missing twitter:image:alt");
+  else if (twImgAlt !== ogImgAlt) issues.push("twitter:image:alt mismatch");
+
   const twCard = meta(html, "twitter:card");
   if (twCard !== "summary_large_image") issues.push("twitter:card");
   const twTitle = meta(html, "twitter:title");
@@ -109,6 +153,10 @@ function analyze(html, expectedCanonical, path, { requireNoindex = false, checkS
   const twImg = meta(html, "twitter:image");
   if (!twImg?.startsWith("http")) issues.push("twitter:image");
 
+  if (!themeColor(html)) issues.push("missing theme-color");
+  const manifestHref = linkRel(html, "manifest");
+  if (!manifestHref) issues.push("missing manifest link");
+
   const h1s = [...html.matchAll(/<h1[\s>]/gi)];
   if (h1s.length !== 1) issues.push(`h1 count ${h1s.length}`);
 
@@ -116,9 +164,25 @@ function analyze(html, expectedCanonical, path, { requireNoindex = false, checkS
   if (!lang) issues.push("html lang");
 
   const robots = meta(html, "robots").toLowerCase();
-  const noindex = robots.includes("noindex");
+  const googlebot = meta(html, "googlebot").toLowerCase();
+  const noindex = robots.includes("noindex") || googlebot.includes("noindex");
   if (requireNoindex && !noindex) issues.push("missing noindex");
   if (!requireNoindex && noindex) issues.push("unexpected noindex");
+
+  if (requireNoindex) {
+    if (robots.includes("max-image-preview") || googlebot.includes("max-image-preview")) {
+      issues.push("noindex has max-image-preview");
+    }
+  } else if (!noindex) {
+    if (!googlebot.includes("max-image-preview:large")) {
+      issues.push("googlebot missing max-image-preview:large");
+    }
+  }
+
+  if (/^\/blog\/[^/]+$/.test(path) && !requireNoindex) {
+    if (meta(html, "og:type") !== "article") issues.push("og:type not article");
+    if (!meta(html, "article:published_time")) issues.push("missing article:published_time");
+  }
 
   const { types, invalid } = collectJsonLdTypes(html);
   if (invalid) issues.push("invalid JSON-LD");
@@ -177,11 +241,33 @@ function appSlugsFromSitemap(urls) {
   return slugs;
 }
 
+async function validateManifest(rows) {
+  const res = await fetch(`${BASE}/manifest.webmanifest`);
+  if (!res.ok) {
+    rows.push({ path: "manifest.webmanifest", ok: false, issues: `status ${res.status}` });
+    return 1;
+  }
+  let json;
+  try {
+    json = await res.json();
+  } catch {
+    rows.push({ path: "manifest.webmanifest", ok: false, issues: "invalid JSON" });
+    return 1;
+  }
+  const issues = [];
+  if (!json.name || !json.short_name) issues.push("missing name");
+  if (!json.start_url) issues.push("missing start_url");
+  rows.push({ path: "manifest.webmanifest", ok: !issues.length, issues: issues.join(", ") || "ok" });
+  return issues.length ? 1 : 0;
+}
+
 async function main() {
   const rows = [];
   const titles = new Map();
   const descs = new Map();
   let failures = 0;
+
+  failures += await validateManifest(rows);
 
   const urls = await sitemapUrls();
   for (const msg of validateSitemap(urls)) {

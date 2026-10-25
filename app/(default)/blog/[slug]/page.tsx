@@ -11,6 +11,7 @@ import { getPost, getPostSlugs, postDocumentTitle, postHeroImageAlt } from "@/li
 import { StructuredData } from "@/components/structured-data";
 import { buildBlogPosting } from "@/lib/structured-data/article";
 import { buildBreadcrumbList } from "@/lib/structured-data/breadcrumbs";
+import { absoluteUrl, toIsoDateTime } from "@/lib/structured-data/utils";
 import { NOINDEX_ROBOTS, pageMetadata } from "@/lib/seo";
 
 type PageProps = { params: { slug: string } };
@@ -28,6 +29,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const post = await getPost(params.slug);
   if (!post) return { title: "Article not found", robots: NOINDEX_ROBOTS };
 
+  const publishedTime = toIsoDateTime(post.date);
+  const modifiedTime = post.modified ? toIsoDateTime(post.modified) : undefined;
+
   return {
     ...pageMetadata({
       title: postDocumentTitle(post),
@@ -35,6 +39,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       path: `/blog/${params.slug}`,
       type: "article",
       noindex: post.noindex,
+      article: publishedTime
+        ? {
+            publishedTime,
+            modifiedTime,
+            authors: [absoluteUrl(`/author/${post.author.slug}`)],
+          }
+        : undefined,
     }),
     authors: [{ name: post.author.name }],
   };

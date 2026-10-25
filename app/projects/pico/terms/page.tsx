@@ -1,5 +1,8 @@
 import React from 'react';
 import { Metadata } from "next";
+import { StructuredData } from "@/components/structured-data";
+import { getAppData } from "@/lib/apps";
+import { buildAppLegalStructuredData } from "@/lib/structured-data/app-legal-page";
 import { pageMetadata, termsDescription } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -9,7 +12,11 @@ export const metadata: Metadata = pageMetadata({
 });
 
 const TermsPage = () => {
+  const app = getAppData("pico");
+
   return (
+    <>
+      {app ? <StructuredData data={buildAppLegalStructuredData(app, "pico", "terms")} /> : null}
     <article className="max-w-4xl mx-auto p-6 space-y-6">
       <h1 className="text-2xl font-bold mb-4">Terms of Service</h1>
       
@@ -68,6 +75,7 @@ const TermsPage = () => {
         <p>If you have any questions about these Terms and Conditions, please contact us at ybahaerarslan@gmail.com</p>
       </section>
     </article>
+    </>
   );
 };
 

@@ -1,7 +1,7 @@
 import { OG_CONTENT_TYPE, OG_SIZE } from "@/lib/og/constants";
 import { renderOgImage } from "@/lib/og/render";
 
-export const alt = "The Poshet blog";
+export const alt = "The Poshet blog — notes on building for the web";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 

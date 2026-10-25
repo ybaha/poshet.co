@@ -3,7 +3,9 @@ import { getAppDisplayName } from "@/lib/app-presentation";
 import { NOINDEX_ROBOTS, pageMetadata, termsDescription } from "@/lib/seo";
 import { getAppData, generateStaticParams } from "@/lib/apps";
 import { notFound } from "next/navigation";
+import { StructuredData } from "@/components/structured-data";
 import { LegalPage } from "@/components/studio/apps/legal-page";
+import { buildAppLegalStructuredData } from "@/lib/structured-data/app-legal-page";
 import { Metadata } from "next";
 
 interface PageProps {
@@ -42,12 +44,15 @@ const DynamicTermsPage = ({ params }: PageProps) => {
   const { metadata, terms } = appData;
 
   return (
-    <LegalPage
-      appSlug={params.slug}
-      legalData={terms}
-      appName={metadata.name}
-      developer={metadata.developer}
-    />
+    <>
+      <StructuredData data={buildAppLegalStructuredData(appData, params.slug, "terms")} />
+      <LegalPage
+        appSlug={params.slug}
+        legalData={terms}
+        appName={metadata.name}
+        developer={metadata.developer}
+      />
+    </>
   );
 };
 

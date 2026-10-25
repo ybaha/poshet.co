@@ -1,12 +1,20 @@
 import "./css/style.css";
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Golos_Text } from "next/font/google";
 import localFont from "next/font/local";
 import { Suspense } from "react";
 import { Footer } from "@/components/studio/footer";
 import { Header } from "@/components/studio/header";
-import { HOME_ABSOLUTE_TITLE, SITE_NAME } from "@/lib/seo";
+import {
+  BRAND_THEME_COLOR,
+  HOME_ABSOLUTE_TITLE,
+  INDEX_ROBOTS,
+  SITE_DESCRIPTION,
+  SITE_FORMAT_DETECTION,
+  SITE_NAME,
+  SITE_PUBLISHER,
+} from "@/lib/seo";
 import Analytics from "./GoogleAnalytics";
 
 const body = Golos_Text({
@@ -22,6 +30,10 @@ const display = localFont({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  themeColor: BRAND_THEME_COLOR,
+};
+
 /** Defaults for any route that does not set its own metadata, such as the 404 page. */
 export const metadata: Metadata = {
   metadataBase: new URL("https://poshet.co"),
@@ -29,8 +41,13 @@ export const metadata: Metadata = {
     default: HOME_ABSOLUTE_TITLE,
     template: "%s | Poshet",
   },
-  description:
-    "Poshet is an independent digital studio that designs and builds websites and mobile apps. Book a 30-minute intro call to talk through your project.",
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  creator: SITE_PUBLISHER,
+  publisher: SITE_PUBLISHER,
+  category: "technology",
+  formatDetection: SITE_FORMAT_DETECTION,
+  robots: INDEX_ROBOTS,
   openGraph: { siteName: SITE_NAME, type: "website", locale: "en_US" },
   twitter: { card: "summary_large_image" },
 };

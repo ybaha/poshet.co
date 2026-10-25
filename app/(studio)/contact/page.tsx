@@ -7,17 +7,32 @@ import { ContactForm } from "@/components/studio/contact-form";
 import { PageHeader } from "@/components/studio/page-header";
 import { textLinkClasses } from "@/components/studio/text-link";
 import { BOOKING_URL, CONTACT_EMAIL } from "@/data/studio";
+import { StructuredData } from "@/components/structured-data";
+import { buildContactPage } from "@/lib/structured-data/contact-page";
+import { buildBreadcrumbList } from "@/lib/structured-data/breadcrumbs";
 import { pageMetadata } from "@/lib/seo";
+
+const CONTACT_DESCRIPTION =
+  "Tell us about your website or app idea. Message Poshet or book a 30-minute intro call to talk through goals, scope, and next steps.";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact",
-  description:
-    "Tell us about your website or app idea. Message Poshet or book a 30-minute intro call to talk through goals, scope, and next steps.",
+  description: CONTACT_DESCRIPTION,
   path: "/contact",
 });
 
 export default function ContactPage() {
   return (
+    <>
+      <StructuredData
+        data={[
+          buildContactPage(CONTACT_DESCRIPTION),
+          buildBreadcrumbList([
+            { name: "Home", path: "/" },
+            { name: "Contact", path: "/contact" },
+          ]),
+        ]}
+      />
     <Section className="pt-10 md:pt-16">
       <Container>
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-20">
@@ -57,5 +72,6 @@ export default function ContactPage() {
         </div>
       </Container>
     </Section>
+    </>
   );
 }

@@ -6,18 +6,33 @@ import { Container, Section } from "@/components/studio/container";
 import { PageHeader } from "@/components/studio/page-header";
 import { FOCUS_RING } from "@/components/studio/styles";
 import { authors } from "@/lib/constants";
+import { StructuredData } from "@/components/structured-data";
+import { buildAuthorsCollectionPage } from "@/lib/structured-data/collection-page";
+import { buildBreadcrumbList } from "@/lib/structured-data/breadcrumbs";
 import { pageMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
+const AUTHORS_DESCRIPTION =
+  "Meet the Poshet developers and designers who write about building websites, mobile apps, and the work that goes into shipping products.";
+
 export const metadata: Metadata = pageMetadata({
   title: "Authors",
-  description:
-    "Meet the Poshet developers and designers who write about building websites, mobile apps, and the work that goes into shipping products.",
+  description: AUTHORS_DESCRIPTION,
   path: "/authors",
 });
 
 export default function AuthorsPage() {
   return (
+    <>
+      <StructuredData
+        data={[
+          buildAuthorsCollectionPage(AUTHORS_DESCRIPTION),
+          buildBreadcrumbList([
+            { name: "Home", path: "/" },
+            { name: "Authors", path: "/authors" },
+          ]),
+        ]}
+      />
     <Section className="pt-10 md:pt-16">
       <Container>
         <PageHeader
@@ -49,5 +64,6 @@ export default function AuthorsPage() {
         </ul>
       </Container>
     </Section>
+    </>
   );
 }

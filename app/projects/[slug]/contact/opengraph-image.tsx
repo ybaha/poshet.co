@@ -1,12 +1,15 @@
-import { OG_CONTENT_TYPE, OG_SIZE } from "@/lib/og/constants";
-import { generateStaticParams } from "@/lib/apps";
+import { generateStaticParams, getAppData } from "@/lib/apps";
+import { getAppDisplayName } from "@/lib/app-presentation";
 import { renderAppOgImage } from "@/lib/og/app";
-
-export const alt = "Support for a Poshet app";
-export const size = OG_SIZE;
-export const contentType = OG_CONTENT_TYPE;
+import { appSupportOgAlt, ogImageMetadata } from "@/lib/og/image-metadata";
 
 export { generateStaticParams };
+
+export function generateImageMetadata({ params }: { params: { slug: string } }) {
+  const app = getAppData(params.slug);
+  const alt = app ? appSupportOgAlt(getAppDisplayName(app)) : "App support";
+  return ogImageMetadata(alt);
+}
 
 export default function Image({ params }: { params: { slug: string } }) {
   return renderAppOgImage(params.slug, { eyebrow: "Support", title: "How can we help?" });

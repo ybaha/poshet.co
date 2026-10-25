@@ -28,6 +28,7 @@ function postImageUrl(post: BlogPost): string | undefined {
 export function buildBlogPosting(post: BlogPost): JsonLdObject {
   const canonical = absoluteUrl(`/blog/${post.slug}`);
   const published = toIsoDateTime(post.date);
+  const modified = post.modified ? toIsoDateTime(post.modified) : published;
 
   return omitEmpty({
     "@context": "https://schema.org",
@@ -35,7 +36,7 @@ export function buildBlogPosting(post: BlogPost): JsonLdObject {
     headline: post.title,
     description: post.description,
     datePublished: published,
-    dateModified: published,
+    dateModified: modified,
     author: buildAuthorPerson(post.author),
     publisher: organizationReference(),
     mainEntityOfPage: {

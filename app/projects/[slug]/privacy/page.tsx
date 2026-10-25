@@ -3,7 +3,9 @@ import { getAppDisplayName } from "@/lib/app-presentation";
 import { NOINDEX_ROBOTS, pageMetadata, privacyPolicyDescription } from "@/lib/seo";
 import { getAppData, generateStaticParams } from "@/lib/apps";
 import { notFound } from "next/navigation";
+import { StructuredData } from "@/components/structured-data";
 import { LegalPage } from "@/components/studio/apps/legal-page";
+import { buildAppLegalStructuredData } from "@/lib/structured-data/app-legal-page";
 import { Metadata } from "next";
 
 interface PageProps {
@@ -42,12 +44,15 @@ const DynamicPrivacyPage = ({ params }: PageProps) => {
   const { metadata, privacy } = appData;
 
   return (
-    <LegalPage
-      appSlug={params.slug}
-      legalData={privacy}
-      appName={metadata.name}
-      developer={metadata.developer}
-    />
+    <>
+      <StructuredData data={buildAppLegalStructuredData(appData, params.slug, "privacy")} />
+      <LegalPage
+        appSlug={params.slug}
+        legalData={privacy}
+        appName={metadata.name}
+        developer={metadata.developer}
+      />
+    </>
   );
 };
 
