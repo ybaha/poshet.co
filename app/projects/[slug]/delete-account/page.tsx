@@ -1,4 +1,5 @@
 import React from "react";
+import { pageMetadata } from "@/lib/seo";
 import { getAppData, generateStaticParams } from "@/lib/apps";
 import { notFound } from "next/navigation";
 import { LegalPage } from "@/components/studio/apps/legal-page";
@@ -18,45 +19,16 @@ export async function generateMetadata({
   const appData = getAppData(params.slug);
 
   if (!appData) {
-    return {
-      title: "Delete Account - App Not Found",
-      description: "The requested app could not be found.",
-    };
+    return { title: "Delete account not found", robots: { index: false } };
   }
 
   const { metadata } = appData;
 
-  return {
+  return pageMetadata({
     title: `${metadata.name} - Delete Account & Data`,
     description: `Request deletion of your account and data for ${metadata.name}. Learn how to delete your data and what happens after deletion.`,
-    keywords: [
-      metadata.name,
-      "delete account",
-      "data deletion",
-      "remove data",
-      metadata.developer,
-    ],
-    authors: [{ name: metadata.developer }],
-    creator: metadata.developer,
-    publisher: metadata.developer,
-    openGraph: {
-      title: `${metadata.name} - Delete Account & Data`,
-      description: `Request deletion of your account and data for ${metadata.name}.`,
-      type: "website",
-      url: `https://poshet.co/projects/${params.slug}/delete-account`,
-      siteName: "Poshet",
-    },
-    twitter: {
-      card: "summary",
-      title: `${metadata.name} - Delete Account & Data`,
-      description: `Delete your account and data for ${metadata.name}`,
-      creator: "@poshet",
-    },
-    robots: {
-      index: true,
-      follow: true,
-    },
-  };
+    path: `/projects/${params.slug}/delete-account`,
+  });
 }
 
 const DeleteAccountPage = ({ params }: PageProps) => {

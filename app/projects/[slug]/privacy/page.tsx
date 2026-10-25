@@ -1,4 +1,5 @@
 import React from "react";
+import { pageMetadata } from "@/lib/seo";
 import { getAppData, generateStaticParams } from "@/lib/apps";
 import { notFound } from "next/navigation";
 import { LegalPage } from "@/components/studio/apps/legal-page";
@@ -18,45 +19,16 @@ export async function generateMetadata({
   const appData = getAppData(params.slug);
 
   if (!appData) {
-    return {
-      title: "Privacy Policy - App Not Found",
-      description: "The requested app could not be found.",
-    };
+    return { title: "Privacy policy not found", robots: { index: false } };
   }
 
-  const { metadata, privacy } = appData;
+  const { metadata } = appData;
 
-  return {
+  return pageMetadata({
     title: `${metadata.name} Privacy Policy`,
     description: `Read the privacy policy for ${metadata.name}. Learn how we protect your data and what information we collect.`,
-    keywords: [
-      metadata.name,
-      "privacy policy",
-      "data protection",
-      "privacy",
-      metadata.developer,
-    ],
-    authors: [{ name: metadata.developer }],
-    creator: metadata.developer,
-    publisher: metadata.developer,
-    openGraph: {
-      title: `${metadata.name} Privacy Policy`,
-      description: `Privacy policy for ${metadata.name}. Learn how we protect your data.`,
-      type: "website",
-      url: `https://poshet.co/projects/${params.slug}/privacy`,
-      siteName: "Poshet",
-    },
-    twitter: {
-      card: "summary",
-      title: `${metadata.name} Privacy Policy`,
-      description: `Privacy policy for ${metadata.name}`,
-      creator: "@poshet",
-    },
-    robots: {
-      index: true,
-      follow: true,
-    },
-  };
+    path: `/projects/${params.slug}/privacy`,
+  });
 }
 
 const DynamicPrivacyPage = ({ params }: PageProps) => {

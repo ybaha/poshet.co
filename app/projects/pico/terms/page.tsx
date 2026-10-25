@@ -1,4 +1,12 @@
 import React from 'react';
+import { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Pico Cards Terms of Service",
+  description: "Read the terms of service for Pico Cards. Learn about usage rights and responsibilities.",
+  path: "/projects/pico/terms",
+});
 
 const TermsPage = () => {
   return (

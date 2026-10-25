@@ -1,4 +1,5 @@
 import React from "react";
+import { pageMetadata } from "@/lib/seo";
 import { getAppData, generateStaticParams } from "@/lib/apps";
 import { notFound } from "next/navigation";
 import { LegalPage } from "@/components/studio/apps/legal-page";
@@ -18,45 +19,16 @@ export async function generateMetadata({
   const appData = getAppData(params.slug);
 
   if (!appData) {
-    return {
-      title: "Terms of Service - App Not Found",
-      description: "The requested app could not be found.",
-    };
+    return { title: "Terms of service not found", robots: { index: false } };
   }
 
-  const { metadata, terms } = appData;
+  const { metadata } = appData;
 
-  return {
+  return pageMetadata({
     title: `${metadata.name} Terms of Service`,
     description: `Read the terms of service for ${metadata.name}. Learn about usage rights and responsibilities.`,
-    keywords: [
-      metadata.name,
-      "terms of service",
-      "terms",
-      "legal",
-      metadata.developer,
-    ],
-    authors: [{ name: metadata.developer }],
-    creator: metadata.developer,
-    publisher: metadata.developer,
-    openGraph: {
-      title: `${metadata.name} Terms of Service`,
-      description: `Terms of service for ${metadata.name}. Learn about usage rights and responsibilities.`,
-      type: "website",
-      url: `https://poshet.co/projects/${params.slug}/terms`,
-      siteName: "Poshet",
-    },
-    twitter: {
-      card: "summary",
-      title: `${metadata.name} Terms of Service`,
-      description: `Terms of service for ${metadata.name}`,
-      creator: "@poshet",
-    },
-    robots: {
-      index: true,
-      follow: true,
-    },
-  };
+    path: `/projects/${params.slug}/terms`,
+  });
 }
 
 const DynamicTermsPage = ({ params }: PageProps) => {

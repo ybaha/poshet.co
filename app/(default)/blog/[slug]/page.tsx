@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -7,6 +8,7 @@ import { Container, Section } from "@/components/studio/container";
 import { ContactCta } from "@/components/studio/contact-cta";
 import { PageHeader } from "@/components/studio/page-header";
 import { getPost, getPostSlugs } from "@/lib/blog";
+import { pageMetadata } from "@/lib/seo";
 
 type PageProps = { params: { slug: string } };
 
@@ -19,21 +21,18 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const post = await getPost(params.slug);
-  if (!post) return {};
+  if (!post) return { title: "Article not found", robots: { index: false } };
 
-  const url = `https://www.poshet.co/blog/${params.slug}`;
   return {
-    title: post.title,
-    description: post.description,
-    openGraph: {
-      images: post.image ? [post.image] : [],
+    ...pageMetadata({
       title: post.title,
       description: post.description,
-      url,
-    },
-    alternates: { canonical: url },
+      path: `/blog/${params.slug}`,
+      type: "article",
+    }),
+    authors: [{ name: post.author.name }],
   };
 }
 

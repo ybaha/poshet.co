@@ -6,13 +6,14 @@ import { GlassPill } from "@/components/studio/glass-pill";
 import { PageHero } from "@/components/studio/page-hero";
 import { SectionHeading } from "@/components/studio/section-heading";
 import { getAllPosts } from "@/lib/blog";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Tech Insights & Trends | Poshet Digital Blog",
   description:
     "Explore the latest in technology trends, insights, and innovations on Poshet Digital's blog. Stay updated with expert analysis and discussions.",
-  alternates: { canonical: "/blog" },
-};
+  path: "/blog",
+});
 
 export default async function BlogPage() {
   const [featured, ...rest] = await getAllPosts();

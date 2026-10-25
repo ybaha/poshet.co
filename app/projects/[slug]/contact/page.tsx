@@ -7,6 +7,7 @@ import { Card } from "@/components/studio/card";
 import { Container, Section } from "@/components/studio/container";
 import { PageHeader } from "@/components/studio/page-header";
 import { FaqSection } from "@/components/studio/faq";
+import { pageMetadata } from "@/lib/seo";
 import { getAppData, generateStaticParams } from "@/lib/apps";
 import { getAppDisplayName } from "@/lib/app-presentation";
 
@@ -24,40 +25,17 @@ export async function generateMetadata({
   const appData = getAppData(params.slug);
 
   if (!appData) {
-    return {
-      title: "Contact - App Not Found",
-      description: "The requested app could not be found.",
-    };
+    return { title: "Support not found", robots: { index: false } };
   }
 
-  const { metadata, contact } = appData;
+  const { metadata } = appData;
+  const { contact } = appData;
 
-  return {
-    alternates: { canonical: `/projects/${params.slug}/contact` },
+  return pageMetadata({
     title: `Contact ${metadata.name} Support`,
     description: `${contact.supportDescription} Get help with ${metadata.name}.`,
-    keywords: [metadata.name, "contact", "support", "help", metadata.developer],
-    authors: [{ name: metadata.developer }],
-    creator: metadata.developer,
-    publisher: metadata.developer,
-    openGraph: {
-      title: `Contact ${metadata.name} Support`,
-      description: `${contact.supportDescription} Get help with ${metadata.name}.`,
-      type: "website",
-      url: `https://poshet.co/projects/${params.slug}/contact`,
-      siteName: "Poshet",
-    },
-    twitter: {
-      card: "summary",
-      title: `Contact ${metadata.name} Support`,
-      description: `Get help with ${metadata.name}`,
-      creator: "@poshet",
-    },
-    robots: {
-      index: true,
-      follow: true,
-    },
-  };
+    path: `/projects/${params.slug}/contact`,
+  });
 }
 
 export default function AppSupportPage({ params }: PageProps) {

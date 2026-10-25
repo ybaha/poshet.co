@@ -1,10 +1,12 @@
 import "./css/style.css";
 
+import type { Metadata } from "next";
 import { Golos_Text } from "next/font/google";
 import localFont from "next/font/local";
 import { Suspense } from "react";
 import { Footer } from "@/components/studio/footer";
 import { Header } from "@/components/studio/header";
+import { SITE_NAME } from "@/lib/seo";
 import Analytics from "./GoogleAnalytics";
 
 const body = Golos_Text({
@@ -20,14 +22,14 @@ const display = localFont({
   display: "swap",
 });
 
-export const metadata = {
+/** Defaults for any route that does not set its own metadata, such as the 404 page. */
+export const metadata: Metadata = {
   metadataBase: new URL("https://poshet.co"),
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    images: "/images/poshet-black-transparent.png",
-  },
+  title: "Poshet | Websites & apps built to move you forward",
+  description:
+    "Poshet is an independent studio designing and building thoughtful websites and apps.",
+  openGraph: { siteName: SITE_NAME, type: "website", locale: "en_US" },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({

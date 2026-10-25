@@ -9,6 +9,7 @@ import { PageHeader } from "@/components/studio/page-header";
 import { SectionHeading } from "@/components/studio/section-heading";
 import { getAllPosts } from "@/lib/blog";
 import { authors } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo";
 
 type PageProps = { params: { name: string } };
 
@@ -20,11 +21,13 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: PageProps): Metadata {
   const author = findAuthor(params.name);
-  return {
-    title: `${author?.name} - Poshet.co Author`,
-    description: author?.bio,
-    openGraph: { images: author?.image ? [author.image] : [] },
-  };
+  if (!author) return { title: "Author not found", robots: { index: false } };
+
+  return pageMetadata({
+    title: `${author.name} - Poshet.co Author`,
+    description: author.bio,
+    path: `/author/${author.slug}`,
+  });
 }
 
 export default async function AuthorPage({ params }: PageProps) {

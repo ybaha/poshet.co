@@ -2,10 +2,8 @@
 
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
+import { BRAND_PALETTE } from "@/lib/shader-gradient/palette";
 import { useShaderGradient } from "./use-shader-gradient";
-
-/** Brand palette, ordered dark → bright. Stops are blended in Oklab. Mirrors studio-void / studio-blue / studio-cyan in tailwind.config.ts. */
-export const BRAND_PALETTE = ["#00001A", "#0043FA", "#005EFF", "#00DDFF"] as const;
 
 type ShaderGradientProps = {
   colors?: readonly string[];

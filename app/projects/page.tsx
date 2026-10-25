@@ -8,28 +8,15 @@ import { PageHero } from "@/components/studio/page-hero";
 import { SectionHeading } from "@/components/studio/section-heading";
 import { products } from "@/data/products";
 import { getAllApps } from "@/lib/apps";
+import { pageMetadata } from "@/lib/seo";
 import { isLive } from "@/lib/app-presentation";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Projects | Poshet",
   description:
     "Web products and mobile apps built and run by Poshet: Karardex, Postmixr, and a portfolio of apps on the App Store.",
-  alternates: { canonical: "/projects" },
-  openGraph: {
-    title: "Projects | Poshet",
-    description: "Web products and mobile apps built and run by Poshet.",
-    type: "website",
-    url: "https://poshet.co/projects",
-    siteName: "Poshet",
-  },
-  twitter: {
-    card: "summary",
-    title: "Projects | Poshet",
-    description: "Web products and mobile apps built and run by Poshet.",
-    creator: "@poshet",
-  },
-  robots: { index: true, follow: true },
-};
+  path: "/projects",
+});
 
 export default function ProjectsPage() {
   const apps = getAllApps();

@@ -1,5 +1,8 @@
 import { hexToHsl, hslToHex, relativeLuminance } from "./color";
 
+/** Brand palette, ordered dark → bright. Mirrors studio-void / studio-blue / studio-cyan in tailwind.config.ts. */
+export const BRAND_PALETTE = ["#00001A", "#0043FA", "#005EFF", "#00DDFF"] as const;
+
 type Stop = {
   /** Starting lightness; reduced until the stop fits `maxLuminance`. */
   lightness: number;

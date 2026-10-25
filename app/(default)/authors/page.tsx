@@ -6,13 +6,14 @@ import { Container, Section } from "@/components/studio/container";
 import { PageHeader } from "@/components/studio/page-header";
 import { FOCUS_RING } from "@/components/studio/styles";
 import { authors } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Our Authors - Poshet.co",
   description: "Meet the expert contributors behind Poshet's content",
-  alternates: { canonical: "/authors" },
-};
+  path: "/authors",
+});
 
 export default function AuthorsPage() {
   return (

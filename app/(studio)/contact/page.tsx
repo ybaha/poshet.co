@@ -7,13 +7,13 @@ import { ContactForm } from "@/components/studio/contact-form";
 import { PageHeader } from "@/components/studio/page-header";
 import { textLinkClasses } from "@/components/studio/text-link";
 import { BOOKING_URL, CONTACT_EMAIL } from "@/data/studio";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact | Poshet",
-  description:
-    "Tell us about your website or app. Send a message or book a call with Poshet.",
-  alternates: { canonical: "/contact" },
-};
+  description: "Tell us about your website or app. Send a message or book a call with Poshet.",
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

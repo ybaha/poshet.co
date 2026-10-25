@@ -10,6 +10,7 @@ import { Container, Eyebrow, Section } from "@/components/studio/container";
 import { ContactCta } from "@/components/studio/contact-cta";
 import { FaqSection } from "@/components/studio/faq";
 import { PageHero } from "@/components/studio/page-hero";
+import { pageMetadata } from "@/lib/seo";
 import { getAppData, generateStaticParams } from "@/lib/apps";
 import { getAppDisplayName, getAppSeed } from "@/lib/app-presentation";
 import { paletteFromTint } from "@/lib/shader-gradient/palette";
@@ -28,64 +29,16 @@ export async function generateMetadata({
   const appData = getAppData(params.slug);
 
   if (!appData) {
-    return {
-      title: "App Not Found",
-      description: "The requested app could not be found.",
-    };
+    return { title: "App not found", robots: { index: false } };
   }
 
-  const { metadata, hero } = appData;
+  const { metadata } = appData;
 
-  return {
-    title: `${metadata.name} - ${metadata.tagline}`,
+  return pageMetadata({
+    title: `${getAppDisplayName(appData)}: ${metadata.tagline}`,
     description: metadata.description,
-    keywords: [
-      metadata.name,
-      metadata.tagline,
-      "mobile app",
-      "download",
-      metadata.developer,
-    ],
-    authors: [{ name: metadata.developer }],
-    creator: metadata.developer,
-    publisher: metadata.developer,
-    alternates: { canonical: `/projects/${params.slug}` },
-    openGraph: {
-      title: `${metadata.name} - ${metadata.tagline}`,
-      description: hero.description,
-      type: "website",
-      url: `https://poshet.co/projects/${params.slug}`,
-      siteName: "Poshet",
-      images: hero.imagePath
-        ? [
-            {
-              url: hero.imagePath,
-              width: 1200,
-              height: 630,
-              alt: `${metadata.name} Screenshot`,
-            },
-          ]
-        : [],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${metadata.name} - ${metadata.tagline}`,
-      description: metadata.description,
-      creator: "@poshet",
-      images: hero.imagePath ? [hero.imagePath] : [],
-    },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-      },
-    },
-  };
+    path: `/projects/${params.slug}`,
+  });
 }
 
 const APP_ICON_SIZE = 96;
