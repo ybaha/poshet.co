@@ -27,4 +27,11 @@ export const authors = [
     bio: "Specializing in modern React applications and design system implementation.",
     image: "/images/authors/yusha-talha-kuralay.jpg",
   },
+  {
+    slug: "mertcan-tacyildiz",
+    name: "Mertcan Tacyildiz",
+    role: "Fullstack Developer",
+    bio: "Full-stack developer at Poshet, working across the front end, the back end and everything that connects them.",
+    image: "/images/authors/mertcan-tacyildiz.jpg",
+  },
 ];
