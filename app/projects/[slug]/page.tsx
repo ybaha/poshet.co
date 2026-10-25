@@ -15,6 +15,7 @@ import { buildBreadcrumbList } from "@/lib/structured-data/breadcrumbs";
 import { buildMobileApplication } from "@/lib/structured-data/mobile-application";
 import { NOINDEX_ROBOTS, pageMetadata } from "@/lib/seo";
 import { getAppData, generateStaticParams } from "@/lib/apps";
+import { appSeoTitle } from "@/lib/seo";
 import { getAppDisplayName, getAppSeed } from "@/lib/app-presentation";
 import { paletteFromTint } from "@/lib/shader-gradient/palette";
 
@@ -38,7 +39,7 @@ export async function generateMetadata({
   const { metadata } = appData;
 
   return pageMetadata({
-    title: `${getAppDisplayName(appData)}: ${metadata.tagline}`,
+    title: appSeoTitle(appData),
     description: metadata.description,
     path: `/projects/${params.slug}`,
   });

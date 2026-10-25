@@ -12,6 +12,8 @@ export type PostAuthor = { name: string; slug: string; image?: string };
 export type BlogPost = {
   slug: string;
   title: string;
+  /** Shorter title for `<title>` and social cards when the headline exceeds search limits. */
+  seoTitle?: string;
   description: string;
   /** ISO date, `YYYY-MM-DD`. */
   date: string;
@@ -51,6 +53,7 @@ async function readPost(slug: string): Promise<BlogPostWithContent | null> {
   return {
     slug,
     title: String(data.title ?? slug),
+    seoTitle: data.seoTitle ? String(data.seoTitle) : undefined,
     description: String(data.description ?? ""),
     date: Number.isNaN(date.getTime()) ? "" : date.toISOString().slice(0, 10),
     image: data.image || undefined,
@@ -79,6 +82,10 @@ export async function getAllPosts(): Promise<BlogPost[]> {
     .filter((post): post is BlogPostWithContent => post !== null)
     .map(({ content: _content, ...post }) => post)
     .sort((a, b) => b.date.localeCompare(a.date));
+}
+
+export function postDocumentTitle(post: BlogPost): string {
+  return post.seoTitle ?? post.title;
 }
 
 export function postHeroImageAlt(post: BlogPost): string {

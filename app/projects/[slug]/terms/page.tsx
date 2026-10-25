@@ -1,5 +1,6 @@
 import React from "react";
-import { NOINDEX_ROBOTS, pageMetadata } from "@/lib/seo";
+import { getAppDisplayName } from "@/lib/app-presentation";
+import { NOINDEX_ROBOTS, pageMetadata, termsDescription } from "@/lib/seo";
 import { getAppData, generateStaticParams } from "@/lib/apps";
 import { notFound } from "next/navigation";
 import { LegalPage } from "@/components/studio/apps/legal-page";
@@ -22,11 +23,11 @@ export async function generateMetadata({
     return { title: "Terms of service not found", robots: NOINDEX_ROBOTS };
   }
 
-  const { metadata } = appData;
+  const appName = getAppDisplayName(appData);
 
   return pageMetadata({
-    title: `${metadata.name} Terms of Service`,
-    description: `Read the terms of service for ${metadata.name}. Learn about usage rights and responsibilities.`,
+    title: `${appName} terms of service`,
+    description: termsDescription(appName),
     path: `/projects/${params.slug}/terms`,
   });
 }

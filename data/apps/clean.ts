@@ -6,7 +6,7 @@ export const cleanAppData: AppData = {
     slug: "clean",
     tagline: "Small promises, kept daily.",
     description:
-      "Clean is a gentle daily-habit app for women. It turns a handful of tiny skincare, movement, and self-care promises into a streak you actually keep — with a circle of sisters who notice when you close your day.",
+      "Clean is a daily-habit app that turns small skincare, movement, and self-care promises into streaks you keep, with sisters who notice when you close your day.",
     version: "1.0.0",
     developer: "Poshet",
     websiteUrl: "https://poshet.co/projects/clean",

@@ -10,8 +10,9 @@ import { pageMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Our Authors - Poshet.co",
-  description: "Meet the expert contributors behind Poshet's content",
+  title: "Authors",
+  description:
+    "Meet the Poshet developers and designers who write about building websites, mobile apps, and the work that goes into shipping products.",
   path: "/authors",
 });
 

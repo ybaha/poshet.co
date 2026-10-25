@@ -1,9 +1,9 @@
 import { Metadata } from "next";
-import { pageMetadata } from "@/lib/seo";
+import { pageMetadata, privacyPolicyDescription } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Math Help AI Privacy Policy",
-  description: "Read the privacy policy for Math Help AI. Learn how we protect your data and what information we collect.",
+  title: "Math Help AI privacy policy",
+  description: privacyPolicyDescription("Math Help AI"),
   path: "/projects/math/privacy",
 });
 

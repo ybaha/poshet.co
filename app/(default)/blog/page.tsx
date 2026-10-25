@@ -11,9 +11,9 @@ import { buildBreadcrumbList } from "@/lib/structured-data/breadcrumbs";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Tech Insights & Trends | Poshet Digital Blog",
+  title: "Blog",
   description:
-    "Explore the latest in technology trends, insights, and innovations on Poshet Digital's blog. Stay updated with expert analysis and discussions.",
+    "Notes on design, development, and shipping products from Poshet, the studio behind our websites, mobile apps, and in-house tools.",
   path: "/blog",
 });
 

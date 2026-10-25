@@ -6,7 +6,7 @@ export const picuAppData: AppData = {
     slug: "picu",
     tagline: "Transform Your Photos with AI Magic",
     description:
-      "PicU is an AI-powered photo transformation app that lets you apply stunning filters and effects to your images. Transform ordinary photos into extraordinary art with our advanced AI technology.",
+      "PicU uses AI to transform photos with filters and effects. Turn everyday images into polished looks you can preview and share from your phone.",
     version: "1.0.0",
     developer: "Poshet",
     supportEmail: "ybahaerarslan@gmail.com",

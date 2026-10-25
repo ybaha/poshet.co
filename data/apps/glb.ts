@@ -6,7 +6,7 @@ export const glbAppData: AppData = {
     slug: "glb",
     tagline: "Generate 3D assets from images or text",
     description:
-      "GLB is an AI-powered 3D model generator that transforms your images and text descriptions into high-quality 3D assets. Create stunning GLB models for games, AR/VR, design projects, and more.",
+      "GLB turns images and text into 3D assets with AI. Generate GLB models for games, AR, VR, and design projects from a photo or a short prompt.",
     version: "1.0.0",
     developer: "Poshet",
     supportEmail: "ybahaerarslan@gmail.com",

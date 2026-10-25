@@ -6,7 +6,7 @@ export const picoAppData: AppData = {
     slug: "pico",
     tagline: "Spark Meaningful Conversations",
     description:
-      "Pico Cards is a conversation-starting app designed to help people connect better with partners, friends, or family.",
+      "Pico Cards helps partners, friends, and family connect through hundreds of conversation starters. Browse prompts, unlock more decks, and keep talks meaningful.",
     version: "1.0.0",
     developer: "Poshet",
     supportEmail: "ybahaerarslan@gmail.com",

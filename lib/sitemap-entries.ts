@@ -10,7 +10,8 @@ const STATIC_PAGE_LAST_MODIFIED = new Date("2024-06-01T00:00:00.000Z");
 type SitemapEntry = MetadataRoute.Sitemap[number];
 
 function absoluteUrl(path: string): string {
-  return new URL(path, SITE_URL).href;
+  const href = new URL(path, SITE_URL).href;
+  return path === "/" ? SITE_URL : href;
 }
 
 function parseLastUpdated(isoDate: string | undefined): Date | undefined {

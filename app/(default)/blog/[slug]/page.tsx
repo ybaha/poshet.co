@@ -7,7 +7,7 @@ import { PostMeta } from "@/components/studio/blog/post-meta";
 import { Container, Section } from "@/components/studio/container";
 import { ContactCta } from "@/components/studio/contact-cta";
 import { PageHeader } from "@/components/studio/page-header";
-import { getPost, getPostSlugs, postHeroImageAlt } from "@/lib/blog";
+import { getPost, getPostSlugs, postDocumentTitle, postHeroImageAlt } from "@/lib/blog";
 import { StructuredData } from "@/components/structured-data";
 import { buildBlogPosting } from "@/lib/structured-data/article";
 import { buildBreadcrumbList } from "@/lib/structured-data/breadcrumbs";
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     ...pageMetadata({
-      title: post.title,
+      title: postDocumentTitle(post),
       description: post.description,
       path: `/blog/${params.slug}`,
       type: "article",

@@ -7,7 +7,7 @@ import { Card } from "@/components/studio/card";
 import { Container, Section } from "@/components/studio/container";
 import { PageHeader } from "@/components/studio/page-header";
 import { FaqSection } from "@/components/studio/faq";
-import { NOINDEX_ROBOTS, pageMetadata } from "@/lib/seo";
+import { NOINDEX_ROBOTS, appSupportDescription, pageMetadata } from "@/lib/seo";
 import { getAppData, generateStaticParams } from "@/lib/apps";
 import { getAppDisplayName } from "@/lib/app-presentation";
 
@@ -31,9 +31,11 @@ export async function generateMetadata({
   const { metadata } = appData;
   const { contact } = appData;
 
+  const appName = getAppDisplayName(appData);
+
   return pageMetadata({
-    title: `Contact ${metadata.name} Support`,
-    description: `${contact.supportDescription} Get help with ${metadata.name}.`,
+    title: `${appName} support`,
+    description: appSupportDescription(appName, contact.supportDescription),
     path: `/projects/${params.slug}/contact`,
     noindex: true,
   });

@@ -6,7 +6,7 @@ import localFont from "next/font/local";
 import { Suspense } from "react";
 import { Footer } from "@/components/studio/footer";
 import { Header } from "@/components/studio/header";
-import { SITE_NAME } from "@/lib/seo";
+import { HOME_ABSOLUTE_TITLE, SITE_NAME } from "@/lib/seo";
 import Analytics from "./GoogleAnalytics";
 
 const body = Golos_Text({
@@ -25,9 +25,12 @@ const display = localFont({
 /** Defaults for any route that does not set its own metadata, such as the 404 page. */
 export const metadata: Metadata = {
   metadataBase: new URL("https://poshet.co"),
-  title: "Poshet | Websites & apps built to move you forward",
+  title: {
+    default: HOME_ABSOLUTE_TITLE,
+    template: "%s | Poshet",
+  },
   description:
-    "Poshet is an independent studio designing and building thoughtful websites and apps.",
+    "Poshet is an independent digital studio that designs and builds websites and mobile apps. Book a 30-minute intro call to talk through your project.",
   openGraph: { siteName: SITE_NAME, type: "website", locale: "en_US" },
   twitter: { card: "summary_large_image" },
 };

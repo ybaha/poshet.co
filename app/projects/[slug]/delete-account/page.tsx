@@ -1,5 +1,6 @@
 import React from "react";
-import { NOINDEX_ROBOTS, pageMetadata } from "@/lib/seo";
+import { getAppDisplayName } from "@/lib/app-presentation";
+import { NOINDEX_ROBOTS, deleteAccountDescription, pageMetadata } from "@/lib/seo";
 import { getAppData, generateStaticParams } from "@/lib/apps";
 import { notFound } from "next/navigation";
 import { LegalPage } from "@/components/studio/apps/legal-page";
@@ -22,11 +23,11 @@ export async function generateMetadata({
     return { title: "Delete account not found", robots: NOINDEX_ROBOTS };
   }
 
-  const { metadata } = appData;
+  const appName = getAppDisplayName(appData);
 
   return pageMetadata({
-    title: `${metadata.name} - Delete Account & Data`,
-    description: `Request deletion of your account and data for ${metadata.name}. Learn how to delete your data and what happens after deletion.`,
+    title: `${appName} delete account`,
+    description: deleteAccountDescription(appName),
     path: `/projects/${params.slug}/delete-account`,
     noindex: true,
   });

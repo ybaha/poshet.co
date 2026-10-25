@@ -6,7 +6,7 @@ export const mathAppData: AppData = {
     slug: "math",
     tagline: "Solve Math Questions with AI",
     description:
-      "Math Help AI is an interactive learning app designed to help students excel in mathematics.",
+      "Math Help AI helps students work through math with an AI tutor. Snap a photo for step-by-step solutions, chat through follow-ups, and review past problems.",
     version: "2.1.0",
     developer: "Poshet",
     supportEmail: "ybahaerarslan@gmail.com",

@@ -6,7 +6,7 @@ export const vidgenAppData: AppData = {
     slug: "vidgen",
     tagline: "Create Stunning AI Videos",
     description:
-      "VidGen3 is an AI-powered video generation app that transforms your ideas into stunning videos using advanced AI models. Create videos from text prompts or transform images into animated masterpieces.",
+      "VidGen3 creates videos with AI from text prompts or still images. Turn ideas into short clips and animated scenes using models built for fast mobile creation.",
     version: "1.0.0",
     developer: "Poshet",
     supportEmail: "ybahaerarslan@gmail.com",

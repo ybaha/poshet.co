@@ -10,8 +10,9 @@ import { BOOKING_URL, CONTACT_EMAIL } from "@/data/studio";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Contact | Poshet",
-  description: "Tell us about your website or app. Send a message or book a call with Poshet.",
+  title: "Contact",
+  description:
+    "Tell us about your website or app idea. Message Poshet or book a 30-minute intro call to talk through goals, scope, and next steps.",
   path: "/contact",
 });
 

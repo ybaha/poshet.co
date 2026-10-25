@@ -27,8 +27,8 @@ export function generateMetadata({ params }: PageProps): Metadata {
   if (!author) return { title: "Author not found", robots: NOINDEX_ROBOTS };
 
   return pageMetadata({
-    title: `${author.name} - Poshet.co Author`,
-    description: author.bio,
+    title: author.name,
+    description: `${author.bio} Articles by ${author.name} on the Poshet blog.`,
     path: `/author/${author.slug}`,
   });
 }

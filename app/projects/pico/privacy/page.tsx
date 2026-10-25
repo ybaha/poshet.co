@@ -1,10 +1,10 @@
 import React from 'react';
 import { Metadata } from "next";
-import { pageMetadata } from "@/lib/seo";
+import { pageMetadata, privacyPolicyDescription } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Pico Cards Privacy Policy",
-  description: "Read the privacy policy for Pico Cards. Learn how we protect your data and what information we collect.",
+  title: "Pico Cards privacy policy",
+  description: privacyPolicyDescription("Pico Cards"),
   path: "/projects/pico/privacy",
 });
 

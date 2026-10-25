@@ -6,7 +6,7 @@ export const viraltyAppData: AppData = {
     slug: "viralty",
     tagline: "Know before you post.",
     description:
-      "Viralty analyzes your short-form video before you publish. Upload a TikTok, Reel, or Short and get an estimated virality score, predicted retention curve, reach range, and specific fixes — tailored to your platform, follower count, and niche.",
+      "Upload short-form video before you publish. Viralty estimates virality, retention, and reach, with practical fixes tuned to your platform, followers, and niche.",
     version: "1.0.0",
     developer: "Poshet",
     websiteUrl: "https://poshet.co/projects/viralty",

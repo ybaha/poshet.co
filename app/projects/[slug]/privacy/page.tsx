@@ -1,5 +1,6 @@
 import React from "react";
-import { NOINDEX_ROBOTS, pageMetadata } from "@/lib/seo";
+import { getAppDisplayName } from "@/lib/app-presentation";
+import { NOINDEX_ROBOTS, pageMetadata, privacyPolicyDescription } from "@/lib/seo";
 import { getAppData, generateStaticParams } from "@/lib/apps";
 import { notFound } from "next/navigation";
 import { LegalPage } from "@/components/studio/apps/legal-page";
@@ -22,11 +23,11 @@ export async function generateMetadata({
     return { title: "Privacy policy not found", robots: NOINDEX_ROBOTS };
   }
 
-  const { metadata } = appData;
+  const appName = getAppDisplayName(appData);
 
   return pageMetadata({
-    title: `${metadata.name} Privacy Policy`,
-    description: `Read the privacy policy for ${metadata.name}. Learn how we protect your data and what information we collect.`,
+    title: `${appName} privacy policy`,
+    description: privacyPolicyDescription(appName),
     path: `/projects/${params.slug}/privacy`,
   });
 }

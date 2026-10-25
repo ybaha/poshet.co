@@ -6,7 +6,7 @@ export const roomaAppData: AppData = {
     slug: "rooma",
     tagline: "Redesign any room with AI",
     description:
-      "Rooma is an AI-powered interior design app that transforms your spaces. Snap a photo of any room and see it redesigned in countless styles. Get unlimited design ideas for your home, office, or any space.",
+      "Rooma redesigns rooms with AI. Snap a photo and explore new interior styles for your home, office, or any space, with unlimited design variations to compare.",
     version: "1.0.0",
     developer: "Poshet",
     supportEmail: "ybahaerarslan@gmail.com",

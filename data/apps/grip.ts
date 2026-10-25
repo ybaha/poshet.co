@@ -6,7 +6,7 @@ export const gripAppData: AppData = {
     slug: "grip",
     tagline: "Build real control. Enjoy sex with confidence.",
     description:
-      "Grip is a private, guided app that helps men last longer, feel more in control, and enjoy sex with confidence. Train your body and mind step by step with personalized exercises.",
+      "Grip is a private guided app to build control and confidence. Follow step-by-step exercises designed to help you last longer and feel more in charge.",
     version: "1.0.0",
     developer: "Poshet",
     supportEmail: "ybahaerarslan@gmail.com",

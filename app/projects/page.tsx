@@ -14,9 +14,9 @@ import { pageMetadata } from "@/lib/seo";
 import { isLive } from "@/lib/app-presentation";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Projects | Poshet",
+  title: "Projects",
   description:
-    "Web products and mobile apps built and run by Poshet: Karardex, Postmixr, and a portfolio of apps on the App Store.",
+    "Web products and mobile apps from Poshet, including Karardex, Postmixr, and iOS apps we design, build, and support ourselves.",
   path: "/projects",
 });
 
