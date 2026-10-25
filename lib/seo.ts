@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+export const SITE_URL = "https://poshet.co";
 export const SITE_NAME = "Poshet";
 
 type PageMetadataOptions = {
