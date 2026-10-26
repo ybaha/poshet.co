@@ -1,5 +1,6 @@
 import type { BlogPost } from "@/lib/blog";
 import { authors } from "@/lib/constants";
+import { authorSchemaType } from "@/lib/structured-data/author";
 import { organizationReference } from "@/lib/structured-data/organization";
 import { absoluteUrl, omitEmpty, toIsoDateTime } from "@/lib/structured-data/utils";
 import type { JsonLdObject } from "@/lib/structured-data/types";
@@ -7,7 +8,7 @@ import type { JsonLdObject } from "@/lib/structured-data/types";
 function buildAuthorPerson(author: BlogPost["author"]): JsonLdObject {
   const known = authors.find((entry) => entry.slug === author.slug);
   const person: JsonLdObject = {
-    "@type": "Person",
+    "@type": known ? authorSchemaType(known) : "Person",
     name: author.name,
   };
 

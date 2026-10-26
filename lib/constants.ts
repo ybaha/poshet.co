@@ -1,4 +1,14 @@
-export const authors = [
+/** Authors are people unless `kind` says otherwise; structured data uses it to pick Person or Organization. */
+export type Author = {
+  slug: string;
+  name: string;
+  role: string;
+  bio: string;
+  image: string;
+  kind?: "organization";
+};
+
+export const authors: Author[] = [
   {
     slug: "yusuf-baha-erarslan",
     name: "Yusuf Baha Erarslan",
@@ -33,5 +43,13 @@ export const authors = [
     role: "Fullstack Developer",
     bio: "Full-stack developer at Poshet, working across the front end, the back end and everything that connects them.",
     image: "/images/authors/mertcan-tacyildiz.jpg",
+  },
+  {
+    slug: "poshet-editorial",
+    name: "Poshet Editorial",
+    role: "Editorial team",
+    bio: "News and practical guides from the Poshet studio, drafted with AI assistance from linked sources.",
+    image: "/images/authors/poshet-editorial.jpg",
+    kind: "organization",
   },
 ];

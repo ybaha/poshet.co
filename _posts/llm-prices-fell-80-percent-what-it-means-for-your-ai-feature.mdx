@@ -1,0 +1,150 @@
+---
+title: "LLM Prices Fell by Up to 80%: What It Means for the AI Feature You Are Planning"
+seoTitle: "LLM Price Cuts: What They Mean for Your AI Feature"
+slug: llm-prices-fell-80-percent-what-it-means-for-your-ai-feature
+date: "2026-10-26"
+description: "OpenAI and Anthropic cut LLM prices by up to 80%. What that means for the cost of adding AI to your app, and how to build so you can switch models."
+image: /blog/llm-prices-fell-80-percent-what-it-means-for-your-ai-feature.webp
+imageAlt: "Abstract blue gradient with a falling line chart, representing falling LLM prices"
+author: "Poshet Editorial"
+---
+
+> **In short.** Between June and October 2026, OpenAI and Anthropic cut what they charge for their models by large margins, in some cases up to 80%, and open-weight models are priced even lower. For one example workload below, the token charges range from a few dollars to a couple of hundred dollars a month, depending on the model. Cheaper tokens do not shrink every bill, though, and nobody can promise prices keep falling. Build the feature so you can change the model without rebuilding the product.
+
+If you are planning an AI feature, the running cost is worth estimating early, and the recent price changes can move that estimate a lot. The price list changed under everyone's feet this year.
+
+This article walks through what changed, why it probably happened, what it means in dollars for a normal app, and how to build so you benefit from falling prices without betting your product on them. It leans on three recent sources, linked at the end: Max Woolf's price timeline, an IBM earnings-call story from The Register, and a small hackathon project that shows what cheap models can do. Prices are from those sources and from Anthropic's pricing page as of October 26, 2026. Check the providers' own pricing pages before you commit to a budget.
+
+## What actually changed
+
+Models are priced per million tokens (MTok), usually as input, output and cache read. Max Woolf lists the major announcements since June. The headline moves:
+
+<table>
+<thead>
+<tr><th>Date</th><th>Move</th><th>Price (input / output per MTok)</th></tr>
+</thead>
+<tbody>
+<tr><td>July 30</td><td>OpenAI cuts GPT-5.6 Luna by 80%</td><td>$1 / $6 down to $0.20 / $1.20</td></tr>
+<tr><td>Sept 22</td><td>OpenAI launches GPT-6 Sol at about half the price of the discounted GPT-5.6 Sol</td><td>$2 / $10</td></tr>
+<tr><td>Sept 22</td><td>Anthropic launches Opus 5.5 below Opus 5</td><td>$4 / $20, down from $5 / $25</td></tr>
+<tr><td>Sept 29</td><td>OpenAI halves the cache price on GPT-6.1 Sol</td><td>$2 / $10, cache read $0.10</td></tr>
+</tbody>
+</table>
+
+Two details matter more than the headline percentages.
+
+First, **cache reads got much cheaper**. Woolf reports that in coding-agent workloads, where the whole conversation is re-read every turn and the cache is hit almost every time, cache reads are 96–99% of token spend. In that setting a 75% cut in cache pricing works out to a 70–75% cut in the real cost. Your feature may behave differently, so check how much of your own usage is cached.
+
+Second, **some of the cheaper releases were also better models**. Anthropic's own pricing page shows Opus 5.5 at $4 input and $20 output, with a $0.20 cache read, against $5, $25 and $0.50 for Opus 5. Woolf describes Opus 5.5 as better than the more expensive Fable 5.1, though he also calls GPT-6 Sol a performance disappointment. Not every cheaper release is a better one, so test a candidate model on your own task.
+
+## Why it happened (and why nobody knows for sure)
+
+Woolf's explanation, which we find more convincing than the cynical ones, is that many models have become close substitutes. He points out that coding tools and API gateways such as OpenRouter make switching a toggle or a new endpoint name, so there is little to stop customers from moving. When a rival cuts prices, you cut too.
+
+The open-weight side adds pressure. Woolf traces DeepSeek V4 Flash from $0.14 / $0.28 per MTok in April to $0.15 / $0.60 for the newer 4.1 version, and notes that 13 providers hosted the original V4 Flash on OpenRouter in May, while 29 host the newer 1017 variant now. More providers selling the same model keeps prices honest.
+
+He also raises a less comfortable possibility: both OpenAI and Anthropic are rumoured to be heading toward IPOs, which makes a deep price cut look odd. In the Hacker News discussion, commenters offered other readings: a plain price war, and competition from Chinese labs. Woolf quotes Anthropic on Opus 5.5: "Opus 5.5 requires less compute to serve than Opus 5, and its pricing reflects that". Nobody outside those companies can say which of these mattered most.
+
+What matters for you is the practical conclusion. **Prices have moved quickly and they can move again, in either direction.** Woolf argues that a sudden price rise is unlikely while many providers compete. Woolf describes a competing argument, that prices are artificially low and will eventually rise, and he cites reports that both companies lose billions on R&D and scaling. Either view could turn out to be right. Plan for both.
+
+## What it costs: a worked example
+
+Here is a hypothetical feature, so you can see the order of magnitude. Say your app sends 10,000 AI requests a month. Each request has about 2,000 tokens of input (instructions plus the user's content) and gets about 500 tokens back. That is 20 million input tokens and 5 million output tokens per month. These are uncached, non-batch token charges. Eligible batch discounts and effective cache reuse can reduce them.
+
+<table>
+<thead>
+<tr><th>Model (price from source)</th><th>Input / output per MTok</th><th>Monthly cost</th></tr>
+</thead>
+<tbody>
+<tr><td>GPT-5.6 Sol at launch</td><td>$5 / $30</td><td>$250</td></tr>
+<tr><td>Opus 5.5</td><td>$4 / $20</td><td>$180</td></tr>
+<tr><td>Sonnet 5, GPT-6.1 Sol</td><td>$2 / $10</td><td>$90</td></tr>
+<tr><td>GPT-5.6 Luna at launch</td><td>$1 / $6</td><td>$50</td></tr>
+<tr><td>GPT-5.6 Luna after the cut</td><td>$0.20 / $1.20</td><td>$10</td></tr>
+<tr><td>DeepSeek V4.1 Flash (DeepSeek's own price)</td><td>$0.15 / $0.60</td><td>$6</td></tr>
+<tr><td>GPT-6 Luna</td><td>$0.10 / $0.50</td><td>$4.50</td></tr>
+</tbody>
+</table>
+
+Three things stand out.
+
+- **The spread is huge.** The same assumed token workload costs between $4.50 and $250 across these current and historical price examples. Model choice moves the token bill by a large factor.
+- **The small models are often enough.** Many features, such as classifying a support ticket, summarising a document or extracting fields from a form, do not need a flagship model. Test the cheap tier first and move up only where it fails.
+- **These figures cover token charges only.** Budget separately for design, development, maintenance and other running costs, and calculate how the token bill scales as usage grows.
+
+## Cheaper tokens, bigger bills
+
+Do not conclude that your AI spend will simply fall. Woolf shows data from Vercel's AI gateway: the cost per token fell to 43.3% of its April 2026 level, but **aggregate spend kept rising**, which Woolf attributes to models getting better faster than they got cheaper.
+
+The same thing can happen inside a single product. A cheaper model invites you to add a second call, a longer prompt, an automatic retry or an agent that loops. Each of those multiplies the tokens. Budget by cost per user action, not per token, and put a monthly cap on spend from day one.
+
+Subscriptions are a different story again. Woolf notes that when OpenAI released GPT-6.1 Sol, it also cut the usage allowance for its $200 a month Codex tier by half, "to reflect our increasingly efficient models". If you rely on a flat-rate plan to power something, do not assume the savings reach you.
+
+## Should you use an open-weight model?
+
+Open-weight models are the other half of the story. IBM CEO Arvind Krishna said on the company's Q3 earnings call, as reported by The Register, that open-weight models now deliver "anywhere from 25 percent to 10 percent of the token cost of the frontier models" while being about 90% as effective. In 2024, he said, a broad benchmark might have scored the top model at 70 and an open one at 20 or 30. For late 2025 he illustrated a narrower gap, 70 against 50.
+
+Read that with the right amount of salt. IBM sells on-prem infrastructure, so it benefits when companies decide to run their own models. Krishna himself raised the catch: running models on your own hardware needs people who understand the networking, the GPU clustering and the caching. For a small team, that is a poor trade.
+
+Our practical advice is a ladder:
+
+1. **Start with a hosted frontier or mid-tier model** through the provider's API. It is the fastest way to find out whether users want the feature.
+2. **Move the routine tasks to a cheaper model** once you can measure quality. Depending on your tests, a small model may handle a large share of the requests.
+3. **Try a hosted open-weight model** through a gateway or a provider that serves it. You get the lower price without running servers.
+4. **Self-host only with a reason**: strict data residency, very high volume, or a compliance requirement. Not because the price list looked tempting.
+
+## A small model, a $1.15 training run, and a safety net
+
+A good illustration of the cheap end is a hackathon project posted on dev.to on October 25. The author built DeedReader, which reads property deed descriptions ("N 86°29' E, 103.2 feet") and plots the parcel on a map. The author fine-tuned a small open model and reports 10% exact reads on a 60-deed baseline and 99.6% on 3,000 fresh generated deeds afterwards. The final training run took 16 minutes and had an estimated cost of $1.15. These are self-reported results on synthetic deeds, not independently verified real-world accuracy, but the design is the instructive part.
+
+The model only reads. Plain, tested code does all the arithmetic, and five independent checks must agree before an answer looks confident. When something does not add up, the tool refuses to draw the result and points to the line for a human to review. Cheap models make mistakes, and the safe design is one where a mistake is caught or flagged, not hidden.
+
+That is the pattern we recommend for most business features: **let the model do the fuzzy part, let normal code do the exact part, and show a human anything the checks cannot confirm.**
+
+## How to build so the price does not matter
+
+You cannot control what OpenAI, Anthropic or DeepSeek charge next quarter. You can control how hard it is to switch.
+
+- **Put one thin layer between your app and the model.** Your code should call your own function (`summarise(text)`), not a vendor's SDK in fifty places. Aim to keep provider-specific changes behind that one interface.
+- **Write a small test set before you pick a model.** As a starting point, collect twenty to fifty real examples with the answers you expect. When a new, cheaper model is released, you can run the same examples to compare it before you switch.
+- **Keep prompts and settings out of the code path.** Treat the model name, the temperature and the prompt as configuration you can change without a release.
+- **Check the caching rules before you budget for them.** Look at each provider's cache eligibility, expiry and write charges. Given how cache pricing moved, it can matter a lot, but savings depend on your usage.
+- **Set budgets and alerts.** A monthly spend limit and a per-user rate limit protect you from both a bug and a viral spike.
+- **Plan a fallback.** Test a second model behind the same function and decide when the app should fall back to it, in case a provider has an outage or changes its terms.
+
+None of this is exotic, and it is easier to do at the start than to retrofit. If you are weighing a feature like this, our write-up on [feature prioritisation and ROI](/blog/maximizing-roi-with-strategic-feature-prioritization-in-custom-software-projects) is a good companion, and our [projects](/projects), including the AI tutor [Math Help AI](/projects/math), show the kind of apps we build.
+
+## What to do this week
+
+- Write down the one task you want the AI feature to do, and a handful of real examples of it done well.
+- Estimate monthly requests, tokens per request, and multiply by a few vendors' current prices. A spreadsheet is enough.
+- Test the cheapest model that might work before you test the best one.
+- Decide your spend cap and what happens when the cap is hit.
+- Keep the model behind one function so the answer can change next month.
+
+## Frequently asked questions
+
+### How much does an AI feature cost to run each month?
+
+For an example workload of 10,000 requests a month, each with 2,000 input and 500 output tokens, the current-price examples above cost between $4.50 and $180 a month in token charges. The table also lists two historical launch prices for comparison. Development, maintenance and other running costs come on top.
+
+### Will LLM prices keep falling?
+
+Nobody can promise it. The trend since June is strongly downward, and Max Woolf argues competition between many providers will keep it that way. Detractors argue the big labs are loss-making and prices could rise. Build so that either outcome is manageable.
+
+### Is it cheaper to use open-weight models?
+
+Often yes, per token. IBM's CEO puts open-weight models at 10–25% of frontier token cost. But hosting them yourself adds engineering and hardware costs, so for most small teams a hosted open-weight model is the practical route.
+
+### Should I wait for prices to fall further before building?
+
+Usually not. Waiting has a cost too: you learn what users actually want only from a working version. A switchable integration makes it easier to adopt cheaper models after you have tested them, so build the first version that way.
+
+## Sources
+
+- Max Woolf, [OpenAI and Anthropic cut their LLM prices by up to 80% within a few months. Why?](https://minimaxir.com/2026/10/cheap-llms/) (minimaxir.com, October 2026) and the [Hacker News discussion](https://news.ycombinator.com/item?id=50236102)
+- Simon Sharwood, [IBM CEO says open weight models are now irresistibly good and cheap on-prem](https://www.theregister.com/systems/2026/10/22/ibm-ceo-says-open-weight-models-are-now-irresistibly-good-and-cheap-on-prem/5304640) (The Register, October 22, 2026)
+- Anthropic, [Claude pricing](https://platform.claude.com/docs/en/about-claude/pricing) (checked October 26, 2026)
+- Advik Divekar, [A small, not-so-smart model went from 10% to 99.6% at reading property deeds for $1.15](https://dev.to/advikdivekar/a-small-not-so-smart-model-went-from-10-to-996-at-reading-property-deeds-for-115-and-it-says-490k) (dev.to, October 25, 2026)
+
+*This article was drafted with AI assistance from the sources above. Prices change often, so confirm current figures with each provider before you plan a budget.*

@@ -1,4 +1,5 @@
 import { authors } from "@/lib/constants";
+import { authorSchemaType } from "@/lib/structured-data/author";
 import { absoluteUrl, omitEmpty } from "@/lib/structured-data/utils";
 import type { JsonLdObject } from "@/lib/structured-data/types";
 
@@ -15,7 +16,7 @@ export function buildAuthorsCollectionPage(description: string): JsonLdObject {
         "@type": "ListItem",
         position: index + 1,
         item: omitEmpty({
-          "@type": "Person",
+          "@type": authorSchemaType(author),
           name: author.name,
           url: absoluteUrl(`/author/${author.slug}`),
         }),
